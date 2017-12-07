@@ -33,13 +33,38 @@ $page = filter_input(INPUT_GET, 'page', FILTER_SANITIZE_URL);
     </div>
   <?php else: ?>
     <div class="loginContainer">
-      <ul>
-        <li>Login</li>
-        <li>Register</li>
-      </ul>
+        <form class="login" action="/app/auth/login.php" method="post">
+            <p>Log in:</p>
+            <div>
+                <label for="username">Username:</label>
+                <input type="text" name="username" required>
+            </div>
+            <div>
+                <label for="password">Password:</label>
+                <input type="password" name="password" required>
+            </div>
+            <button type="submit" name="submit">Log in</button>
+        </form>
+    </div>
+    <div class="signupContainer">
+      <form class="signup" action="/app/auth/createAccount.php" method="post">
+          <p>Don't have an account? Create one below:</p>
+          <div>
+              <label for="email">Email:</label>
+              <input type="email" name="email" required>
+          </div>
+          <div>
+              <label for="username">Username:</label>
+              <input type="text" name="username" required>
+          </div>
+          <div>
+              <label for="password">Password:</label>
+              <input type="password" name="password" required>
+          </div>
+          <button type="submit" name="submit">Create account</button>
+      </form>
     </div>
   <?php endif; ?>
-
 
 
 <?php require __DIR__.'/views/footer.php'; ?>
