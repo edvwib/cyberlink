@@ -18,3 +18,8 @@ $config = require __DIR__.'/config.php';
 
 // Setup the database connection.
 $pdo = new PDO($config['database_path']);
+
+//Set default dateFormat
+$dateFormat = $config['dateFormat'];
+
+$spacer = $config['spacer'];
