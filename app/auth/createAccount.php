@@ -40,7 +40,8 @@ if (!empty($_POST['email']) && !empty($_POST['username']) && !empty($_POST['pass
     $createAccount->bindParam(':username', $username, PDO::PARAM_STR);
     $createAccount->execute();
 
-    echo 'Account created!';
+    $_SESSION['authenticated'] = true;
+    $_SESSION['user'] = $username;
 }else {
-    echo 'not filled in';
+
 }
