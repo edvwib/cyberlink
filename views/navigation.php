@@ -2,10 +2,10 @@
 declare(strict_types=1);
 ?>
 <nav>
-  <li><a href="?page=frontpage">Frontpage</a></li>
-  <?php if (!empty($_SESSION['user'])): ?>
-    <li><a href="#">Logout</a></li>
+  <li><a href="#">Frontpage</a></li>
+  <?php if (isset($_SESSION['authenticated'])): ?>
+    <li><a href="/../app/auth/logout.php">Logout</a></li>
   <?php else: ?>
-    <li><a href="?page=login">Login/register</a></li>
+    <li><a href="#">Login/register</a></li>
   <?php endif; ?>
 </nav>

@@ -15,7 +15,8 @@ if (!empty($_POST['username']) && !empty($_POST['password'])) {
     if (empty($result)) {
         echo "Wrong username or password.";
     }else if (password_verify($password, $result[0]['password'])) {
-        echo "You are now logged in.";
+        $_SESSION['authenticated'] = true;
+        header('Location: /index.php');
     }else {
         echo "Wrong username or password.";
     }
