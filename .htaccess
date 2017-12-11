@@ -1,5 +1,6 @@
 RewriteEngine On    # Turn on the rewriting engine
 
+RewriteRule     ^$       index.php [NC,N]
+
 # Handle requests for "login"
 RewriteRule     login    login.html    [NC,L]
-

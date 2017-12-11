@@ -4,7 +4,7 @@ declare(strict_types=1);
 require_once __DIR__.'/../../views/header.php';
 
 if (!empty($_POST['username']) && !empty($_POST['password'])) {
-    $username = $_POST['username'];
+    $username = filter_var($_POST['username'], FILTER_SANITIZE_STRING);
     $password = $_POST['password'];
 
     $checkUser = $pdo->prepare("SELECT username, password FROM users WHERE username=:username");

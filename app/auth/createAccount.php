@@ -4,8 +4,8 @@ declare(strict_types=1);
 require_once __DIR__.'/../../views/header.php';
 
 if (!empty($_POST['email']) && !empty($_POST['username']) && !empty($_POST['password'])) {
-    $mail = $_POST['email'];
-    $username = $_POST['username'];
+    $mail = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
+    $username = filter_var($_POST['username'], FILTER_SANITIZE_STRING);
     $passwordHash = password_hash($_POST['password'], PASSWORD_DEFAULT);
     $errors = 0;
 
