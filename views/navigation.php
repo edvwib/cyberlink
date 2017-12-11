@@ -6,6 +6,6 @@ declare(strict_types=1);
   <?php if (isset($_SESSION['authenticated'])): ?>
     <li><a href="/../app/auth/logout.php">Logout</a></li>
   <?php else: ?>
-    <li><a href="#">Login/register</a></li>
+    <li><a href="login">Login/register</a></li>
   <?php endif; ?>
 </nav>

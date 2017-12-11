@@ -1,0 +1,5 @@
+RewriteEngine On    # Turn on the rewriting engine
+
+# Handle requests for "login"
+RewriteRule     login    login.html    [NC,L]
+
