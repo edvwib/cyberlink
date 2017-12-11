@@ -7,16 +7,16 @@ if (!empty($_POST['username']) && !empty($_POST['password'])) {
     $username = filter_var($_POST['username'], FILTER_SANITIZE_STRING);
     $password = $_POST['password'];
 
-    $checkUser = $pdo->prepare("SELECT username, password FROM users WHERE username=:username");
+    $checkUser = $pdo->prepare("SELECT * FROM users WHERE username=:username");
     $checkUser->bindParam(':username', $username, PDO::PARAM_STR);
     $checkUser->execute();
-    $result = $checkUser->fetchAll(PDO::FETCH_ASSOC);
+    $user = $checkUser->fetchAll(PDO::FETCH_ASSOC);
 
-    if (empty($result)) {
+    if (empty($user)) {
         echo "Wrong username or password.";
-    }else if (password_verify($password, $result[0]['password'])) {
+    }else if (password_verify($password, $user[0]['password'])) {
         $_SESSION['authenticated'] = true;
-        $_SESSION['user'] = $username;
+        $_SESSION['user'] = $user[0];
         header('Location: /');
     }else {
         echo "Wrong username or password.";
