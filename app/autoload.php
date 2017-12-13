@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 // Start the session engines.
 session_start();
+$_SESSION['authenticated'];
 
 // Set the default timezone to Coordinated Universal Time.
 date_default_timezone_set('UTC');
