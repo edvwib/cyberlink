@@ -1,10 +1,5 @@
-RewriteEngine On    # Turn on the rewriting engine
+# Disable browsing folders
+Options -Indexes
 
-RewriteRule     ^$       index.php [NC,N]
-
-# Handle requests for "login"
-RewriteRule     Login    login.html    [L]
-RewriteRule     app/auth/login.php   app/auth/login.php   [NC,L]
-
-# Handle requests for "newpost"
-RewriteRule     Newpost   newPostForm.php   [L]
+# Turn on the rewriting engine
+RewriteEngine On

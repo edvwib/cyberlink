@@ -8,7 +8,7 @@
 </head>
 <body>
   <div class="loginContainer">
-    <form class="login" action="/app/auth/login.php" method="post">
+    <form class="login" action="/../../app/auth/login.php" method="post">
       <p>Log in:</p>
       <div>
         <label for="username">Username:</label>
@@ -22,7 +22,7 @@
     </form>
   </div>
   <div class="signupContainer">
-    <form class="signup" action="/app/auth/createAccount.php" method="post">
+    <form class="signup" action="/../../app/auth/createAccount.php" method="post">
       <p>Don't have an account? Create one below:</p>
       <div>
         <label for="email">Email:</label>

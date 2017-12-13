@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-require_once __DIR__.'/views/header.php';
+require_once __DIR__.'/../header.php';
 
 ?>
 
-<form class="newPost" action="/app/posts/newpost.php" method="post">
+<form class="newPost" action="/../../app/posts/newpost.php" method="post">
       <p>New post:</p>
       <div>
         <label for="link">Link:</label>
@@ -18,4 +18,4 @@ require_once __DIR__.'/views/header.php';
       <button type="submit" name="submit">Post</button>
     </form>
 
-<?php require __DIR__.'/views/footer.php'; ?>
+<?php require __DIR__.'/../footer.php'; ?>
