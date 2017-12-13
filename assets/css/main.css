@@ -1,25 +1,6 @@
 *{
   font-family: 'Roboto Light', Arial, sans-serif;
-  font-size: 14px;
-  margin: 0;
-  padding: 0;
 }
-
-/*NAV*/
-nav{
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: space-between;
-}
-nav > li{
-  list-style-type: none;
-}
-nav > li > a{
-  text-decoration: none;
-  color: black;
-}
-
-
 
 /*COMMENTS*/
 .comments{
