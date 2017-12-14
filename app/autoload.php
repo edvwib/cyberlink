@@ -3,7 +3,11 @@ declare(strict_types=1);
 
 // Start the session engines.
 session_start();
-$_SESSION['authenticated'];
+if (isset($_SESSION['user'])) {
+    $_SESSION['authenticated'] = true;
+}else {
+    $_SESSION['authenticated'] = false;
+}
 
 // Set the default timezone to Coordinated Universal Time.
 date_default_timezone_set('UTC');
