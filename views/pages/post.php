@@ -21,13 +21,39 @@ if (isset($_GET['post'])) {
     $comments->bindParam(':post_id', $postID, PDO::PARAM_INT);
     $comments->execute();
     $comments = $comments->fetchAll(PDO::FETCH_ASSOC);
-}
 
+
+    $up = $pdo->prepare("SELECT vote_type FROM user_votes WHERE post_id=:post_id AND vote_type=1 GROUP BY vote_type");
+    $up->bindParam(':post_id', $post['post_id'], PDO::PARAM_INT);
+    $up->execute();
+    $up = $up->fetchAll(PDO::FETCH_ASSOC);
+    $up = sizeof($up);
+
+    $down = $pdo->prepare("SELECT vote_type FROM user_votes WHERE post_id=:post_id AND vote_type=0 GROUP BY vote_type");
+    $down->bindParam(':post_id', $post['post_id'], PDO::PARAM_INT);
+    $down->execute();
+    $down = $down->fetchAll(PDO::FETCH_ASSOC);
+    $down = sizeof($down);
+
+    $score = $up-$down;
+}
 
 
 ?>
 
 <div class="row post">
+    <div class="voteForm">
+        <form action="/../../app/posts/postVote.php" method="post">
+            <input type="hidden" name="post_id" value="<?php echo $post['post_id']; ?>">
+            <div>
+            <button type="submit" name="upvote">Upvote</button>
+            </div>
+            <div>
+            <button type="submit" name="downvote">Downvote</button>
+            </div>
+        </form>
+    </div>
+    <div class="score"><?php echo $score ?></div>
     <h2><a href="<?php echo $post['link'] ?>"><?php echo $post['title']; ?></a></h2>
     <a href="http://<?php echo parse_url($post['link'], PHP_URL_HOST); ?>">(<?php echo parse_url($post['link'], PHP_URL_HOST); ?>)</a>
 </div>
