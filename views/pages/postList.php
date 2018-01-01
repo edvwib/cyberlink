@@ -12,7 +12,8 @@ foreach ($posts as $post) {
     <div class="post">
         <div class="score"><?php echo $score ?></div>
         <h3><a href="<?php echo $post['link'] ?>"><?php echo $post['title']; ?></a></h3>
-        <a href="http://<?php echo parse_url($post['link'], PHP_URL_HOST); ?>">(<?php echo parse_url($post['link'], PHP_URL_HOST); ?>)</a><br>
+        <a href="http://<?php echo parse_url($post['link'], PHP_URL_HOST); ?>">(<?php echo parse_url($post['link'], PHP_URL_HOST); ?>)</a>
+        <?php echo $spacer ?>
         <a href="?page=post&post=<?php echo $post['post_id'] ?>">comments</a>
     </div>
     <?php

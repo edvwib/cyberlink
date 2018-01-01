@@ -14,17 +14,16 @@ if (!empty($_POST['link']) && !empty($_POST['title'])) {
     }
 
     $addPost = $pdo->prepare("INSERT INTO posts
-                            (link, title, time, votes, user_id, description)
+                            (link, title, time, user_id, description)
                             VALUES
-                            (:link, :title, date('now'), 0, :user_id), :description");
+                            (:link, :title, date('now'), :user_id, :description)");
     if(!$addPost){
-        var_dump($addPost);
-        exit;
+        die(var_dump($pdo->errorInfo()));
     }
     $addPost->bindParam(':link', $link, PDO::PARAM_STR);
     $addPost->bindParam(':title', $title, PDO::PARAM_STR);
-    $addPost->bindParam(':description', $description, PDO::PARAM_STR);
     $addPost->bindParam(':user_id', $_SESSION['user']['user_id'], PDO::PARAM_INT);
+    $addPost->bindParam(':description', $description, PDO::PARAM_STR);
     $addPost->execute();
 
     header('Location: /');
