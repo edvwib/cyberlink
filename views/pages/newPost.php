@@ -15,6 +15,10 @@ require_once __DIR__.'/../header.php';
             <label for="title">Title:</label>
             <input type="text" name="title" required>
         </div>
+        <div>
+            <label for="description">description:</label>
+            <input type="text" name="description" required>
+        </div>
         <button type="submit" name="submit">Post</button>
     </form>
 <?php else: ?>

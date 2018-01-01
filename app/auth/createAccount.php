@@ -9,6 +9,11 @@ if (!empty($_POST['email']) && !empty($_POST['username']) && !empty($_POST['pass
     $passwordHash = password_hash($_POST['password'], PASSWORD_DEFAULT);
     $errors = 0;
 
+    if(!filter_var($mail, FILTER_VALIDATE_EMAIL)){
+        echo 'Invalid email';
+        exit;
+    }
+
     $checkMail = $pdo->prepare("SELECT email FROM users WHERE email=:mail");
     $checkMail->bindParam(':mail', $mail, PDO::PARAM_STR);
     $checkMail->execute();
