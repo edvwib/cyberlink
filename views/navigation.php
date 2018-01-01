@@ -11,7 +11,10 @@ declare(strict_types=1);
     </li>
     <?php if ($_SESSION['authenticated']): ?>
         <li class="nav-item">
-            <a class="nav-link" href="?page=logout">Logout (<?php echo $_SESSION['user']['username'] ?>)</a>
+            <a class="nav-link <?php if($query['page'] === 'user'){echo 'active';} ?>" href="?page=user&user=<?php echo $_SESSION['user']['username'] ?>">You (<?php echo $_SESSION['user']['username'] ?>)</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="?page=logout">Logout</a>
         </li>
     <?php else: ?>
         <li class="nav-item">

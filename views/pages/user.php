@@ -1,0 +1,33 @@
+<?php
+declare(strict_types=1);
+
+require_once __DIR__.'/../header.php';
+
+if (isset($_GET['user'])) {
+    $username = filter_var($_GET['user'], FILTER_SANITIZE_STRING);
+
+    $userID = $pdo->prepare("SELECT user_id FROM users WHERE username=:username");
+    $userID->bindParam(':username', $username, PDO::PARAM_STR);
+    $userID->execute();
+    $userID = $userID->fetchAll(PDO::FETCH_ASSOC);
+    $userID = $userID[0]['user_id'];
+
+    $userPosts = $pdo->prepare("SELECT * FROM posts WHERE user_id=:user_id");
+    $userPosts->bindParam(':user_id', $userID, PDO::PARAM_INT);
+    $userPosts->execute();
+    $userPosts = $userPosts->fetchAll(PDO::FETCH_ASSOC);
+
+    var_dump($userPosts);
+}
+
+foreach ($userPosts as $UserPost) {
+    $score = getPostScore($UserPost['post_id'], $pdo);
+    ?>
+    <div class="post">
+        <div class="score"><?php echo $score ?></div>
+        <h3><a href="<?php echo $UserPost['link'] ?>"><?php echo $UserPost['title']; ?></a></h3>
+        <a href="http://<?php echo parse_url($UserPost['link'], PHP_URL_HOST); ?>">(<?php echo parse_url($UserPost['link'], PHP_URL_HOST); ?>)</a><br>
+        <a href="?page=post&post=<?php echo $UserPost['post_id'] ?>">comments</a>
+    </div>
+    <?php
+}
