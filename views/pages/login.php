@@ -20,8 +20,6 @@
       </div>
       <button type="submit" name="submit">Log in</button>
     </form>
-  </div>
-  <div class="signupContainer">
     <form class="signup" action="/../../app/auth/createAccount.php" method="post">
       <p>Don't have an account? Create one below:</p>
       <div>

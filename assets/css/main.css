@@ -2,6 +2,34 @@
   font-family: 'Roboto Light', Arial, sans-serif;
 }
 
+/*VARIABLES*/
+:root {
+  --bg-color: #192231;
+  --bg-color2: #494E6B;
+  --highlight-color: #985E6D;
+  --highligt-damp: #98878F;
+}
+
+
+/*GENERAL*/
+body{
+  background-color: var(--bg-color);
+  color: var(--highligt-damp);
+}
+.upvote:hover{color: lightgreen;}
+.downvote:hover{color: tomato;}
+
+/*NAVIGATION*/
+.nav-link.active{
+  color: rgb(0, 102, 255);
+}
+
+/*POSTS*/
+.post a{
+  color: var(--highlight-color);
+}
+
+
 /*COMMENTS*/
 .comments{
 
@@ -44,6 +72,16 @@
   text-decoration: none;
 }
 
-/*GENERAL*/
-.upvote:hover{color: lightgreen;}
-.downvote:hover{color: tomato;}
+
+/*LOGIN/SIGNUP PAGE*/
+.loginContainer{
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: center;
+  margin-top: 25px;
+
+}
+.login{
+
+}
