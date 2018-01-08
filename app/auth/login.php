@@ -13,12 +13,15 @@ if (!empty($_POST['username']) && !empty($_POST['password'])) {
     $user = $checkUser->fetchAll(PDO::FETCH_ASSOC);
 
     if (empty($user)) {
-        echo "Wrong username or password.";
+        $_SESSION['failedAuth'] = true;
+        header('Location: /?page=login');
     }else if (password_verify($password, $user[0]['password'])) {
         $_SESSION['authenticated'] = true;
         $_SESSION['user'] = $user[0];
+        $_SESSION['failedAuth'] = false;
         header('Location: /');
     }else {
-        echo "Wrong username or password.";
+        $_SESSION['failedAuth'] = true;
+        header('Location: /?page=login');
     }
 }

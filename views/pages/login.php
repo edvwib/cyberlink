@@ -10,6 +10,10 @@
 <br>
 <div class="row">
     <form class="col-6 login-form" action="/../../app/auth/login.php" method="post">
+        <?php if ($_SESSION['failedAuth']): ?>
+            <p class="col-6 text-warning">Wrong username or password.</p>
+            <?php $_SESSION['failedAuth'] = false;?>
+        <?php endif; ?>
         <div class="form-group">
             <input class="col-6 form-control" type="text" name="username" placeholder="Username..." required>
         </div>
