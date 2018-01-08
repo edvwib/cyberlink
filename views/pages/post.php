@@ -1,8 +1,6 @@
 <?php
 declare(strict_types=1);
 
-require_once __DIR__.'/../header.php';
-
 if (isset($_GET['post'])) {
     $postID = filter_var($_GET['post'], FILTER_SANITIZE_NUMBER_INT);
 
