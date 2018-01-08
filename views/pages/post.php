@@ -20,20 +20,7 @@ if (isset($_GET['post'])) {
     $comments->execute();
     $comments = $comments->fetchAll(PDO::FETCH_ASSOC);
 
-
-    $up = $pdo->prepare("SELECT vote_type FROM user_votes WHERE post_id=:post_id AND vote_type=1 GROUP BY vote_type");
-    $up->bindParam(':post_id', $post['post_id'], PDO::PARAM_INT);
-    $up->execute();
-    $up = $up->fetchAll(PDO::FETCH_ASSOC);
-    $up = sizeof($up);
-
-    $down = $pdo->prepare("SELECT vote_type FROM user_votes WHERE post_id=:post_id AND vote_type=0 GROUP BY vote_type");
-    $down->bindParam(':post_id', $post['post_id'], PDO::PARAM_INT);
-    $down->execute();
-    $down = $down->fetchAll(PDO::FETCH_ASSOC);
-    $down = sizeof($down);
-
-    $score = $up-$down;
+    $score = getPostScore($post['post_id'], $pdo);
 }
 
 
@@ -44,14 +31,15 @@ if (isset($_GET['post'])) {
         <form action="/../../app/posts/postVote.php" method="post">
             <input type="hidden" name="post_id" value="<?php echo $post['post_id']; ?>">
             <div>
-            <button class="upvote" type="submit" name="upvote">▲</button>
+            <button class="btn btn-link" type="submit" name="upvote">▲</button>
             </div>
+            <div class="btn score"><?php echo $score ?></div>
             <div>
-            <button class="downvote" type="submit" name="downvote">▼</button>
+            <button class="btn btn-link" type="submit" name="downvote">▼</button>
             </div>
         </form>
     </div>
-    <div class="score"><?php echo $score ?></div>
+
     <h2><a href="<?php echo $post['link'] ?>"><?php echo $post['title']; ?></a></h2>
     <a href="http://<?php echo parse_url($post['link'], PHP_URL_HOST); ?>">(<?php echo parse_url($post['link'], PHP_URL_HOST); ?>)</a>
 </div>

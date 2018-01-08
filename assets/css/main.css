@@ -18,6 +18,10 @@
   border-bottom: 1px solid black;
 }
 
+.voteForm .btn{
+  width: 38px;
+}
+
 /* GENERAL
 body{
   background-color: var(--bg-color);
