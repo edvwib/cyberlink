@@ -10,27 +10,26 @@
   --highligt-damp: #98878F;
 }
 
+.hidden{
+  display: none;
+}
 
-/*GENERAL*/
+/* GENERAL
 body{
   background-color: var(--bg-color);
   color: var(--highligt-damp);
 }
 .upvote:hover{color: lightgreen;}
 .downvote:hover{color: tomato;}
-
-/*NAVIGATION*/
+/*NAVIGATION
 .nav-link.active{
   color: rgb(0, 102, 255);
 }
-
-/*POSTS*/
+/*POSTS
 .post a{
   color: var(--highlight-color);
 }
-
-
-/*COMMENTS*/
+/*COMMENTS
 .comments{
 
 }
@@ -71,14 +70,4 @@ body{
 .commentReply{
   text-decoration: none;
 }
-
-
-/*LOGIN/SIGNUP PAGE*/
-.loginContainer{
-  display: flex;
-  flex-flow: column nowrap;
-  align-items: center;
-  justify-content: center;
-  margin-top: 25px;
-
-}
+*/
