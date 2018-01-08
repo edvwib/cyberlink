@@ -46,10 +46,10 @@ if (isset($_GET['post'])) {
         <form action="/../../app/posts/postVote.php" method="post">
             <input type="hidden" name="post_id" value="<?php echo $post['post_id']; ?>">
             <div>
-            <button type="submit" name="upvote">Upvote</button>
+            <button class="upvote" type="submit" name="upvote">▲</button>
             </div>
             <div>
-            <button type="submit" name="downvote">Downvote</button>
+            <button class="downvote" type="submit" name="downvote">▼</button>
             </div>
         </form>
     </div>
