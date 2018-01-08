@@ -32,3 +32,10 @@ function getPostScore($postID, $pdo){
 
     return $up-$down;
 }
+function getUser($userID, $pdo){
+    $user = $pdo->prepare("SELECT username FROM users WHERE user_id=:user_id");
+    $user->bindParam(':user_id', $userID, PDO::PARAM_INT);
+    $user->execute();
+    $user = $user->fetchAll(PDO::FETCH_ASSOC);
+    return $user[0]['username'];
+}

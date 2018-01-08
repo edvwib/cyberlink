@@ -14,6 +14,10 @@
   display: none;
 }
 
+.post{
+  border-bottom: 1px solid black;
+}
+
 /* GENERAL
 body{
   background-color: var(--bg-color);
