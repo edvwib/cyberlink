@@ -24,7 +24,7 @@ function getPostScore($postID, $pdo){
     $up = $up->fetchAll(PDO::FETCH_ASSOC);
     $up = sizeof($up);
 
-    $down = $pdo->prepare("SELECT vote_type FROM user_votes WHERE post_id=:post_id AND vote_type=0");
+    $down = $pdo->prepare("SELECT vote_type FROM user_votes WHERE post_id=:post_id AND vote_type=-1");
     $down->bindParam(':post_id', $postID, PDO::PARAM_INT);
     $down->execute();
     $down = $down->fetchAll(PDO::FETCH_ASSOC);

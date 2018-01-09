@@ -6,32 +6,21 @@ require_once __DIR__.'/../../views/header.php';
 if(isset($_POST['upvote'])){
     $vote = 1;
 }
-else if(isset($_POST['downvote'])){
-    $vote = 0;
-}else if(!$_SESSION['authenticated']){
+if(isset($_POST['downvote'])){
+    $vote = -1;
+}
+if(!$_SESSION['authenticated']){
     unset($vote);
 }
 
 if(isset($vote)){
-    $voted = -1;
+    $checkUserVote = $pdo->prepare("SELECT * FROM user_votes WHERE post_id=:post_id AND user_id=:user_id");
+    $checkUserVote->bindParam(':post_id', $_POST['post_id'], PDO::PARAM_INT);
+    $checkUserVote->bindParam(':user_id', $_SESSION['user']['user_id'], PDO::PARAM_INT);
+    $checkUserVote->execute();
+    $checkUserVote = $checkUserVote->fetch(PDO::FETCH_ASSOC);
 
-    $votes = $pdo->query("SELECT * FROM user_votes");
-    $votes = $votes->fetchAll(PDO::FETCH_ASSOC);
-
-    foreach ($votes as $row) {
-        var_dump($row);
-        if($row['post_id'] == $_POST['post_id'] && $row['user_id'] == $_SESSION['user']['user_id']){
-            //If post is already voted on by user
-            $voted = $row['vote_type'];
-        }
-    }
-
-    $newVote = false;
-    if($voted === -1){ //If new vote
-        $newVote = true;
-    }
-
-    if($newVote){
+    if (empty($checkUserVote)){ //If never voted on post
         $addVote = $pdo->prepare("INSERT INTO user_votes
                             (user_id, post_id, vote_type)
                             VALUES
@@ -40,7 +29,16 @@ if(isset($vote)){
         $addVote->bindParam(':post_id', $_POST['post_id'], PDO::PARAM_INT);
         $addVote->bindParam(':vote', $vote, PDO::PARAM_INT);
         $addVote->execute();
-    }else{
+    }else if ($checkUserVote['vote_type'] == $vote) { //If has voted same on post
+        $vote = 0;
+        $removeVote = $pdo->prepare("UPDATE user_votes SET
+                            (vote_type) = (:vote)
+                            WHERE user_id=:user_id AND post_id=:post_id");
+        $removeVote->bindParam(':vote', $vote, PDO::PARAM_INT);
+        $removeVote->bindParam(':user_id', $_SESSION['user']['user_id'], PDO::PARAM_INT);
+        $removeVote->bindParam(':post_id', $_POST['post_id'], PDO::PARAM_INT);
+        $removeVote->execute();
+    }else{ //If has changed vote
         $updateVote = $pdo->prepare("UPDATE user_votes SET
                             (vote_type) = (:vote)
                             WHERE user_id=:user_id AND post_id=:post_id");
@@ -49,6 +47,5 @@ if(isset($vote)){
         $updateVote->bindParam(':post_id', $_POST['post_id'], PDO::PARAM_INT);
         $updateVote->execute();
     }
-
-    header("Location: /?page=post&post=$_POST[post_id]");
 }
+header("Location: /?page=post&post=$_POST[post_id]");
