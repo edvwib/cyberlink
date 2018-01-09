@@ -39,3 +39,7 @@ function getUser($userID, $pdo){
     $user = $user->fetchAll(PDO::FETCH_ASSOC);
     return $user[0]['username'];
 }
+
+function getAvatar($userID, $pdo){
+
+}

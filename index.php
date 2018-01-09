@@ -22,6 +22,9 @@ switch ($query['page']) {
     case 'user':
         require_once __DIR__.'/views/pages/user.php';
         break;
+    case 'profile':
+        require_once __DIR__.'/views/pages/profile.php';
+        break;
     case 'login':
         require_once __DIR__.'/views/pages/login.php';
         break;
