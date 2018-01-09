@@ -53,9 +53,10 @@ if (isset($_GET['post'])) {
 
 <div class="row topLevelCommentFormDiv">
     <form class="col-6 offset-1 topLevelCommentForm" action="/../../app/posts/topLevelComment.php" method="post">
+        <input type="hidden" name="post_id" value="<?php echo $post['post_id']; ?>">
         <div>
           <label for="comment">Add comment:</label><br>
-          <textarea name="comment" rows="4" cols="50"></textarea>
+          <textarea name="comment" rows="4" cols="50" required></textarea>
         </div>
         <button class="col-2 btn" type="submit" name="submit">Comment</button>
     </form>
