@@ -18,6 +18,6 @@ if (document.URL.indexOf("page=login") >= 0) {
     registerForm.classList.remove('hidden');
     loginBtn.classList.remove('active');
     registerBtn.classList.add('active');
-    document.querySelector('p.text-warning').remove();
+    document.querySelector('p.bg-warning').remove();
   });
 }

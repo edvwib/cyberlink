@@ -10,7 +10,7 @@
 <br>
 <div class="row">
     <form class="col-6 login-form" action="/../../app/auth/login.php" method="post">
-        <?php if ($_SESSION['failedAuth']): ?>
+        <?php if (isset($_SESSION['failedAuth']) && $_SESSION['failedAuth']): ?>
             <p class="col-6 bg-warning">Wrong username or password.</p>
             <?php $_SESSION['failedAuth'] = false;?>
         <?php endif; ?>

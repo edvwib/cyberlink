@@ -7,7 +7,7 @@ if (!empty($_POST['username']) && !empty($_POST['password'])) {
     $username = filter_var($_POST['username'], FILTER_SANITIZE_STRING);
     $password = $_POST['password'];
 
-    $checkUser = $pdo->prepare("SELECT * FROM users WHERE username=:username");
+    $checkUser = $pdo->prepare("SELECT user_id, email, username, password FROM users WHERE username=:username");
     $checkUser->bindParam(':username', $username, PDO::PARAM_STR);
     $checkUser->execute();
     $user = $checkUser->fetchAll(PDO::FETCH_ASSOC);
