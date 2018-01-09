@@ -14,7 +14,7 @@
   display: none;
 }
 
-.post{
+.post, .row > .vote{
   border-bottom: 1px solid black;
 }
 
