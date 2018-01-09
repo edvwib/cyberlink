@@ -18,13 +18,13 @@ if (!function_exists('redirect')) {
 }
 
 function getPostScore($postID, $pdo){
-    $up = $pdo->prepare("SELECT vote_type FROM user_votes WHERE post_id=:post_id AND vote_type=1 GROUP BY vote_type");
+    $up = $pdo->prepare("SELECT vote_type FROM user_votes WHERE post_id=:post_id AND vote_type=1");
     $up->bindParam(':post_id', $postID, PDO::PARAM_INT);
     $up->execute();
     $up = $up->fetchAll(PDO::FETCH_ASSOC);
     $up = sizeof($up);
 
-    $down = $pdo->prepare("SELECT vote_type FROM user_votes WHERE post_id=:post_id AND vote_type=0 GROUP BY vote_type");
+    $down = $pdo->prepare("SELECT vote_type FROM user_votes WHERE post_id=:post_id AND vote_type=0");
     $down->bindParam(':post_id', $postID, PDO::PARAM_INT);
     $down->execute();
     $down = $down->fetchAll(PDO::FETCH_ASSOC);

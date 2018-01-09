@@ -34,7 +34,7 @@ if (isset($_GET['post'])) {
             <div>
             <button class="btn btn-link" type="submit" name="upvote">▲</button>
             </div>
-            <div class="btn score"><?php echo $score ?></div>
+            <div class="btn score"><?php echo ($score===1)?($score.'pt'):($score.'pts') ?></div>
             <div>
             <button class="btn btn-link" type="submit" name="downvote">▼</button>
             </div>
@@ -42,7 +42,6 @@ if (isset($_GET['post'])) {
     </div>
 
     <div class="col-9 postSingle">
-        <span class="col-1 h4 score"><?php echo ($score===1)?($score.'pt'):($score.'pts') ?></span>
         <a class="col-11 h3" href="<?php echo $post['link'] ?>"><?php echo $post['title']; ?></a>
         <a class="h6" href="http://<?php echo parse_url($post['link'], PHP_URL_HOST); ?>">(<?php echo parse_url($post['link'], PHP_URL_HOST); ?>)</a>
         <blockquote class="col-12 mb-0 blockquote">
@@ -58,7 +57,7 @@ if (isset($_GET['post'])) {
           <label for="comment">Add comment:</label><br>
           <textarea name="comment" rows="4" cols="50"></textarea>
         </div>
-        <button type="submit" name="submit">Comment</button>
+        <button class="col-2 btn" type="submit" name="submit">Comment</button>
     </form>
 </div>
 
