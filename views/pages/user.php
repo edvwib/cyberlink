@@ -17,7 +17,7 @@ if (isset($_GET['user'])) {
 }
 
 foreach ($userPosts as $UserPost) {
-    $score = getPostScore($UserPost['post_id'], $pdo);
+    $score = getPostScoreByID($UserPost['post_id'], $pdo);
     ?>
     <div class="post">
         <div class="score"><?php echo $score ?></div>

@@ -48,4 +48,4 @@ if(isset($vote)){
         $updateVote->execute();
     }
 }
-header("Location: /?page=post&post=$_POST[post_id]");
+redirect("/?page=post&post=$_POST[post_id]");

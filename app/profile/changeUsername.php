@@ -16,4 +16,4 @@ if (isset($_POST['new-username'])) {
     $_SESSION['user']['username'] = $newUsername;
     $_SESSION['forms']['usernameUpdated'] = true;
 }
-header('Location: /?page=profile');
+redirect('/?page=profile')

@@ -15,4 +15,4 @@ if (isset($_POST['bio'])) {
     }
     $_SESSION['forms']['bioUpdated'] = true;
 }
-header('Location: /?page=profile');
+redirect('/?page=profile')

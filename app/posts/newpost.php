@@ -26,5 +26,5 @@ if (!empty($_POST['link']) && !empty($_POST['title'])) {
     $addPost->bindParam(':description', $description, PDO::PARAM_STR);
     $addPost->execute();
 
-    header('Location: /');
+    redirect('/');
 }

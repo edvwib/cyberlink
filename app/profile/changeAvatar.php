@@ -28,5 +28,5 @@ if (isset($_FILES['avatar'])) {
         unlink(__DIR__.'/avatar.png');
         $_SESSION['forms']['avatarUpdated'] = true;
     }
-    header('Location: /?page=profile');
+    redirect('/?page=profile')
 }

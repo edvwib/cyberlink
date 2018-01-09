@@ -20,8 +20,8 @@ if (isset($_GET['post'])) {
     $comments->execute();
     $comments = $comments->fetchAll(PDO::FETCH_ASSOC);
 
-    $score = getPostScore($post['post_id'], $pdo);
-    $user = getUser($post['user_id'], $pdo);
+    $score = getPostScoreByID($post['post_id'], $pdo);
+    $user = getUserByID($post['user_id'], $pdo);
 }
 
 
@@ -71,9 +71,9 @@ if (isset($_GET['post'])) {
       </span>
       <div class="comment">
         <div class="commentData">
-          <a href="#" class="commentAuthor">/u/<?php echo $comment['user_id']; ?></a>
+          <a href="?page=user&user=<?php echo getUserByID($comment['user_id'], $pdo); ?>" class="commentAuthor">/u/<?php echo getUserByID($comment['user_id'], $pdo); ?></a>
           <?php echo $spacer ?>
-          <p class="commentTime"><?php echo date($dateFormat, (int)$comment['time']); ?></p>
+          <span class="commentTime"><?php echo date($dateFormat, (int)$comment['time']); ?></span>
         </div>
           <p class="commentText"><?php echo $comment['comment']; ?></p>
         <div class="commentControls">

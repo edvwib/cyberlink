@@ -14,14 +14,14 @@ if (!empty($_POST['username']) && !empty($_POST['password'])) {
 
     if (empty($user)) {
         $_SESSION['failedAuth'] = true;
-        header('Location: /?page=login');
+        redirect('/?page=login');
     }else if (password_verify($password, $user[0]['password'])) {
         $_SESSION['authenticated'] = true;
         $_SESSION['user'] = $user[0];
         $_SESSION['failedAuth'] = false;
-        header('Location: /');
+        redirect('/');
     }else {
         $_SESSION['failedAuth'] = true;
-        header('Location: /?page=login');
+        redirect('/?page=login');
     }
 }

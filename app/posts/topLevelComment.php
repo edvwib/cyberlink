@@ -16,4 +16,4 @@ if (isset($_POST['comment'])) {
         die(var_dump($pdo->errorInfo()));
     }
 }
-header("Location: /?page=post&post=$_POST[post_id]");
+redirect("/?page=post&post=$_POST[post_id]")

@@ -29,7 +29,7 @@ switch ($query['page']) {
         require_once __DIR__.'/views/pages/login.php';
         break;
     case 'logout':
-        header('Location: /app/auth/logout.php');
+        redirect('/app/auth/logout.php');
         break;
 
     default:

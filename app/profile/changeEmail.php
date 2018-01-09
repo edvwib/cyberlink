@@ -21,4 +21,4 @@ if (isset($_POST['new-email'])) {
         $_SESSION['forms']['changeEmailInvalid'] = true;
     }
 }
-header('Location: /?page=profile');
+redirect('/?page=profile')
