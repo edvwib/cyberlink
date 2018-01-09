@@ -9,10 +9,7 @@ foreach ($posts as $post) {
     $user = getUser($post['user_id'], $pdo);
     ?>
     <div class="row">
-        <div class="col-1 offset-1 vote">
-
-        </div>
-        <div class="col-9 post">
+        <div class="col-8 offset-2 post">
             <span class="col-1 h4 score"><?php echo ($score===1)?($score.'pt'):($score.'pts') ?></span>
             <a class="col-11 h3" href="<?php echo $post['link'] ?>"><?php echo $post['title']; ?></a>
             <a class="h6" href="http://<?php echo parse_url($post['link'], PHP_URL_HOST); ?>">(<?php echo parse_url($post['link'], PHP_URL_HOST); ?>)</a>

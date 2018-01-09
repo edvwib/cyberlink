@@ -33,6 +33,15 @@ div[class*='profile'] > .panel{
   background-color: #f5f5f5;
   padding: 10px 20px;
 }
+div[class*='profile'] input,
+div[class*='profile'] button,
+div[class*='profile'] [class*="bg"]{ /*Spacing for profile forms*/
+  margin-top: 10px;
+}
+.bg-warning,
+.bg-success{
+  border-radius: 4px;
+}
 
 /* GENERAL
 body{

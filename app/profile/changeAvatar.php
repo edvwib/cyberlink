@@ -11,9 +11,9 @@ if (isset($_FILES['avatar'])) {
 
 
     if ($avatar['size'] >= 10000000){
-        echo 'The uploaded file exceeded the file size limit (10MB).';
+        $_SESSION['forms']['avatarSizeLimit'] = true;
     }if(!in_array($avatar['type'], $allowed)) {
-        echo 'The uploaded file is not in a valid format.';
+        $_SESSION['forms']['avatarInvalidType'] = true;
     }else{
         move_uploaded_file($avatar['tmp_name'], __DIR__.'/avatar.png');
         $avatar = base64_encode(file_get_contents(__DIR__.'/avatar.png'));
@@ -26,6 +26,7 @@ if (isset($_FILES['avatar'])) {
             die(var_dump($pdo->errorInfo()));
         }
         unlink(__DIR__.'/avatar.png');
-        header('Location: /?page=profile');
+        $_SESSION['forms']['avatarUpdated'] = true;
     }
+    header('Location: /?page=profile');
 }

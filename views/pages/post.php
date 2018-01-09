@@ -21,13 +21,14 @@ if (isset($_GET['post'])) {
     $comments = $comments->fetchAll(PDO::FETCH_ASSOC);
 
     $score = getPostScore($post['post_id'], $pdo);
+    $user = getUser($post['user_id'], $pdo);
 }
 
 
 ?>
 
 <div class="row post">
-    <div class="voteForm">
+    <div class="col-1 offset-1">
         <form action="/../../app/posts/postVote.php" method="post">
             <input type="hidden" name="post_id" value="<?php echo $post['post_id']; ?>">
             <div>
@@ -40,12 +41,19 @@ if (isset($_GET['post'])) {
         </form>
     </div>
 
-    <h2><a href="<?php echo $post['link'] ?>"><?php echo $post['title']; ?></a></h2>
-    <a href="http://<?php echo parse_url($post['link'], PHP_URL_HOST); ?>">(<?php echo parse_url($post['link'], PHP_URL_HOST); ?>)</a>
+    <div class="col-9 postSingle">
+        <span class="col-1 h4 score"><?php echo ($score===1)?($score.'pt'):($score.'pts') ?></span>
+        <a class="col-11 h3" href="<?php echo $post['link'] ?>"><?php echo $post['title']; ?></a>
+        <a class="h6" href="http://<?php echo parse_url($post['link'], PHP_URL_HOST); ?>">(<?php echo parse_url($post['link'], PHP_URL_HOST); ?>)</a>
+        <blockquote class="col-12 mb-0 blockquote">
+            <p class="mb-0"><?php echo ($post['description']!=null)?($post['description']):('No description to display') ?></p>
+        </blockquote>
+        <a class="col-2" href="?page=user&user=<?php echo $user ?>">/u/<?php echo $user ?></a>
+    </div>
 </div>
 
 <div class="row topLevelCommentFormDiv">
-    <form class="topLevelCommentForm" action="/../../app/posts/topLevelComment.php" method="post">
+    <form class="col-6 offset-1 topLevelCommentForm" action="/../../app/posts/topLevelComment.php" method="post">
         <div>
           <label for="comment">Add comment:</label><br>
           <textarea name="comment" rows="4" cols="50"></textarea>
@@ -56,7 +64,7 @@ if (isset($_GET['post'])) {
 
 <div class="row comments">
   <?php foreach ($comments as $comment): ?>
-    <div class="commentContainer">
+    <div class="col-6 offset-1 commentContainer">
       <span class="commmentVote">
         <a href="" class="vote upvote">▲</a>
         <a href="" class="vote downvote">▼</a>
