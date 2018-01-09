@@ -48,6 +48,10 @@ if (isset($_GET['post'])) {
             <p class="mb-0"><?php echo ($post['description']!=null)?($post['description']):('No description to display') ?></p>
         </blockquote>
         <a class="col-2" href="?page=user&user=<?php echo $user ?>">/u/<?php echo $user ?></a>
+        <?php if (isset($_SESSION['user']) && isPostOwner($post['post_id'], $_SESSION['user']['user_id'], $pdo)): ?>
+            <a href="?page=post&post=<?php echo $post['post_id'] ?>&action=edit">edit</a>
+            <a href="?page=post&post=<?php echo $post['post_id'] ?>&action=delete">delete</a>
+        <?php endif; ?>
     </div>
 </div>
 
@@ -72,7 +76,6 @@ if (isset($_GET['post'])) {
       <div class="comment">
         <div class="commentData">
           <a href="?page=user&user=<?php echo getUserByID($comment['user_id'], $pdo); ?>" class="commentAuthor">/u/<?php echo getUserByID($comment['user_id'], $pdo); ?></a>
-          <?php echo $spacer ?>
           <span class="commentTime"><?php echo date($dateFormat, (int)$comment['time']); ?></span>
         </div>
           <p class="commentText"><?php echo $comment['comment']; ?></p>

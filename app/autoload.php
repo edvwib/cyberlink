@@ -26,5 +26,3 @@ $pdo = new PDO($config['database_path']);
 
 //Set default dateFormat
 $dateFormat = $config['dateFormat'];
-
-$spacer = $config['spacer'];

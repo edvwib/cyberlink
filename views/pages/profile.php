@@ -6,7 +6,7 @@ $profile->bindParam(':user_id', $_SESSION['user']['user_id']);
 $profile->execute();
 $profile = $profile->fetch(PDO::FETCH_ASSOC);
 
-$avatar = getAvatarByID($_SESSION['user']['user_id'], $pdo);
+$avatar = getAvatarByID(intval($_SESSION['user']['user_id']), $pdo);
 
 ?>
 

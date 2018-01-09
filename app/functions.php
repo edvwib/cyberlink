@@ -17,7 +17,7 @@ if (!function_exists('redirect')) {
 
 }
 
-function getPostScoreByID($postID, $pdo){
+function getPostScoreByID($postID, PDO $pdo):int{
     $up = $pdo->prepare("SELECT vote_type FROM user_votes WHERE post_id=:post_id AND vote_type=1");
     $up->bindParam(':post_id', $postID, PDO::PARAM_INT);
     $up->execute();
@@ -32,14 +32,14 @@ function getPostScoreByID($postID, $pdo){
 
     return $up-$down;
 }
-function getUserByID($userID, $pdo){
+function getUserByID($userID, PDO $pdo):string{
     $user = $pdo->prepare("SELECT username FROM users WHERE user_id=:user_id");
     $user->bindParam(':user_id', $userID, PDO::PARAM_INT);
     $user->execute();
     $user = $user->fetchAll(PDO::FETCH_ASSOC);
     return $user[0]['username'];
 }
-function getCommentCountByID($postID, $pdo){
+function getCommentCountByID($postID, PDO $pdo){
     $commentCount = $pdo->prepare("SELECT count() FROM comments WHERE post_id=:post_id");
     $commentCount->bindParam(':post_id', $postID, PDO::PARAM_INT);
     $commentCount->execute();
@@ -48,11 +48,21 @@ function getCommentCountByID($postID, $pdo){
     return $commentCount['count()'];
 }
 
-function getAvatarByID($userID, $pdo){
+function getAvatarByID($userID, PDO $pdo):string{
     $avatar = $pdo->prepare("SELECT avatar FROM users WHERE user_id=:user_id");
     $avatar->bindParam(':user_id', $userID, PDO::PARAM_INT);
     $avatar->execute();
     $avatar = $avatar->fetch(PDO::FETCH_ASSOC);
 
     return $avatar['avatar'];
+}
+
+function isPostOwner($postID, $userID, PDO $pdo){
+    $post = $pdo->query("SELECT user_id FROM posts WHERE post_id=$postID");
+    $post = $post->fetch(PDO::FETCH_ASSOC);
+
+    return $post['user_id'] == $userID;
+}
+function isCommentOwner($commentID, $userID){
+
 }

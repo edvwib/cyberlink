@@ -6,15 +6,31 @@ if (substr($_SERVER['QUERY_STRING'],0,4) !== "page") { //If URL !contain page va
 }else {
     parse_str($_SERVER['QUERY_STRING'], $query); //Auto parse query with parse_str
 }
+var_dump($query);
 
 require_once __DIR__.'/views/header.php';
+
+//var_dump($_SESSION);
 
 switch ($query['page']) {
     case 'start':
     require_once __DIR__.'/views/pages/postList.php';
         break;
     case 'post':
-        require_once __DIR__.'/views/pages/post.php';
+        if (isset($query['action'])) {
+            switch ($query['action']) {
+                case 'edit':
+                    require_once __DIR__.'/views/pages/editPost.php';
+                    break;
+                case 'delete':
+                    require_once __DIR__.'/app/posts/deletePost.php';
+                    break;
+                default:
+                    break;
+            }
+        }else {
+            require_once __DIR__.'/views/pages/post.php';
+        }
         break;
     case 'newpost':
         require_once __DIR__.'/views/pages/newPost.php';
@@ -31,14 +47,8 @@ switch ($query['page']) {
     case 'logout':
         redirect('/app/auth/logout.php');
         break;
-
     default:
-
         break;
 }
 
-?>
-
-
-
-<?php require_once __DIR__.'/views/footer.php'; ?>
+require_once __DIR__.'/views/footer.php';

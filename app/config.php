@@ -7,5 +7,4 @@ return [
     'title' => 'Cyberlink',
     'database_path' => sprintf('sqlite:%s/database/database.db', __DIR__),
     'dateFormat' => 'Y-m-d @ H:i:s',
-    'spacer' => '<span>&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;</span>',
 ];
