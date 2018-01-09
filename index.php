@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 if (substr($_SERVER['QUERY_STRING'],0,4) !== "page") { //If URL !contain page var
     $query = ['page' => 'start',];
-}else { //If
+}else {
     parse_str($_SERVER['QUERY_STRING'], $query); //Auto parse query with parse_str
 }
 

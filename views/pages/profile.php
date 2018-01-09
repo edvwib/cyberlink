@@ -13,7 +13,11 @@ $avatar = getAvatar($pdo);
 <div class="row profile-email">
     <div class="col-10 offset-1 panel">
         <h4 class="">Email</h4>
-        <input class="" type="email" name="current-email" value="<?php echo $profile['email'] ?>" disabled>
+        <input type="email" name="current-email" value="<?php echo $profile['email'] ?>" disabled>
+        <form action="index.html" method="post">
+            <input type="email" name="new-email" placeholder="new email">
+
+        </form>
     </div>
 </div>
 
