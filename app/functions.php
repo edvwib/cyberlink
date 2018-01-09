@@ -40,6 +40,10 @@ function getUser($userID, $pdo){
     return $user[0]['username'];
 }
 
-function getAvatar($userID, $pdo){
-
+function getAvatar($pdo){
+    $avatar = $pdo->prepare("SELECT avatar FROM users WHERE user_id=:user_id");
+    $avatar->bindParam(':user_id', $_SESSION['user']['user_id'], PDO::PARAM_INT);
+    $avatar->execute();
+    $avatar = $avatar->fetch(PDO::FETCH_ASSOC);
+    return $avatar['avatar'];
 }
