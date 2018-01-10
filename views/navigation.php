@@ -11,7 +11,7 @@ declare(strict_types=1);
     </li>
     <?php if ($_SESSION['authenticated']): ?>
         <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle <?php if($query['page'] === 'user'){echo 'active';} ?>" href="?page=user&user=<?php echo $_SESSION['user']['username'] ?>" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">You (<?php echo $_SESSION['user']['username'] ?>)</a>
+            <a class="nav-link dropdown-toggle <?php if($query['page'] === 'user' || $query['page'] === 'profile'){echo 'active';} ?>" href="?page=user&user=<?php echo $_SESSION['user']['username'] ?>" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">You (<?php echo $_SESSION['user']['username'] ?>)</a>
             <div class="dropdown-menu">
                 <a class="dropdown-item" href="?page=profile">Edit profile</a>
                 <div class="dropdown-divider"></div>

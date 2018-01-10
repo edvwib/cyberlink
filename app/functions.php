@@ -48,7 +48,7 @@ function getCommentCountByID($postID, PDO $pdo){
     return $commentCount['count()'];
 }
 
-function getAvatarByID($userID, PDO $pdo):string{
+function getAvatarByID($userID, PDO $pdo){
     $avatar = $pdo->prepare("SELECT avatar FROM users WHERE user_id=:user_id");
     $avatar->bindParam(':user_id', $userID, PDO::PARAM_INT);
     $avatar->execute();

@@ -17,9 +17,6 @@ if (!empty($_POST['link']) && !empty($_POST['title'])) {
                                 title=:title,
                                 description=:description
                             WHERE post_id=:post_id");
-    if(!$editPost){
-        die(var_dump($pdo->errorInfo()));
-    }
     $editPost->bindParam(':link', $link, PDO::PARAM_STR);
     $editPost->bindParam(':title', $title, PDO::PARAM_STR);
     $editPost->bindParam(':description', $description, PDO::PARAM_STR);
