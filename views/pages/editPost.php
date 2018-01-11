@@ -10,9 +10,8 @@ if (!$post)
 {
     die(var_dump($pdo->errorInfo()));
 }
-
-//redirect('/?page=post&post='.$_GET['post']);
 ?>
+
 <form class="editPost" action="/../../app/posts/editPost.php" method="post">
 
     <h3>Edit your post:</h3>
@@ -32,4 +31,3 @@ if (!$post)
     </div>
     <button class="col-6 btn" type="submit" name="submit">Update</button>
 </form>
-<?php require __DIR__.'/../footer.php'; ?>

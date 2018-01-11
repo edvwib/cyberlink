@@ -3,9 +3,12 @@ declare(strict_types=1);
 
 // Start the session engines.
 session_start();
-if (isset($_SESSION['user'])) {
+if (isset($_SESSION['user']))
+{
     $_SESSION['authenticated'] = true;
-}else {
+}
+else
+{
     $_SESSION['authenticated'] = false;
 }
 

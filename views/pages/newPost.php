@@ -1,13 +1,11 @@
 <?php
 declare(strict_types=1);
-
 ?>
 
 <div class="row">
   <div class="col-8 offset-2">
     <?php if ($_SESSION['authenticated']): ?>
         <form class="newPost" action="/../../app/posts/newPost.php" method="post">
-
             <h3>Submit a new post:</h3>
             <div class="form-group">
                 <input class="col-6 form-control" type="text" name="link" placeholder="Link..." required>
@@ -25,9 +23,7 @@ declare(strict_types=1);
             <button class="col-6 btn" type="submit" name="submit">Post</button>
         </form>
     <?php else: ?>
-        <p class="col-6 bg-warning text-white">You need to be <a href="?page=login">logged in</a> in order to create posts.</p>
+        <p>You need to be <a href="?page=login">logged in</a> in order to create posts.</p>
     <?php endif; ?>
   </div>
 </div>
-
-<?php require __DIR__.'/../footer.php'; ?>

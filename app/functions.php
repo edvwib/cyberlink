@@ -1,7 +1,8 @@
 <?php
 declare(strict_types=1);
 
-if (!function_exists('redirect')) {
+if (!function_exists('redirect'))
+{
     /**
      * Redirect the user to given path.
      *
@@ -13,11 +14,10 @@ if (!function_exists('redirect')) {
         header("Location: ${path}");
         exit;
     }
-
-
 }
 
-function getPostScoreByID($postID, PDO $pdo):int{
+function getPostScoreByID($postID, PDO $pdo):int
+{
     $up = $pdo->prepare("SELECT vote_type FROM user_votes WHERE post_id=:post_id AND vote_type=1");
     $up->bindParam(':post_id', $postID, PDO::PARAM_INT);
     $up->execute();
@@ -32,23 +32,26 @@ function getPostScoreByID($postID, PDO $pdo):int{
 
     return $up-$down;
 }
-function getUserByID($userID, PDO $pdo):string{
+function getUserByID($userID, PDO $pdo):string
+{
     $user = $pdo->prepare("SELECT username FROM users WHERE user_id=:user_id");
     $user->bindParam(':user_id', $userID, PDO::PARAM_INT);
     $user->execute();
     $user = $user->fetchAll(PDO::FETCH_ASSOC);
     return $user[0]['username'];
 }
-function getCommentCountByID($postID, PDO $pdo){
-    $commentCount = $pdo->prepare("SELECT count() FROM comments WHERE post_id=:post_id");
+function getCommentCountByID($postID, PDO $pdo)
+{
+    $commentCount = $pdo->prepare("SELECT COUNT() FROM comments WHERE post_id=:post_id");
     $commentCount->bindParam(':post_id', $postID, PDO::PARAM_INT);
     $commentCount->execute();
     $commentCount = $commentCount->fetch(PDO::FETCH_ASSOC);
 
-    return $commentCount['count()'];
+    return $commentCount['COUNT()'];
 }
 
-function getAvatarByID($userID, PDO $pdo){
+function getAvatarByID($userID, PDO $pdo)
+{
     $avatar = $pdo->prepare("SELECT avatar FROM users WHERE user_id=:user_id");
     $avatar->bindParam(':user_id', $userID, PDO::PARAM_INT);
     $avatar->execute();
@@ -57,12 +60,14 @@ function getAvatarByID($userID, PDO $pdo){
     return $avatar['avatar'];
 }
 
-function isPostOwner($postID, $userID, PDO $pdo){
+function isPostOwner($postID, $userID, PDO $pdo)
+{
     $post = $pdo->query("SELECT user_id FROM posts WHERE post_id=$postID");
     $post = $post->fetch(PDO::FETCH_ASSOC);
 
     return $post['user_id'] == $userID;
 }
-function isCommentOwner($commentID, $userID){
+function isCommentOwner($commentID, $userID)
+{
 
 }

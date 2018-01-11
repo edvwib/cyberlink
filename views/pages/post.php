@@ -27,6 +27,11 @@ if (isset($_GET['post'])) {
 
 ?>
 
+<?php if (isset($_SESSION['forms']['voteFailed']) && $_SESSION['forms']['voteFailed']): ?>
+    <p class="col-4 offset-4 bg-warning text-white">You need to be logged in in order to vote.</p>
+    <?php $_SESSION['forms']['voteFailed'] = false; ?>
+<?php endif; ?>
+
 <div class="row post">
     <div class="col-1 offset-1">
         <form action="/../../app/posts/postVote.php" method="post">

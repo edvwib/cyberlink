@@ -1,3 +1,7 @@
+<?php
+declare(strict_types=1);
+?>
+
 <div class="row">
     <div class="col-2 offset-2 login">
         <a href="#" class="col-12 btn btn-primary login-btn active">Login:</a>

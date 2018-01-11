@@ -14,7 +14,7 @@ if (isset($_POST['new-email']))
             $_SESSION['forms']['changeEmailSame'] = true;
         }
         else
-        {
+        {//Check if email is in use
             $checkNewEmail = $pdo->prepare("SELECT email FROM users WHERE email=:newEmail");
             $checkNewEmail->bindParam(':newEmail', $newMail, PDO::PARAM_STR);
             $checkNewEmail->execute();

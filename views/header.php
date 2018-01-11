@@ -4,6 +4,7 @@ declare(strict_types=1);
 //Always load setup
 require __DIR__.'/../app/autoload.php';
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

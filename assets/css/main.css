@@ -10,11 +10,15 @@
   --highligt-damp: #98878F;
 }
 
-.hidden{
+.hidden{ /*Used with javascript to hide elements*/
   display: none;
 }
 
-.post, .row > .vote{
+[class*="bg"]{ /*Adds rounded corners on bootstrap warnings/danger bg etc*/
+  border-radius: 4px;
+}
+
+.post, .row > .vote{ /*Adds border below each post in postList and on single post*/
   border-bottom: 1px solid black;
 }
 
@@ -26,6 +30,7 @@
   height: 200px;
 }
 
+/*PROFILE EDIT PAGE*/
 div[class*='profile'] > .panel{
   border: 1px solid #ddd;
   border-radius: 4px;
@@ -38,64 +43,3 @@ div[class*='profile'] button,
 div[class*='profile'] [class*="bg"]{ /*Spacing for profile forms*/
   margin-top: 10px;
 }
-[class*="bg"]{
-  border-radius: 4px;
-}
-
-/* GENERAL
-body{
-  background-color: var(--bg-color);
-  color: var(--highligt-damp);
-}
-.upvote:hover{color: lightgreen;}
-.downvote:hover{color: tomato;}
-/*NAVIGATION
-.nav-link.active{
-  color: rgb(0, 102, 255);
-}
-/*POSTS
-.post a{
-  color: var(--highlight-color);
-}
-/*COMMENTS
-.comments{
-
-}
-.commentContainer{
-  display: flex;
-  flex-flow: row nowrap;
-  min-height: 70px;
-  margin-top: 5px;
-  border-top: 1px solid black;
-  border-bottom: 1px solid black;
-  background-color: #ffffef;
-}
-.comments .vote{
-  text-decoration: none;
-  align-self: center;
-  font-size: 18px;
-  color: black;
-}
-.commmentVote{
-  display: flex;
-  flex-flow: column nowrap;
-  align-self: center;
-  width: 30px;
-}
-.comment{
-  display: flex;
-  flex-flow: column nowrap;
-  justify-content: space-between;
-}
-.commentData{
-  display: flex;
-  flex-flow: row nowrap;
-  align-items: center;
-}
-.commentText{
-
-}
-.commentReply{
-  text-decoration: none;
-}
-*/
