@@ -9,8 +9,10 @@ if (!empty($_POST['link']) && !empty($_POST['title'])) {
     $description = filter_var($_POST['description'], FILTER_SANITIZE_STRING);
 
     if(!filter_var($link, FILTER_VALIDATE_URL)){
-        echo 'Not a valid link';
-        exit;
+        $link = 'http://'.$link;
+        if (!filter_var($link, FILTER_VALIDATE_URL)) {
+            echo 'Not a valid link';
+        }
     }
 
     $addPost = $pdo->prepare("INSERT INTO posts

@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 ?>
 <?php if ($_SESSION['authenticated']): ?>
-    <form class="newPost" action="/../../app/posts/newpost.php" method="post">
+    <form class="newPost" action="/../../app/posts/newPost.php" method="post">
 
         <h3>Submit a new post:</h3>
         <div class="form-group">
