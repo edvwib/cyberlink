@@ -6,7 +6,8 @@ $post->bindParam(':post_id', $_GET['post'], PDO::PARAM_INT);
 $post->bindParam(':user_id', $_SESSION['user']['user_id'], PDO::PARAM_INT);
 $post->execute();
 $post = $post->fetch(PDO::FETCH_ASSOC);
-if (!$post) {
+if (!$post)
+{
     die(var_dump($pdo->errorInfo()));
 }
 
@@ -19,6 +20,10 @@ if (!$post) {
     <div class="form-group">
         <input class="col-6 form-control" type="text" name="link" value="<?php echo $post['link'] ?>" required>
     </div>
+    <?php if (isset($_SESSION['forms']['invalidLink']) && $_SESSION['forms']['invalidLink']): ?>
+        <p class="col-3 bg-warning text-white">The link you've entered is invalid, please try again.</p>
+        <?php $_SESSION['forms']['invalidLink'] = false; ?>
+    <?php endif; ?>
     <div class="form-group">
         <input class="col-6 form-control" type="text" name="title" value="<?php echo $post['title'] ?>" required>
     </div>
