@@ -1,6 +1,6 @@
 
 <div class="row">
-    <div class="col-2 login">
+    <div class="col-2 offset-2 login">
         <a href="#" class="col-12 btn btn-primary login-btn active">Login:</a>
     </div>
     <div class="col-2 register">
@@ -9,7 +9,7 @@
 </div>
 <br>
 <div class="row">
-    <form class="col-6 login-form" action="/../../app/auth/login.php" method="post">
+    <form class="col-6 offset-2 login-form" action="/../../app/auth/login.php" method="post">
         <?php if (isset($_SESSION['failedAuth']) && $_SESSION['failedAuth']): ?>
             <p class="col-6 bg-warning">Wrong username or password.</p>
             <?php $_SESSION['failedAuth'] = false;?>
@@ -25,7 +25,7 @@
         </div>
     </form>
 
-    <form class="col-6 register-form hidden" action="/../../app/auth/createAccount.php" method="post">
+    <form class="col-6 offset-2 register-form hidden" action="/../../app/auth/createAccount.php" method="post">
         <div class="form-group">
             <input class="col-6 form-control" type="email" name="email" placeholder="Email..." required>
         </div>
