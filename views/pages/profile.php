@@ -51,9 +51,9 @@ $avatar = getAvatarByID(intval($_SESSION['user']['user_id']), $pdo);
                 <p class="col-3 bg-warning text-white">You're already using that username.</p>
                 <?php $_SESSION['forms']['changeUsernameSame'] = false; ?>
             <?php endif; ?>
-            <?php if (isset($_SESSION['forms']['changeUsernameInvalid']) && $_SESSION['forms']['changeUsernameInvalid']): ?>
+            <?php if (isset($_SESSION['forms']['usernameInUse']) && $_SESSION['forms']['usernameInUse']): ?>
                 <p class="col-3 bg-danger text-white">That username is already in use.</p>
-                <?php $_SESSION['forms']['changeUsernameInvalid'] = false; ?>
+                <?php $_SESSION['forms']['usernameInUse'] = false; ?>
             <?php endif; ?>
             <button class="col-3 btn" type="submit" name="submit">Update username</button>
         </form>

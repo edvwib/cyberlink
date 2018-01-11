@@ -33,7 +33,7 @@ if (isset($_POST['new-username']))
         }
         else
         {//If another user is already using this username
-            $_SESSION['forms']['changeUsernameInvalid'] = true;
+            $_SESSION['forms']['usernameInUse'] = true;
         }
     }
 }
