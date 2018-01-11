@@ -16,13 +16,21 @@ $avatar = getAvatarByID(intval($_SESSION['user']['user_id']), $pdo);
         <input class="form-control col-3" type="email" name="current-email" value="<?php echo $profile['email'] ?>" disabled>
         <form action="/../../app/profile/changeEmail.php" method="post">
             <input class="form-control col-3" type="email" name="new-email" placeholder="new email" required>
+            <?php if (isset($_SESSION['forms']['emailUpdated']) && $_SESSION['forms']['emailUpdated']): ?>
+                <p class="col-3 bg-success text-white">Successfully updated email.</p>
+                <?php $_SESSION['forms']['emailUpdated'] = false; ?>
+            <?php endif; ?>
+            <?php if (isset($_SESSION['forms']['changeEmailSame']) && $_SESSION['forms']['changeEmailSame']): ?>
+                <p class="col-3 bg-warning text-white">You're already using that email.</p>
+                <?php $_SESSION['forms']['changeEmailSame'] = false; ?>
+            <?php endif; ?>
             <?php if (isset($_SESSION['forms']['changeEmailInvalid']) && $_SESSION['forms']['changeEmailInvalid']): ?>
                 <p class="col-3 bg-warning text-white">Invalid email.</p>
                 <?php $_SESSION['forms']['changeEmailInvalid'] = false; ?>
             <?php endif; ?>
-            <?php if (isset($_SESSION['forms']['emailUpdated']) && $_SESSION['forms']['emailUpdated']): ?>
-                <p class="col-3 bg-success text-white">Successfully updated email.</p>
-                <?php $_SESSION['forms']['emailUpdated'] = false; ?>
+            <?php if (isset($_SESSION['forms']['changeEmailInUse']) && $_SESSION['forms']['changeEmailInUse']): ?>
+                <p class="col-3 bg-danger text-white">Email is already in use.</p>
+                <?php $_SESSION['forms']['changeEmailInUse'] = false; ?>
             <?php endif; ?>
             <button class="col-3 btn" type="submit" name="submit">Update email</button>
         </form>
@@ -35,13 +43,17 @@ $avatar = getAvatarByID(intval($_SESSION['user']['user_id']), $pdo);
         <form action="/../../app/profile/changeUsername.php" method="post">
             <input class="form-control col-3" type="text" name="current-username" value="<?php echo $profile['username'] ?>" disabled>
             <input class="form-control col-3" type="text" name="new-username" placeholder="new username" required>
-            <?php if (isset($_SESSION['forms']['changeUsernameInvalid']) && $_SESSION['forms']['changeUsernameInvalid']): ?>
-                <p class="col-3 bg-warning text-white">This username is already taken.</p>
-                <?php $_SESSION['forms']['changeUsernameInvalid'] = false; ?>
-            <?php endif; ?>
             <?php if (isset($_SESSION['forms']['usernameUpdated']) && $_SESSION['forms']['usernameUpdated']): ?>
-                <p class="col-3 bg-success text-white">Successfully updated username.</p>
+                <p class="col-3 bg-success text-white">Successfully updated your username.</p>
                 <?php $_SESSION['forms']['usernameUpdated'] = false; ?>
+            <?php endif; ?>
+            <?php if (isset($_SESSION['forms']['changeUsernameSame']) && $_SESSION['forms']['changeUsernameSame']): ?>
+                <p class="col-3 bg-warning text-white">You're already using that username.</p>
+                <?php $_SESSION['forms']['changeUsernameSame'] = false; ?>
+            <?php endif; ?>
+            <?php if (isset($_SESSION['forms']['changeUsernameInvalid']) && $_SESSION['forms']['changeUsernameInvalid']): ?>
+                <p class="col-3 bg-danger text-white">That username is already in use.</p>
+                <?php $_SESSION['forms']['changeUsernameInvalid'] = false; ?>
             <?php endif; ?>
             <button class="col-3 btn" type="submit" name="submit">Update username</button>
         </form>
@@ -59,17 +71,17 @@ $avatar = getAvatarByID(intval($_SESSION['user']['user_id']), $pdo);
         <form action="/../../app/profile/changeAvatar.php" method="post" enctype="multipart/form-data">
             <label class="col-3" for="avatar">Choose your avatar image to upload (Max 10MB, .jpg, .jpeg, .png, .gif):</label>
             <input class="col-12 btn" type="file" accept="image/*" name="avatar" required>
+            <?php if (isset($_SESSION['forms']['avatarUpdated']) && $_SESSION['forms']['avatarUpdated']): ?>
+                <p class="col-3 bg-success text-white">Successfully updated your avatar.</p>
+                <?php $_SESSION['forms']['avatarUpdated'] = false; ?>
+            <?php endif; ?>
             <?php if (isset($_SESSION['forms']['avatarSizeLimit']) && $_SESSION['forms']['avatarSizeLimit']): ?>
-                <p class="col-3 bg-warning text-white">The uploaded file exceeded the file size limit (10MB).</p>
+                <p class="col-3 bg-danger text-white">The uploaded file exceeded the file size limit (10MB).</p>
                 <?php $_SESSION['forms']['avatarSizeLimit'] = false; ?>
             <?php endif; ?>
             <?php if (isset($_SESSION['forms']['avatarInvalidType']) && $_SESSION['forms']['avatarInvalidType']): ?>
-                <p class="col-3 bg-warning text-white">The uploaded file is not in a valid format.</p>
+                <p class="col-3 bg-danger text-white">The uploaded file is not in a valid format.</p>
                 <?php $_SESSION['forms']['avatarInvalidType'] = false; ?>
-            <?php endif; ?>
-            <?php if (isset($_SESSION['forms']['avatarUpdated']) && $_SESSION['forms']['avatarUpdated']): ?>
-                <p class="col-3 bg-success text-white">Successfully updated avatar.</p>
-                <?php $_SESSION['forms']['avatarUpdated'] = false; ?>
             <?php endif; ?>
             <button class="col-3 btn" type="submit">Upload</button>
         </form>

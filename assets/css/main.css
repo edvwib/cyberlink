@@ -38,8 +38,7 @@ div[class*='profile'] button,
 div[class*='profile'] [class*="bg"]{ /*Spacing for profile forms*/
   margin-top: 10px;
 }
-.bg-warning,
-.bg-success{
+[class*="bg"]{
   border-radius: 4px;
 }
 
