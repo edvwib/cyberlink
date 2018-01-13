@@ -11,34 +11,34 @@ $avatar = getAvatarByID(intval($_SESSION['user']['user_id']), $pdo);
 ?>
 
 <div class="row profile-email my-3">
-  <div class="col-12 col-sm-8 offset-sm-2 panel">
-      <form class="row" action="/../../app/profile/changeEmail.php" method="post">
-        <h4 class="col-10 offset-1">Email</h4>
-        <input class="col-10 offset-1 form-control" type="email" name="current-email" value="<?php echo $profile['email'] ?>" disabled>
-        <input class="col-10 offset-1 form-control" type="email" name="new-email" placeholder="new email" required>
-        <?php if (isset($_SESSION['forms']['emailUpdated']) && $_SESSION['forms']['emailUpdated']): ?>
-          <p class="col-10 offset-1 bg-success text-white formError">Successfully updated email.</p>
-          <?php $_SESSION['forms']['emailUpdated'] = false; ?>
-        <?php endif; ?>
-        <?php if (isset($_SESSION['forms']['changeEmailSame']) && $_SESSION['forms']['changeEmailSame']): ?>
-          <p class="col-10 offset-1 bg-warning text-white formError">You're already using that email.</p>
-          <?php $_SESSION['forms']['changeEmailSame'] = false; ?>
-        <?php endif; ?>
-        <?php if (isset($_SESSION['forms']['changeEmailInvalid']) && $_SESSION['forms']['changeEmailInvalid']): ?>
-          <p class="col-10 offset-1 bg-warning text-white formError">Invalid email.</p>
-          <?php $_SESSION['forms']['changeEmailInvalid'] = false; ?>
-        <?php endif; ?>
-        <?php if (isset($_SESSION['forms']['changeEmailInUse']) && $_SESSION['forms']['changeEmailInUse']): ?>
-          <p class="col-10 offset-1 bg-danger text-white formError">Email is already in use.</p>
-          <?php $_SESSION['forms']['changeEmailInUse'] = false; ?>
-        <?php endif; ?>
-        <button class="col-10 offset-1 btn" type="submit" name="submit">Update email</button>
-      </form>
-  </div>
+    <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 panel">
+        <form class="row" action="/../../app/profile/changeEmail.php" method="post">
+            <h4 class="col-10 offset-1">Email</h4>
+            <input class="col-10 offset-1 form-control" type="email" name="current-email" value="<?php echo $profile['email'] ?>" disabled>
+            <input class="col-10 offset-1 form-control" type="email" name="new-email" placeholder="new email" required>
+            <?php if (isset($_SESSION['forms']['emailUpdated']) && $_SESSION['forms']['emailUpdated']): ?>
+                <p class="col-10 offset-1 bg-success text-white formError">Successfully updated email.</p>
+                <?php $_SESSION['forms']['emailUpdated'] = false; ?>
+            <?php endif; ?>
+            <?php if (isset($_SESSION['forms']['changeEmailSame']) && $_SESSION['forms']['changeEmailSame']): ?>
+                <p class="col-10 offset-1 bg-warning text-white formError">You're already using that email.</p>
+                <?php $_SESSION['forms']['changeEmailSame'] = false; ?>
+            <?php endif; ?>
+            <?php if (isset($_SESSION['forms']['changeEmailInvalid']) && $_SESSION['forms']['changeEmailInvalid']): ?>
+                <p class="col-10 offset-1 bg-warning text-white formError">Invalid email.</p>
+                <?php $_SESSION['forms']['changeEmailInvalid'] = false; ?>
+            <?php endif; ?>
+            <?php if (isset($_SESSION['forms']['changeEmailInUse']) && $_SESSION['forms']['changeEmailInUse']): ?>
+                <p class="col-10 offset-1 bg-danger text-white formError">Email is already in use.</p>
+                <?php $_SESSION['forms']['changeEmailInUse'] = false; ?>
+            <?php endif; ?>
+            <button class="col-10 offset-1 btn" type="submit" name="submit">Update email</button>
+        </form>
+    </div>
 </div>
 
 <div class="row profile-username my-3">
-    <div class="col-12 col-sm-8 offset-sm-2 panel">
+    <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 panel">
         <form class="row" action="/../../app/profile/changeUsername.php" method="post">
             <h4 class="col-10 offset-1">Username</h4>
             <input class="col-10 offset-1 form-control" type="text" name="current-username" value="<?php echo $profile['username'] ?>" disabled>
@@ -61,14 +61,14 @@ $avatar = getAvatarByID(intval($_SESSION['user']['user_id']), $pdo);
 </div>
 
 <div class="row profile-avatar my-3">
-    <div class="col-12 col-sm-8 offset-sm-2 panel">
+    <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 panel">
         <form class="row" action="/../../app/profile/changeAvatar.php" method="post" enctype="multipart/form-data">
             <h4 class="col-10 offset-1">Avatar</h4>
             <div class="col-10 offset-1 text-center">
             <?php if ($avatar === null): ?>
-                <img src="/../../assets/default-avatar.png" class="col-8 rounded" alt="avatar">
+                <img src="/../../assets/default-avatar.png" class="col-8 col-lg-6 col-xl-4 rounded" alt="avatar">
             <?php else: ?>
-                <img src="data:image;base64,<?php echo $avatar ?>" class="col-8 rounded" alt="avatar">
+                <img src="data:image;base64,<?php echo $avatar ?>" class="col-8 col-lg-6 col-xl-4 rounded" alt="avatar">
             <?php endif; ?>
             </div>
             <label class="col-10 offset-1" for="avatar">Choose your avatar image to upload (Max 10MB, .jpg, .jpeg, .png, .gif):</label>
@@ -91,7 +91,7 @@ $avatar = getAvatarByID(intval($_SESSION['user']['user_id']), $pdo);
 </div>
 
 <div class="row profile-bio my-3">
-    <div class="col-12 col-sm-8 offset-sm-2 panel">
+    <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 panel">
         <form class="row" action="/../../app/profile/changeBio.php" method="post">
             <h4 class="col-10 offset-1">Biography</h4>
             <textarea class="col-10 offset-1 form-control" name="bio" rows="4" cols="80" placeholder="Write something about yourself!" required><?php echo $profile['bio'] ?></textarea>

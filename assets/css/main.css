@@ -37,6 +37,9 @@
 input, button, .formError{ /*Spacing for profile forms*/
   margin-top: 10px;
 }
+[class*="profile"] img{
+  /* max-height: 200px; */
+}
 
 
 

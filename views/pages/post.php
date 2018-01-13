@@ -100,7 +100,7 @@ if (isset($_GET['post'])) {
         <div class="row">
           <a href="#" class="col-2 commentReply">reply</a>
         </div>
+        <hr>
     <?php endforeach; ?>
   </div>
 </div>
-<hr>

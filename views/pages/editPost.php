@@ -13,7 +13,7 @@ if (!$post)
 ?>
 
 <div class="row">
-    <div class="col-12 panel">
+    <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 panel">
       <form class="row editPost" action="/../../app/posts/editPost.php" method="post">
           <h4 class="col-10 offset-1">Edit your post:</h4>
           <input type="hidden" name="post_id" value="<?php echo $_GET['post']; ?>">

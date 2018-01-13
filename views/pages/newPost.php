@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 <div class="row">
   <?php if ($_SESSION['authenticated']): ?>
-    <div class="col-12 col-sm-8 offset-sm-2 panel">
+    <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 panel">
         <form class="row newPost" action="/../../app/posts/newPost.php" method="post">
-            <h4>Submit a new post:</h4>
+            <h4 class="col-10 offset-1">Submit a new post:</h4>
             <div class="col-10 offset-1 form-group">
                 <input class="form-control" type="text" name="link" placeholder="Link..." required>
             </div>
