@@ -6,7 +6,6 @@ if (substr($_SERVER['QUERY_STRING'],0,4) !== "page") { //If URL !contain page va
 }else {
     parse_str($_SERVER['QUERY_STRING'], $query); //Auto parse query with parse_str
 }
-var_dump($query);
 
 require_once __DIR__.'/views/header.php';
 

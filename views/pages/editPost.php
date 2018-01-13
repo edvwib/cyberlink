@@ -12,22 +12,23 @@ if (!$post)
 }
 ?>
 
-<form class="editPost" action="/../../app/posts/editPost.php" method="post">
-
-    <h3>Edit your post:</h3>
-    <input type="hidden" name="post_id" value="<?php echo $_GET['post']; ?>">
-    <div class="form-group">
-        <input class="col-6 form-control" type="text" name="link" value="<?php echo $post['link'] ?>" required>
+<div class="row">
+    <div class="col-12 panel">
+      <form class="row editPost" action="/../../app/posts/editPost.php" method="post">
+          <h4 class="col-10 offset-1">Edit your post:</h4>
+          <input type="hidden" name="post_id" value="<?php echo $_GET['post']; ?>">
+          <div class="col-10 offset-1 form-group">
+              <input class="form-control" type="text" name="link" value="<?php echo $post['link'] ?>" required>
+          </div>
+          <div class="col-10 offset-1 form-group">
+              <input class="form-control" type="text" name="title" value="<?php echo $post['title'] ?>" required>
+          </div>
+          <div class="col-10 offset-1 form-group">
+              <textarea class="form-control" type="text" name="description" rows="3"><?php echo $post['description'] ?></textarea>
+          </div>
+          <div class="col-10 offset-1 form-group">
+              <button class="col-12 btn" type="submit" name="submit">Update</button>
+          </div>
+      </form>
     </div>
-    <?php if (isset($_SESSION['forms']['invalidLink']) && $_SESSION['forms']['invalidLink']): ?>
-        <p class="col-3 bg-warning text-white">The link you've entered is invalid, please try again.</p>
-        <?php $_SESSION['forms']['invalidLink'] = false; ?>
-    <?php endif; ?>
-    <div class="form-group">
-        <input class="col-6 form-control" type="text" name="title" value="<?php echo $post['title'] ?>" required>
-    </div>
-    <div class="form-group">
-        <textarea class="col-6 form-control" type="text" name="description" rows="3"><?php echo $post['description'] ?></textarea>
-    </div>
-    <button class="col-6 btn" type="submit" name="submit">Update</button>
-</form>
+</div>

@@ -22,6 +22,7 @@ if (isset($_GET['post'])) {
 
     $score = getPostScoreByID($post['post_id'], $pdo);
     $user = getUserByID($post['user_id'], $pdo);
+    $commentCount = getCommentCountByID(intval($post['post_id']), $pdo);
 }
 
 
@@ -32,64 +33,74 @@ if (isset($_GET['post'])) {
     <?php $_SESSION['forms']['voteFailed'] = false; ?>
 <?php endif; ?>
 
-<div class="row post">
-    <div class="col-1 offset-1">
-        <form action="/../../app/posts/postVote.php" method="post">
-            <input type="hidden" name="post_id" value="<?php echo $post['post_id']; ?>">
-            <div>
-            <button class="btn btn-link" type="submit" name="upvote">▲</button>
+<div class="row">
+    <div class="col-12 col-sm-8 offset-sm-2">
+        <div class="row">
+            <div class="col-1">
+                <form action="/../../app/posts/postVote.php" method="post">
+                    <input type="hidden" name="post_id" value="<?php echo $post['post_id']; ?>">
+                    <button class="btn btn-link vote" type="submit" name="upvote">▲</button>
+                    <span><?php echo ($score===1)?($score.'pt'):($score.'pts') ?></span>
+                    <button class="btn btn-link vote" type="submit" name="downvote">▼</button>
+                </form>
             </div>
-            <div class="btn score"><?php echo ($score===1)?($score.'pt'):($score.'pts') ?></div>
-            <div>
-            <button class="btn btn-link" type="submit" name="downvote">▼</button>
-            </div>
-        </form>
-    </div>
-
-    <div class="col-9 postSingle">
-        <a class="col-11 h3" href="<?php echo $post['link'] ?>"><?php echo $post['title']; ?></a>
-        <a class="h6" href="http://<?php echo parse_url($post['link'], PHP_URL_HOST); ?>">(<?php echo parse_url($post['link'], PHP_URL_HOST); ?>)</a>
-        <blockquote class="col-12 mb-0 blockquote">
-            <p class="mb-0"><?php echo ($post['description']!=null)?($post['description']):('No description to display') ?></p>
-        </blockquote>
-        <a class="col-2" href="?page=user&user=<?php echo $user ?>">/u/<?php echo $user ?></a>
-        <?php if (isset($_SESSION['user']) && isPostOwner($post['post_id'], $_SESSION['user']['user_id'], $pdo)): ?>
-            <a href="?page=post&post=<?php echo $post['post_id'] ?>&action=edit">edit</a>
-            <a href="?page=post&post=<?php echo $post['post_id'] ?>&action=delete">delete</a>
-        <?php endif; ?>
-    </div>
-</div>
-
-<div class="row topLevelCommentFormDiv">
-    <?php if ($post['user_id'] != 0): ?>
-        <form class="col-6 offset-1 topLevelCommentForm" action="/../../app/posts/topLevelComment.php" method="post">
-            <input type="hidden" name="post_id" value="<?php echo $post['post_id']; ?>">
-            <div>
-              <label for="comment">Add comment:</label><br>
-              <textarea name="comment" rows="4" cols="50" required></textarea>
-            </div>
-            <button class="col-2 btn" type="submit" name="submit">Comment</button>
-        </form>
-    <?php endif; ?>
-</div>
-
-<div class="row comments">
-  <?php foreach ($comments as $comment): ?>
-    <div class="col-6 offset-1 commentContainer">
-      <span class="commmentVote">
-        <a href="" class="vote upvote">▲</a>
-        <a href="" class="vote downvote">▼</a>
-      </span>
-      <div class="comment">
-        <div class="commentData">
-          <a href="?page=user&user=<?php echo getUserByID($comment['user_id'], $pdo); ?>" class="commentAuthor">/u/<?php echo getUserByID($comment['user_id'], $pdo); ?></a>
-          <span class="commentTime"><?php echo date($dateFormat, (int)$comment['time']); ?></span>
+            <a class="col-10 offset-1 verticalAlign" href="<?php echo $post['link'] ?>"><?php echo $post['title']; ?></a>
         </div>
-          <p class="commentText"><?php echo $comment['comment']; ?></p>
-        <div class="commentControls">
-          <a href="#" class="commentReply">reply</a>
+        <div class="row">
+            <span class="col-7 col-sm-5"><?php echo date($dateFormat, (int)$post['time']); ?></span>
+            <?php if ($post['user_id'] != 0): ?>
+                <a class="col-5 offset-sm-2 text-right" href="http://<?php echo parse_url($post['link'], PHP_URL_HOST); ?>">(<?php echo parse_url($post['link'], PHP_URL_HOST); ?>)</a>
+            <?php endif; ?>
         </div>
-      </div>
+        <div class="row">
+            <p class="col-12 mb-0"><?php echo ($post['description']!=null)?($post['description']):('No description to display') ?></p>
+        </div>
+        <div class="row">
+            <a class="col-8" href="?page=user&user=<?php echo $user ?>">/u/<?php echo $user ?></a>
+            <?php if (isset($_SESSION['user']) && isPostOwner($post['post_id'], $_SESSION['user']['user_id'], $pdo)): ?>
+                <a class="col-1 offset-1" href="?page=post&post=<?php echo $post['post_id'] ?>&action=edit">edit</a>
+                <a class="col-2" href="?page=post&post=<?php echo $post['post_id'] ?>&action=delete">delete</a>
+            <?php endif; ?>
+        </div>
     </div>
-  <?php endforeach; ?>
+    <hr>
 </div>
+
+
+<div class="row">
+    <div class="col-12 col-sm-8 offset-sm-2 panel">
+      <?php if ($_SESSION['authenticated']): ?>
+          <form class="col-10 offset-1 topLevelCommentForm" action="/../../app/posts/topLevelComment.php" method="post">
+              <h5 class="col-12">Add a comment:</h5>
+              <input type="hidden" name="post_id" value="<?php echo $post['post_id']; ?>">
+              <textarea class="col-12 form-control" name="comment" placeholder="Discuss this post..." rows="4" cols="50" required></textarea>
+              <?php if (isset($_SESSION['forms']['commentInvalid']) && $_SESSION['forms']['commentInvalid']): ?>
+                  <p class="col-12 bg-danger text-white">Invalid comment.</p>
+                  <?php $_SESSION['forms']['commentInvalid'] = false; ?>
+              <?php endif; ?>
+              <button class="col-12 btn" type="submit" name="submit">Comment</button>
+          </form>
+      <?php endif; ?>
+    </div>
+</div>
+
+<div class="row">
+  <h4 class="col-12 col-sm-8 offset-sm-2">Comments(<?php echo $commentCount ?>)</h4>
+  <div class="col-12 col-sm-8 offset-sm-2">
+    <?php foreach ($comments as $comment): ?>
+        <div class="row">
+          <div class="col-12">
+            <a class="" href="?page=user&user=<?php echo getUserByID($comment['user_id'], $pdo); ?>" class="commentAuthor">/u/<?php echo getUserByID($comment['user_id'], $pdo); ?></a>
+            <span class=""><?php echo date($dateFormat, (int)$comment['time']); ?></span>
+          </div>
+        </div>
+        <div class="row">
+          <span class="col-12"><?php echo $comment['comment']; ?></span>
+        </div>
+        <div class="row">
+          <a href="#" class="col-2 commentReply">reply</a>
+        </div>
+    <?php endforeach; ?>
+  </div>
+</div>
+<hr>

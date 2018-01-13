@@ -15,7 +15,7 @@ if (!empty($_POST['username']) && !empty($_POST['password']))
 
     if (empty($checkUser))
     {//If user doesn't exist
-        $_SESSION['failedAuth'] = true;
+        $_SESSION['forms']['failedAuth'] = true;
     }else if (password_verify($password, $checkUser[0]['password']))
     {//If password correct
         $_SESSION['authenticated'] = true;
@@ -24,7 +24,7 @@ if (!empty($_POST['username']) && !empty($_POST['password']))
         redirect('/');
     }else
     {//If password incorrect
-        $_SESSION['failedAuth'] = true;
+        $_SESSION['forms']['failedAuth'] = true;
     }
 }
 redirect('/?page=login');

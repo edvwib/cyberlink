@@ -8,25 +8,59 @@ if (isset($_GET['user'])) {
     $userID->bindParam(':username', $username, PDO::PARAM_STR);
     $userID->execute();
     $userID = $userID->fetchAll(PDO::FETCH_ASSOC);
-    $userID = $userID[0]['user_id'];
+    if (empty($userID))
+    {
+        $_SESSION['forms']['userNotFound'] = true;
+    }
+    else
+    {
+        $userID = $userID[0]['user_id'];
 
-    $userPosts = $pdo->prepare("SELECT * FROM posts WHERE user_id=:user_id");
-    $userPosts->bindParam(':user_id', $userID, PDO::PARAM_INT);
-    $userPosts->execute();
-    $userPosts = $userPosts->fetchAll(PDO::FETCH_ASSOC);
+        $userPosts = $pdo->prepare("SELECT * FROM posts WHERE user_id=:user_id");
+        $userPosts->bindParam(':user_id', $userID, PDO::PARAM_INT);
+        $userPosts->execute();
+        $userPosts = $userPosts->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
 
-foreach ($userPosts as $UserPost) {
-    $score = getPostScoreByID($UserPost['post_id'], $pdo);
+if (isset($_SESSION['forms']['userNotFound']) && $_SESSION['forms']['userNotFound'])
+{
     ?>
-    <div class="post">
-        <div class="score"><?php echo $score ?></div>
-        <h3><a href="<?php echo $UserPost['link'] ?>"><?php echo $UserPost['title']; ?></a></h3>
-        <a href="http://<?php echo parse_url($UserPost['link'], PHP_URL_HOST); ?>">(<?php echo parse_url($UserPost['link'], PHP_URL_HOST); ?>)</a>
-        <a href="?page=post&post=<?php echo $UserPost['post_id'] ?>">comments</a>
-        <?php if ($username === $_SESSION['user']['username']): ?>
-            <span>asd</span>
-        <?php endif; ?>
+    <div class="row">
+        <div class="col-12">
+            <p class="bg-warning">There's no user with the username '<?php echo $username ?>'.</p>
+        </div>
     </div>
     <?php
+    $_SESSION['forms']['userNotFound'] = false;
+}
+else
+{
+    foreach ($userPosts as $userPost)
+    {
+        $score = getPostScoreByID($userPost['post_id'], $pdo);
+        $commentCount = getCommentCountByID(intval($userPost['post_id']), $pdo);
+        ?>
+        <div class="row">
+          <div class="col-12">
+            <div class="row">
+              <span class="col-1"><?php echo ($score===1)?($score.'pt'):($score.'pts') ?></span>
+              <a class="col-10 offset-1" href="http://<?php echo $userPost['link'] ?>"><?php echo $userPost['title']; ?></a>
+            </div>
+            <div class="row">
+              <span class="col-6"><?php echo date($dateFormat, (int)$userPost['time']); ?></span>
+              <a class="col-6" href="http://<?php echo parse_url($userPost['link'], PHP_URL_HOST); ?>">(<?php echo parse_url($userPost['link'], PHP_URL_HOST); ?>)</a>
+            </div>
+            <div class="row">
+              <p class="col-12 mb-0"><?php echo ($userPost['description']!=null && strlen($userPost['description']) < 105)?(substr($userPost['description'], 0, 105). '...'):($userPost['description']) ?></p>
+            </div>
+            <div class="row">
+              <a href="?page=user&user=<?php echo $username ?>" class="col-8">/u/<?php echo $username ?></a>
+              <a href="?page=post&post=<?php echo $userPost['post_id'] ?>"class="col-4">comments(<?php echo $commentCount ?>)</a>
+            </div>
+          </div>
+        </div>
+        <hr>
+        <?php
+    }
 }

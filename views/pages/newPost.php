@@ -3,27 +3,31 @@ declare(strict_types=1);
 ?>
 
 <div class="row">
-  <div class="col-8 offset-2">
-    <?php if ($_SESSION['authenticated']): ?>
-        <form class="newPost" action="/../../app/posts/newPost.php" method="post">
-            <h3>Submit a new post:</h3>
-            <div class="form-group">
-                <input class="col-6 form-control" type="text" name="link" placeholder="Link..." required>
+  <?php if ($_SESSION['authenticated']): ?>
+    <div class="col-12 panel">
+        <form class="row newPost" action="/../../app/posts/newPost.php" method="post">
+            <h4>Submit a new post:</h4>
+            <div class="col-10 offset-1 form-group">
+                <input class="form-control" type="text" name="link" placeholder="Link..." required>
             </div>
-            <div class="form-group">
-                <input class="col-6 form-control" type="text" name="title" placeholder="Title..." required>
+            <div class="col-10 offset-1 form-group">
+                <input class="form-control" type="text" name="title" placeholder="Title..." required>
             </div>
-            <div class="form-group">
-                <textarea class="col-6 form-control" type="text" name="description" placeholder="Description..." rows="3"></textarea>
+            <div class="col-10 offset-1 form-group">
+                <textarea class="form-control" type="text" name="description" placeholder="Description..." rows="3"></textarea>
             </div>
             <?php if (isset($_SESSION['forms']['invalidPost']) && $_SESSION['forms']['invalidPost']): ?>
-                <p class="col-6 bg-danger text-white">Please enter at least a link and a title.</p>
+                <div class="col-10 offset-1 form-group">
+                    <p class="bg-danger text-white formError">Please enter at least a link and a title.</p>
+                </div>
                 <?php $_SESSION['forms']['invalidPost'] = false; ?>
             <?php endif; ?>
-            <button class="col-6 btn" type="submit" name="submit">Post</button>
+            <div class="col-10 offset-1 form-group">
+                <button class="col-12 btn" type="submit" name="submit">Post</button>
+            </div>
         </form>
-    <?php else: ?>
-        <p>You need to be <a href="?page=login">logged in</a> in order to create posts.</p>
-    <?php endif; ?>
-  </div>
+      </div>
+  <?php else: ?>
+    <p class="col-10 offset-1">You need to be <a href="?page=login">logged in</a> in order to create posts.</p>
+  <?php endif; ?>
 </div>
