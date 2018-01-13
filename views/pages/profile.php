@@ -11,7 +11,7 @@ $avatar = getAvatarByID(intval($_SESSION['user']['user_id']), $pdo);
 ?>
 
 <div class="row profile-email my-3">
-  <div class="col-12 panel">
+  <div class="col-12 col-sm-8 offset-sm-2 panel">
       <form class="row" action="/../../app/profile/changeEmail.php" method="post">
         <h4 class="col-10 offset-1">Email</h4>
         <input class="col-10 offset-1 form-control" type="email" name="current-email" value="<?php echo $profile['email'] ?>" disabled>
@@ -38,7 +38,7 @@ $avatar = getAvatarByID(intval($_SESSION['user']['user_id']), $pdo);
 </div>
 
 <div class="row profile-username my-3">
-    <div class="col-12 panel">
+    <div class="col-12 col-sm-8 offset-sm-2 panel">
         <form class="row" action="/../../app/profile/changeUsername.php" method="post">
             <h4 class="col-10 offset-1">Username</h4>
             <input class="col-10 offset-1 form-control" type="text" name="current-username" value="<?php echo $profile['username'] ?>" disabled>
@@ -61,7 +61,7 @@ $avatar = getAvatarByID(intval($_SESSION['user']['user_id']), $pdo);
 </div>
 
 <div class="row profile-avatar my-3">
-    <div class="col-12 panel">
+    <div class="col-12 col-sm-8 offset-sm-2 panel">
         <form class="row" action="/../../app/profile/changeAvatar.php" method="post" enctype="multipart/form-data">
             <h4 class="col-10 offset-1">Avatar</h4>
             <div class="col-10 offset-1 text-center">
@@ -91,7 +91,7 @@ $avatar = getAvatarByID(intval($_SESSION['user']['user_id']), $pdo);
 </div>
 
 <div class="row profile-bio my-3">
-    <div class="col-12 panel">
+    <div class="col-12 col-sm-8 offset-sm-2 panel">
         <form class="row" action="/../../app/profile/changeBio.php" method="post">
             <h4 class="col-10 offset-1">Biography</h4>
             <textarea class="col-10 offset-1 form-control" name="bio" rows="4" cols="80" placeholder="Write something about yourself!" required><?php echo $profile['bio'] ?></textarea>

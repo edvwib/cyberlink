@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 <div class="row">
   <?php if ($_SESSION['authenticated']): ?>
-    <div class="col-12 panel">
+    <div class="col-12 col-sm-8 offset-sm-2 panel">
         <form class="row newPost" action="/../../app/posts/newPost.php" method="post">
             <h4>Submit a new post:</h4>
             <div class="col-10 offset-1 form-group">
@@ -28,6 +28,6 @@ declare(strict_types=1);
         </form>
       </div>
   <?php else: ?>
-    <p class="col-10 offset-1">You need to be <a href="?page=login">logged in</a> in order to create posts.</p>
+    <p class="col-12 col-sm-8 offset-sm-2">You need to be <a href="?page=login">logged in</a> in order to create posts.</p>
   <?php endif; ?>
 </div>
