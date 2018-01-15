@@ -44,13 +44,10 @@ if (isset($_GET['post'])) {
                     <button class="btn btn-link vote" type="submit" name="downvote">▼</button>
                 </form>
             </div>
-            <a class="col-10 offset-1 verticalAlign" href="<?php echo $post['link'] ?>"><?php echo $post['title']; ?></a>
+            <a class="col-10 offset-1 verticalAlign" href="http://<?php echo $post['link'] ?>"><?php echo $post['title']; ?></a>
         </div>
         <div class="row">
             <span class="col-7 col-sm-5"><?php echo date($dateFormat, (int)$post['time']); ?></span>
-            <?php if ($post['user_id'] != 0): ?>
-                <a class="col-5 offset-sm-2 text-right" href="http://<?php echo parse_url($post['link'], PHP_URL_HOST); ?>">(<?php echo parse_url($post['link'], PHP_URL_HOST); ?>)</a>
-            <?php endif; ?>
         </div>
         <div class="row">
             <p class="col-12 mb-0"><?php echo ($post['description']!=null)?($post['description']):('No description to display') ?></p>

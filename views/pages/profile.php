@@ -9,75 +9,6 @@ $profile = $profile->fetch(PDO::FETCH_ASSOC);
 
 ?>
 
-<div class="row profile-email my-3">
-    <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 panel">
-        <form class="row" action="/../../app/profile/changeEmail.php" method="post">
-            <h4 class="col-10 offset-1">Email</h4>
-            <input class="col-10 offset-1 form-control" type="email" name="current-email" value="<?php echo $profile['email'] ?>" disabled>
-            <input class="col-10 offset-1 form-control" type="email" name="new-email" placeholder="new email" required>
-            <?php if (isset($_SESSION['forms']['emailUpdated']) && $_SESSION['forms']['emailUpdated']): ?>
-                <p class="col-10 offset-1 bg-success text-white formError">Successfully updated email.</p>
-                <?php $_SESSION['forms']['emailUpdated'] = false; ?>
-            <?php endif; ?>
-            <?php if (isset($_SESSION['forms']['changeEmailSame']) && $_SESSION['forms']['changeEmailSame']): ?>
-                <p class="col-10 offset-1 bg-warning text-white formError">You're already using that email.</p>
-                <?php $_SESSION['forms']['changeEmailSame'] = false; ?>
-            <?php endif; ?>
-            <?php if (isset($_SESSION['forms']['changeEmailInvalid']) && $_SESSION['forms']['changeEmailInvalid']): ?>
-                <p class="col-10 offset-1 bg-warning text-white formError">Invalid email.</p>
-                <?php $_SESSION['forms']['changeEmailInvalid'] = false; ?>
-            <?php endif; ?>
-            <?php if (isset($_SESSION['forms']['changeEmailInUse']) && $_SESSION['forms']['changeEmailInUse']): ?>
-                <p class="col-10 offset-1 bg-danger text-white formError">Email is already in use.</p>
-                <?php $_SESSION['forms']['changeEmailInUse'] = false; ?>
-            <?php endif; ?>
-            <button class="col-10 offset-1 btn" type="submit" name="submit">Update email</button>
-        </form>
-    </div>
-</div>
-
-<div class="row profile-username my-3">
-    <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 panel">
-        <form class="row" action="/../../app/profile/changeUsername.php" method="post">
-            <h4 class="col-10 offset-1">Username</h4>
-            <input class="col-10 offset-1 form-control" type="text" name="current-username" value="<?php echo $profile['username'] ?>" disabled>
-            <input class="col-10 offset-1 form-control" type="text" name="new-username" placeholder="new username" autocomplete="off" required>
-            <?php if (isset($_SESSION['forms']['usernameUpdated']) && $_SESSION['forms']['usernameUpdated']): ?>
-                <p class="col-10 offset-1 bg-success text-white formError">Successfully updated your username.</p>
-                <?php $_SESSION['forms']['usernameUpdated'] = false; ?>
-            <?php endif; ?>
-            <?php if (isset($_SESSION['forms']['changeUsernameSame']) && $_SESSION['forms']['changeUsernameSame']): ?>
-                <p class="col-10 offset-1 bg-warning text-white formError">You're already using that username.</p>
-                <?php $_SESSION['forms']['changeUsernameSame'] = false; ?>
-            <?php endif; ?>
-            <?php if (isset($_SESSION['forms']['changeUsernameInUse']) && $_SESSION['forms']['changeUsernameInUse']): ?>
-                <p class="col-10 offset-1 bg-danger text-white formError">That username is already in use.</p>
-                <?php $_SESSION['forms']['changeUsernameInUse'] = false; ?>
-            <?php endif; ?>
-            <button class="col-10 offset-1 btn" type="submit" name="submit">Update username</button>
-        </form>
-    </div>
-</div>
-
-<div class="row profile-password my-3">
-    <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 panel">
-        <form class="row" action="/../../app/profile/changePassword.php" method="post">
-            <h4 class="col-10 offset-1">Password</h4>
-            <input class="col-10 offset-1 form-control" type="password" name="old-password" placeholder="old password" autocomplete="off" required>
-            <input class="col-10 offset-1 form-control" type="password" name="new-password" placeholder="new password" autocomplete="off" required>
-            <?php if (isset($_SESSION['forms']['passwordUpdated']) && $_SESSION['forms']['passwordUpdated']): ?>
-                <p class="col-10 offset-1 bg-success text-white formError">Successfully updated your password.</p>
-                <?php $_SESSION['forms']['passwordUpdated'] = false; ?>
-            <?php endif; ?>
-            <?php if (isset($_SESSION['forms']['updatePassFailed']) && $_SESSION['forms']['updatePassFailed']): ?>
-                <p class="col-10 offset-1 bg-danger text-white formError">Incorrect password.</p>
-                <?php $_SESSION['forms']['updatePassFailed'] = false; ?>
-            <?php endif; ?>
-            <button class="col-10 offset-1 btn" type="submit" name="submit">Update password</button>
-        </form>
-    </div>
-</div>
-
 <div class="row profile-avatar my-3">
     <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 panel">
         <form class="row" action="/../../app/profile/changeAvatar.php" method="post" enctype="multipart/form-data">
@@ -112,12 +43,63 @@ $profile = $profile->fetch(PDO::FETCH_ASSOC);
     <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 panel">
         <form class="row" action="/../../app/profile/changeBio.php" method="post">
             <h4 class="col-10 offset-1">Biography</h4>
-            <textarea class="col-10 offset-1 form-control" name="bio" rows="4" cols="80" placeholder="Write something about yourself!" required><?php echo $profile['bio'] ?></textarea>
+            <textarea class="col-10 offset-1 form-control" maxlength="400" name="bio" rows="4" cols="80" placeholder="Write something about yourself!"><?php echo $profile['bio'] ?></textarea>
+            <span class="col-10 offset-1"><span id="bioCharsLeft"></span> characters left.</span>
             <?php if (isset($_SESSION['forms']['bioUpdated']) && $_SESSION['forms']['bioUpdated']): ?>
                 <p class="col-10 offset-1 bg-success text-white formError">Successfully updated biography.</p>
                 <?php $_SESSION['forms']['bioUpdated'] = false; ?>
             <?php endif; ?>
+            <?php if (isset($_SESSION['forms']['bioTooLong']) && $_SESSION['forms']['bioTooLong']): ?>
+                <p class="col-10 offset-1 bg-danger text-white formError">Biography exceeded the maximum length(400).</p>
+                <?php $_SESSION['forms']['bioTooLong'] = false; ?>
+            <?php endif; ?>
             <button class="col-10 offset-1 btn" type="submit" name="submit">Update biography</button>
+        </form>
+    </div>
+</div>
+
+<div class="row profile-email my-3">
+    <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 panel">
+        <form class="row" action="/../../app/profile/changeEmail.php" method="post">
+            <h4 class="col-10 offset-1">Email</h4>
+            <input class="col-10 offset-1 form-control" type="email" name="current-email" value="<?php echo $profile['email'] ?>" disabled>
+            <input class="col-10 offset-1 form-control" type="email" name="new-email" placeholder="new email" required>
+            <?php if (isset($_SESSION['forms']['emailUpdated']) && $_SESSION['forms']['emailUpdated']): ?>
+                <p class="col-10 offset-1 bg-success text-white formError">Successfully updated email.</p>
+                <?php $_SESSION['forms']['emailUpdated'] = false; ?>
+            <?php endif; ?>
+            <?php if (isset($_SESSION['forms']['changeEmailSame']) && $_SESSION['forms']['changeEmailSame']): ?>
+                <p class="col-10 offset-1 bg-warning text-white formError">You're already using that email.</p>
+                <?php $_SESSION['forms']['changeEmailSame'] = false; ?>
+            <?php endif; ?>
+            <?php if (isset($_SESSION['forms']['changeEmailInvalid']) && $_SESSION['forms']['changeEmailInvalid']): ?>
+                <p class="col-10 offset-1 bg-warning text-white formError">Invalid email.</p>
+                <?php $_SESSION['forms']['changeEmailInvalid'] = false; ?>
+            <?php endif; ?>
+            <?php if (isset($_SESSION['forms']['changeEmailInUse']) && $_SESSION['forms']['changeEmailInUse']): ?>
+                <p class="col-10 offset-1 bg-danger text-white formError">Email is already in use.</p>
+                <?php $_SESSION['forms']['changeEmailInUse'] = false; ?>
+            <?php endif; ?>
+            <button class="col-10 offset-1 btn" type="submit" name="submit">Update email</button>
+        </form>
+    </div>
+</div>
+
+<div class="row profile-password my-3">
+    <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 panel">
+        <form class="row" action="/../../app/profile/changePassword.php" method="post">
+            <h4 class="col-10 offset-1">Password</h4>
+            <input class="col-10 offset-1 form-control" type="password" name="old-password" placeholder="old password" autocomplete="off" required>
+            <input class="col-10 offset-1 form-control" type="password" name="new-password" placeholder="new password" autocomplete="off" required>
+            <?php if (isset($_SESSION['forms']['passwordUpdated']) && $_SESSION['forms']['passwordUpdated']): ?>
+                <p class="col-10 offset-1 bg-success text-white formError">Successfully updated your password.</p>
+                <?php $_SESSION['forms']['passwordUpdated'] = false; ?>
+            <?php endif; ?>
+            <?php if (isset($_SESSION['forms']['updatePassFailed']) && $_SESSION['forms']['updatePassFailed']): ?>
+                <p class="col-10 offset-1 bg-danger text-white formError">Incorrect password.</p>
+                <?php $_SESSION['forms']['updatePassFailed'] = false; ?>
+            <?php endif; ?>
+            <button class="col-10 offset-1 btn" type="submit" name="submit">Update password</button>
         </form>
     </div>
 </div>

@@ -20,3 +20,12 @@ if (document.URL.indexOf("page=login") >= 0) {
     registerBtn.classList.add('active');
   });
 }
+
+if (document.URL.indexOf("page=profile") >= 0) {
+  let bioTextarea = document.querySelector('.profile-bio textarea');
+  let bioChars = document.querySelector('#bioCharsLeft');
+  bioChars.textContent = 400 - bioTextarea.value.length;
+  bioTextarea.addEventListener('keyup', (ev) => {
+    bioChars.textContent = 400 - bioTextarea.value.length;
+  });
+}
