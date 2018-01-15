@@ -56,7 +56,7 @@ if (isset($_GET['post'])) {
             <a class="col-8" href="?page=user&user=<?php echo $user ?>">/u/<?php echo $user ?></a>
             <?php if (isset($_SESSION['user']) && isPostOwner($post['post_id'], $_SESSION['user']['user_id'], $pdo)): ?>
                 <a class="col-1 offset-1" href="?page=post&post=<?php echo $post['post_id'] ?>&action=edit">edit</a>
-                <a class="col-2" href="?page=post&post=<?php echo $post['post_id'] ?>&action=delete">delete</a>
+                <a id="deletePost" class="col-2" href="?page=post&post=<?php echo $post['post_id'] ?>&action=delete">delete</a>
             <?php endif; ?>
         </div>
     </div>

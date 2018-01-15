@@ -1,6 +1,6 @@
 'use strict';
 
-if (document.URL.indexOf("page=login") >= 0) {
+if (document.URL.indexOf("page=login") >= 0) { //On login/register page
   var loginBtn = document.querySelector('.login-btn');
   var registerBtn = document.querySelector('.register-btn');
   var loginForm = document.querySelector('.login-form');
@@ -18,12 +18,25 @@ if (document.URL.indexOf("page=login") >= 0) {
   });
 }
 
-if (document.URL.indexOf("page=profile") >= 0) {
+if (document.URL.indexOf("page=profile") >= 0) { //On profile page
   let bioTextarea = document.querySelector('.profile-bio textarea');
-  let bioChars = document.querySelector('#bioCharsLeft');
-  bioChars.textContent = 400 - bioTextarea.value.length;
+  let bioCount = document.querySelector('#bioCount');
+  bioCount.textContent = 400 - bioTextarea.value.length;
 
   bioTextarea.addEventListener('keyup', (ev) => {
-    bioChars.textContent = 400 - bioTextarea.value.length;
+    bioCount.textContent = 400 - bioTextarea.value.length;
+  });
+}
+
+if (document.URL.indexOf("page=post") >= 0) { //On user page
+  let deleteLink = document.querySelector('#deletePost');
+  deleteLink.addEventListener('click', (e) => {
+    if (!confirm("Do you really want to delete this post?")) {
+      e.preventDefault();
+      console.log('no');
+    }
+    else {
+      console.log('yes');
+    }
   });
 }

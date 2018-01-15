@@ -44,7 +44,7 @@ $profile = $profile->fetch(PDO::FETCH_ASSOC);
         <form class="row" action="/../../app/profile/changeBio.php" method="post">
             <h4 class="col-10 offset-1">Biography</h4>
             <textarea class="col-10 offset-1 form-control" maxlength="400" name="bio" rows="4" cols="80" placeholder="Write something about yourself!"><?php echo $profile['bio'] ?></textarea>
-            <span class="col-10 offset-1"><span id="bioCharsLeft"></span> characters left.</span>
+            <span class="col-10 offset-1"><span id="bioCount"></span> characters left.</span>
             <?php if (isset($_SESSION['forms']['bioUpdated']) && $_SESSION['forms']['bioUpdated']): ?>
                 <p class="col-10 offset-1 bg-success text-white formError">Successfully updated biography.</p>
                 <?php $_SESSION['forms']['bioUpdated'] = false; ?>
