@@ -12,39 +12,40 @@ if (!empty($_POST['email']) && !empty($_POST['username']) && !empty($_POST['pass
     if(!filter_var($email, FILTER_VALIDATE_EMAIL))
     {//If email is not correct format
         $_SESSION['forms']['emailInvalid'] = true;
+        redirect('/?page=login');
     }
-    else
-    {//Check if email is not in use
-        $checkMail = $pdo->prepare("SELECT email FROM users WHERE email=:email");
-        $checkMail->bindParam(':email', $email, PDO::PARAM_STR);
-        $checkMail->execute();
-        $checkMail = $checkMail->fetchAll(PDO::FETCH_ASSOC);
-        if (!empty($checkMail))
-        {
-            $_SESSION['forms']['emailInUse'] = true;
-        }
-        else
-        {//Check if username is not in use
-            $checkUsername = $pdo->prepare("SELECT username FROM users WHERE username=:username");
-            $checkUsername->bindParam(':username', $username, PDO::PARAM_STR);
-            $checkUsername->execute();
-            $checkUsername = $checkUsername->fetchAll(PDO::FETCH_ASSOC);
-            if (!empty($checkUsername))
-            {
-                $_SESSION['forms']['usernameInUse'] = true;
-            }
-        }
+
+    $checkMail = $pdo->prepare("SELECT email FROM users WHERE email=:email");
+    $checkMail->bindParam(':email', $email, PDO::PARAM_STR);
+    $checkMail->execute();
+    $checkMail = $checkMail->fetchAll(PDO::FETCH_ASSOC);
+    if (!empty($checkMail))
+    {
+        $_SESSION['forms']['emailInUse'] = true;
     }
-    if (!$_SESSION['forms']['emailInUse'] && !$_SESSION['forms']['usernameInUse'])
+
+    $checkUsername = $pdo->prepare("SELECT username FROM users WHERE username=:username");
+    $checkUsername->bindParam(':username', $username, PDO::PARAM_STR);
+    $checkUsername->execute();
+    $checkUsername = $checkUsername->fetchAll(PDO::FETCH_ASSOC);
+    if (!empty($checkUsername))
+    {
+        $_SESSION['forms']['usernameInUse'] = true;
+    }
+
+    if (empty($checkMail) && empty($checkUsername))
     {//If both email and username are not in use
         $createAccount = $pdo->prepare("INSERT INTO users
-                                        (email, password, username) VALUES
-                                        (:mail, :password, :username)");
+            (email, username, password) VALUES
+            (:mail, :username, :password)");
 
-        $createAccount->bindParam(':mail', $mail, PDO::PARAM_STR);
-        $createAccount->bindParam(':password', $passwordHash, PDO::PARAM_STR);
+        $createAccount->bindParam(':mail', $email, PDO::PARAM_STR);
         $createAccount->bindParam(':username', $username, PDO::PARAM_STR);
+        $createAccount->bindParam(':password', $passwordHash, PDO::PARAM_STR);
         $createAccount->execute();
+        if (!$createAccount) {
+            die(var_dump($pdo->errorInfo()));
+        }
     }
 }
 redirect('/?page=login');

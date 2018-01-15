@@ -3,16 +3,16 @@ declare(strict_types=1);
 ?>
 
 <div class="row">
-    <div class="col-5 offset-1 login">
+    <div class="col-5 offset-1 col-sm-3 offset-sm-3 col-md-2 offset-md-4 login">
         <a href="#" class="col-12 btn btn-primary login-btn active">Log in:</a>
     </div>
-    <div class="col-5 register">
+    <div class="col-5 col-sm-3 col-md-2 register">
         <a href="#" class="col-12 btn btn-primary register-btn">Register:</a>
     </div>
 </div>
 <br>
 <div class="row">
-    <div class="col-12">
+    <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-4 offset-lg-4">
       <form class="row login-form" action="/../../app/auth/login.php" method="post">
           <?php if (isset($_SESSION['forms']['failedAuth']) && $_SESSION['forms']['failedAuth']): ?>
               <div class="col-10 offset-1 form-group">
