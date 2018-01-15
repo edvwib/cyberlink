@@ -8,7 +8,7 @@ if (isset($_FILES['avatar']))
     $avatar = $_FILES['avatar'];
     $allowedFormats = array("image/jpeg", "image/jpg", "image/png", "image/gif");
 
-    if ($avatar['size'] >= 10000000)
+    if ($avatar['size'] >= 150000000)
     {//If file is too big
         $_SESSION['forms']['avatarSizeLimit'] = true;
     }

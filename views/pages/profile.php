@@ -62,6 +62,25 @@ $avatar = getAvatarByID(intval($_SESSION['user']['user_id']), $pdo);
     </div>
 </div>
 
+<div class="row profile-password my-3">
+    <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 panel">
+        <form class="row" action="/../../app/profile/changePassword.php" method="post">
+            <h4 class="col-10 offset-1">Password</h4>
+            <input class="col-10 offset-1 form-control" type="password" name="old-password" placeholder="old password" autocomplete="off" required>
+            <input class="col-10 offset-1 form-control" type="password" name="new-password" placeholder="new password" autocomplete="off" required>
+            <?php if (isset($_SESSION['forms']['passwordUpdated']) && $_SESSION['forms']['passwordUpdated']): ?>
+                <p class="col-10 offset-1 bg-success text-white formError">Successfully updated your password.</p>
+                <?php $_SESSION['forms']['passwordUpdated'] = false; ?>
+            <?php endif; ?>
+            <?php if (isset($_SESSION['forms']['updatePassFailed']) && $_SESSION['forms']['updatePassFailed']): ?>
+                <p class="col-10 offset-1 bg-danger text-white formError">Incorrect password.</p>
+                <?php $_SESSION['forms']['updatePassFailed'] = false; ?>
+            <?php endif; ?>
+            <button class="col-10 offset-1 btn" type="submit" name="submit">Update password</button>
+        </form>
+    </div>
+</div>
+
 <div class="row profile-avatar my-3">
     <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 panel">
         <form class="row" action="/../../app/profile/changeAvatar.php" method="post" enctype="multipart/form-data">
