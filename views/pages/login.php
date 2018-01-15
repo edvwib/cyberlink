@@ -32,6 +32,24 @@ declare(strict_types=1);
       </form>
 
       <form class="row register-form hidden" action="/../../app/auth/createAccount.php" method="post">
+          <?php if (isset($_SESSION['forms']['emailInvalid']) && $_SESSION['forms']['emailInvalid']): ?>
+              <div class="col-10 offset-1 form-group">
+                  <p class="col-12 bg-warning formError">The email is not in a valid format.</p>
+              </div>
+              <?php $_SESSION['forms']['emailInvalid'] = false;?>
+          <?php endif; ?>
+          <?php if (isset($_SESSION['forms']['emailInUse']) && $_SESSION['forms']['emailInUse']): ?>
+              <div class="col-10 offset-1 form-group">
+                  <p class="col-12 bg-warning formError">There's already an account registered with that email.</p>
+              </div>
+              <?php $_SESSION['forms']['emailInUse'] = false;?>
+          <?php endif; ?>
+          <?php if (isset($_SESSION['forms']['usernameInUse']) && $_SESSION['forms']['usernameInUse']): ?>
+              <div class="col-10 offset-1 form-group">
+                  <p class="col-12 bg-warning formError">There's already an account registered with that username.</p>
+              </div>
+              <?php $_SESSION['forms']['usernameInUse'] = false;?>
+          <?php endif; ?>
           <div class="col-10 offset-1 form-group">
               <input class="form-control" type="email" name="email" placeholder="Email..." required>
           </div>

@@ -28,7 +28,7 @@ if (!empty($_POST['email']) && !empty($_POST['username']) && !empty($_POST['pass
     $checkUsername->bindParam(':username', $username, PDO::PARAM_STR);
     $checkUsername->execute();
     $checkUsername = $checkUsername->fetchAll(PDO::FETCH_ASSOC);
-    if (!empty($checkUsername))
+    if (!empty($checkUsername) || $username === '[deleted]')
     {
         $_SESSION['forms']['usernameInUse'] = true;
     }
