@@ -1,13 +1,10 @@
 <?php
 declare(strict_types=1);
 
-$profile = $pdo->prepare("SELECT email, username, password, bio FROM users WHERE user_id=:user_id");
+$profile = $pdo->prepare("SELECT email, username, user_id, bio FROM users WHERE user_id=:user_id");
 $profile->bindParam(':user_id', $_SESSION['user']['user_id']);
 $profile->execute();
 $profile = $profile->fetch(PDO::FETCH_ASSOC);
-
-$avatar = getAvatarByID(intval($_SESSION['user']['user_id']), $pdo);
-
 
 
 ?>
@@ -86,13 +83,13 @@ $avatar = getAvatarByID(intval($_SESSION['user']['user_id']), $pdo);
         <form class="row" action="/../../app/profile/changeAvatar.php" method="post" enctype="multipart/form-data">
             <h4 class="col-10 offset-1">Avatar</h4>
             <div class="col-10 offset-1 text-center">
-            <?php if ($avatar === null): ?>
-                <img src="/../../assets/default-avatar.png" class="col-8 col-lg-6 col-xl-4 rounded" alt="avatar">
+            <?php if (file_exists(__DIR__.'/../../assets/profiles/'.$profile['user_id'].'.png')): ?>
+                <img src="/../../assets/profiles/<?php echo $profile['user_id'] ?>.png" class="col-8 col-lg-6 col-xl-4 rounded" alt="avatar">
             <?php else: ?>
-                <img src="data:image;base64,<?php echo $avatar ?>" class="col-8 col-lg-6 col-xl-4 rounded" alt="avatar">
+                <img src="/../../assets/profiles/0.png" class="col-8 col-lg-6 col-xl-4 rounded" alt="avatar">
             <?php endif; ?>
             </div>
-            <label class="col-10 offset-1" for="avatar">Choose your avatar image to upload (Max 10MB, .jpg, .jpeg, .png, .gif):</label>
+            <label class="col-10 offset-1" for="avatar">Choose your avatar image to upload (Max 10MB, .jpg, .jpeg, .png):</label>
             <input class="col-10 offset-1 btn" type="file" accept="image/*" name="avatar" required>
             <?php if (isset($_SESSION['forms']['avatarUpdated']) && $_SESSION['forms']['avatarUpdated']): ?>
                 <p class="col-10 offset-1 bg-success text-white formError">Successfully updated your avatar.</p>
