@@ -5,8 +5,8 @@ require_once __DIR__.'/../../views/header.php';
 
 if (!empty($_POST['email']) && !empty($_POST['username']) && !empty($_POST['password']))
 {
-    $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
-    $username = filter_var($_POST['username'], FILTER_SANITIZE_STRING);
+    $email = strtolower(filter_var($_POST['email'], FILTER_SANITIZE_EMAIL));
+    $username = strtolower(filter_var($_POST['username'], FILTER_SANITIZE_STRING));
     $passwordHash = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
     if(!filter_var($email, FILTER_VALIDATE_EMAIL))
@@ -15,7 +15,7 @@ if (!empty($_POST['email']) && !empty($_POST['username']) && !empty($_POST['pass
         redirect('/?page=login&fail');
     }
 
-    $checkMail = $pdo->prepare("SELECT email FROM users WHERE email=:email");
+    $checkMail = $pdo->prepare("SELECT LOWER(email) AS email FROM users WHERE email=:email");
     $checkMail->bindParam(':email', $email, PDO::PARAM_STR);
     $checkMail->execute();
     $checkMail = $checkMail->fetchAll(PDO::FETCH_ASSOC);
@@ -24,7 +24,7 @@ if (!empty($_POST['email']) && !empty($_POST['username']) && !empty($_POST['pass
         $_SESSION['forms']['emailInUse'] = true;
     }
 
-    $checkUsername = $pdo->prepare("SELECT username FROM users WHERE username=:username");
+    $checkUsername = $pdo->prepare("SELECT lower(username) as username FROM users WHERE username=:username");
     $checkUsername->bindParam(':username', $username, PDO::PARAM_STR);
     $checkUsername->execute();
     $checkUsername = $checkUsername->fetchAll(PDO::FETCH_ASSOC);
