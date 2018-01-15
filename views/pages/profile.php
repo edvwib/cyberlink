@@ -8,6 +8,8 @@ $profile = $profile->fetch(PDO::FETCH_ASSOC);
 
 $avatar = getAvatarByID(intval($_SESSION['user']['user_id']), $pdo);
 
+
+
 ?>
 
 <div class="row profile-email my-3">
@@ -51,9 +53,9 @@ $avatar = getAvatarByID(intval($_SESSION['user']['user_id']), $pdo);
                 <p class="col-10 offset-1 bg-warning text-white formError">You're already using that username.</p>
                 <?php $_SESSION['forms']['changeUsernameSame'] = false; ?>
             <?php endif; ?>
-            <?php if (isset($_SESSION['forms']['usernameInUse']) && $_SESSION['forms']['usernameInUse']): ?>
+            <?php if (isset($_SESSION['forms']['changeUsernameInUse']) && $_SESSION['forms']['changeUsernameInUse']): ?>
                 <p class="col-10 offset-1 bg-danger text-white formError">That username is already in use.</p>
-                <?php $_SESSION['forms']['usernameInUse'] = false; ?>
+                <?php $_SESSION['forms']['changeUsernameInUse'] = false; ?>
             <?php endif; ?>
             <button class="col-10 offset-1 btn" type="submit" name="submit">Update username</button>
         </form>
