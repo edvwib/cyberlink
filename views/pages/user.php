@@ -38,7 +38,7 @@ else
 {
     foreach ($userPosts as $userPost)
     {
-        $score = getPostScoreByID($userPost['post_id'], $pdo);
+        $score = getPostScoreByID((int) $userPost['post_id'], $pdo);
         $commentCount = getCommentCountByID(intval($userPost['post_id']), $pdo);
         ?>
         <div class="row">

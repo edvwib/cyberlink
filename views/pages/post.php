@@ -23,6 +23,8 @@ if (isset($_GET['post'])) {
     $score = getPostScoreByID((int) $post['post_id'], $pdo);
     $user = getUserByID((int) $post['user_id'], $pdo);
     $commentCount = getCommentCountByID((int) $post['post_id'], $pdo);
+
+    $vote = getVoteAction($_SESSION['user_id'], (int) $post['post_id'], $pdo);
 }
 
 
@@ -39,9 +41,9 @@ if (isset($_GET['post'])) {
             <div class="col-1">
                 <form action="/../../app/posts/postVote.php" method="post">
                     <input type="hidden" name="post_id" value="<?php echo $post['post_id']; ?>">
-                    <button class="btn btn-link vote" type="submit" name="upvote">▲</button>
+                    <button class="btn u_vote <?php echo ($vote===1)?('active'):('') ?>" type="submit" name="upvote">▲</button>
                     <span><?php echo ($score===1)?($score.'pt'):($score.'pts') ?></span>
-                    <button class="btn btn-link vote" type="submit" name="downvote">▼</button>
+                    <button class="btn d_vote <?php echo ($vote===-1)?('active'):('') ?>" type="submit" name="downvote">▼</button>
                 </form>
             </div>
             <a class="col-10 offset-1 verticalAlign" href="http://<?php echo $post['link'] ?>"><?php echo $post['title']; ?></a>

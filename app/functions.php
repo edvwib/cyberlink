@@ -34,7 +34,13 @@ function getPostScoreByID(int $postID, PDO $pdo):int
 }
 function getVoteAction(int $userID, int $postID, PDO $pdo):int
 {
+    $checkUserVote = $pdo->prepare("SELECT vote_type FROM user_votes WHERE post_id=:post_id AND user_id=:user_id");
+    $checkUserVote->bindParam(':post_id', $postID, PDO::PARAM_INT);
+    $checkUserVote->bindParam(':user_id', $userID, PDO::PARAM_INT);
+    $checkUserVote->execute();
+    $checkUserVote = $checkUserVote->fetch(PDO::FETCH_ASSOC);
 
+    return (int) $checkUserVote['vote_type'];
 }
 
 function getUserByID(int $userID, PDO $pdo):string

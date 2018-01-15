@@ -9,7 +9,7 @@ if (isset($_POST['new-email']))
 
     if (filter_var($newEmail, FILTER_VALIDATE_EMAIL))
     {//If email IS in a valid format
-        if ($newEmail === getEmailByID($_SESSION['user_id'], $pdo))
+        if ($newEmail === getEmailByID((int) $_SESSION['user_id'], $pdo))
         { //If user is already using this email
             $_SESSION['forms']['changeEmailSame'] = true;
         }

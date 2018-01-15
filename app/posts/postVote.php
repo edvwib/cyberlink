@@ -19,7 +19,7 @@ if(!$_SESSION['authenticated'])
 
 if(isset($vote))
 {
-    $checkUserVote = $pdo->prepare("SELECT * FROM user_votes WHERE post_id=:post_id AND user_id=:user_id");
+    $checkUserVote = $pdo->prepare("SELECT vote_type FROM user_votes WHERE post_id=:post_id AND user_id=:user_id");
     $checkUserVote->bindParam(':post_id', $_POST['post_id'], PDO::PARAM_INT);
     $checkUserVote->bindParam(':user_id', $_SESSION['user_id'], PDO::PARAM_INT);
     $checkUserVote->execute();
@@ -35,7 +35,7 @@ if(isset($vote))
         $addVote->bindParam(':post_id', $_POST['post_id'], PDO::PARAM_INT);
         $addVote->bindParam(':vote', $vote, PDO::PARAM_INT);
         $addVote->execute();
-    }else if ($checkUserVote['vote_type'] == $vote)
+    }else if ((int) $checkUserVote['vote_type'] === $vote)
     { //If has voted same on post
         $vote = 0;
         $removeVote = $pdo->prepare("UPDATE user_votes SET
