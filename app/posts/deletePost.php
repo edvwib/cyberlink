@@ -17,7 +17,7 @@ if (isset($_GET['post']) && $_GET['action'] === 'delete')
     { //Deletes post entirely
         $deletePost = $pdo->prepare("DELETE FROM posts WHERE post_id=:post_id AND user_id=:user_id");
         $deletePost->bindParam(':post_id', $postID, PDO::PARAM_INT);
-        $deletePost->bindParam(':user_id', $_SESSION['user']['user_id'], PDO::PARAM_INT);
+        $deletePost->bindParam(':user_id', $_SESSION['user_id'], PDO::PARAM_INT);
         $deletePost->execute();
         if (!$deletePost)
         {
@@ -41,7 +41,7 @@ if (isset($_GET['post']) && $_GET['action'] === 'delete')
                                      AND   user_id=:user_id");
         $deletePostdata->bindParam(':deletedLink', $deletedLink, PDO::PARAM_STR);
         $deletePostdata->bindParam(':post_id', $postID, PDO::PARAM_INT);
-        $deletePostdata->bindParam(':user_id', $_SESSION['user']['user_id'], PDO::PARAM_INT);
+        $deletePostdata->bindParam(':user_id', $_SESSION['user_id'], PDO::PARAM_INT);
         $deletePostdata->execute();
         if (!$deletePostdata)
         {

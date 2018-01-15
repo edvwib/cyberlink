@@ -33,7 +33,7 @@ if (!empty($_POST['link']) && !empty($_POST['title']))
     $editPost->bindParam(':title', $title, PDO::PARAM_STR);
     $editPost->bindParam(':description', $description, PDO::PARAM_STR);
     $editPost->bindParam(':post_id', $_POST['post_id'], PDO::PARAM_INT);
-    $editPost->bindParam(':user_id', $_SESSION['user']['user_id'], PDO::PARAM_INT);
+    $editPost->bindParam(':user_id', $_SESSION['user_id'], PDO::PARAM_INT);
     $editPost->execute();
     if (!$editPost)
     {

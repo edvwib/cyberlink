@@ -18,7 +18,7 @@ if (isset($_FILES['avatar']))
     }
     else
     {//If file is accepted
-        $fileName = $_SESSION['user']['user_id'] . '.png';
+        $fileName = $_SESSION['user_id'] . '.png';
         move_uploaded_file($avatar['tmp_name'], __DIR__.'/../../assets/profiles/'.$fileName);
 
         $_SESSION['forms']['avatarUpdated'] = true;

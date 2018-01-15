@@ -21,7 +21,7 @@ if(isset($vote))
 {
     $checkUserVote = $pdo->prepare("SELECT * FROM user_votes WHERE post_id=:post_id AND user_id=:user_id");
     $checkUserVote->bindParam(':post_id', $_POST['post_id'], PDO::PARAM_INT);
-    $checkUserVote->bindParam(':user_id', $_SESSION['user']['user_id'], PDO::PARAM_INT);
+    $checkUserVote->bindParam(':user_id', $_SESSION['user_id'], PDO::PARAM_INT);
     $checkUserVote->execute();
     $checkUserVote = $checkUserVote->fetch(PDO::FETCH_ASSOC);
 
@@ -31,7 +31,7 @@ if(isset($vote))
                             (user_id, post_id, vote_type)
                             VALUES
                             (:user_id, :post_id, :vote)");
-        $addVote->bindParam(':user_id', $_SESSION['user']['user_id'], PDO::PARAM_INT);
+        $addVote->bindParam(':user_id', $_SESSION['user_id'], PDO::PARAM_INT);
         $addVote->bindParam(':post_id', $_POST['post_id'], PDO::PARAM_INT);
         $addVote->bindParam(':vote', $vote, PDO::PARAM_INT);
         $addVote->execute();
@@ -42,7 +42,7 @@ if(isset($vote))
                             (vote_type) = (:vote)
                             WHERE user_id=:user_id AND post_id=:post_id");
         $removeVote->bindParam(':vote', $vote, PDO::PARAM_INT);
-        $removeVote->bindParam(':user_id', $_SESSION['user']['user_id'], PDO::PARAM_INT);
+        $removeVote->bindParam(':user_id', $_SESSION['user_id'], PDO::PARAM_INT);
         $removeVote->bindParam(':post_id', $_POST['post_id'], PDO::PARAM_INT);
         $removeVote->execute();
     }else
@@ -51,7 +51,7 @@ if(isset($vote))
                             (vote_type) = (:vote)
                             WHERE user_id=:user_id AND post_id=:post_id");
         $updateVote->bindParam(':vote', $vote, PDO::PARAM_INT);
-        $updateVote->bindParam(':user_id', $_SESSION['user']['user_id'], PDO::PARAM_INT);
+        $updateVote->bindParam(':user_id', $_SESSION['user_id'], PDO::PARAM_INT);
         $updateVote->bindParam(':post_id', $_POST['post_id'], PDO::PARAM_INT);
         $updateVote->execute();
     }

@@ -33,10 +33,6 @@ if (document.URL.indexOf("page=post") >= 0) { //On user page
   deleteLink.addEventListener('click', (e) => {
     if (!confirm("Do you really want to delete this post?")) {
       e.preventDefault();
-      console.log('no');
-    }
-    else {
-      console.log('yes');
     }
   });
 }

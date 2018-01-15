@@ -14,7 +14,7 @@ if (isset($_POST['comment']))
         $addComment = $pdo->prepare("INSERT INTO comments (comment, time, user_id, parent_id, post_id)
                                     VALUES (:comment, strftime('%s'), :user_id, null, :post_id)");
         $addComment->bindParam(':comment', $comment, PDO::PARAM_STR);
-        $addComment->bindParam(':user_id', $_SESSION['user']['user_id'], PDO::PARAM_INT);
+        $addComment->bindParam(':user_id', $_SESSION['user_id'], PDO::PARAM_INT);
         $addComment->bindParam(':post_id', $_POST['post_id'], PDO::PARAM_INT);
         $addComment->execute();
         if (!$addComment)

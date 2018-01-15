@@ -28,12 +28,12 @@ if (!empty($_POST['link']) && !empty($_POST['title']))
     }
     $addPost->bindParam(':link', $link, PDO::PARAM_STR);
     $addPost->bindParam(':title', $title, PDO::PARAM_STR);
-    $addPost->bindParam(':user_id', $_SESSION['user']['user_id'], PDO::PARAM_INT);
+    $addPost->bindParam(':user_id', $_SESSION['user_id'], PDO::PARAM_INT);
     $addPost->bindParam(':description', $description, PDO::PARAM_STR);
     $addPost->execute();
 
     $linkToPost = $pdo->prepare("SELECT post_id FROM posts WHERE user_id=:user_id ORDER BY time DESC LIMIT 1");
-    $linkToPost->bindParam(':user_id', $_SESSION['user']['user_id'], PDO::PARAM_INT);
+    $linkToPost->bindParam(':user_id', $_SESSION['user_id'], PDO::PARAM_INT);
     $linkToPost->execute();
     $linkToPost = $linkToPost->fetch();
 

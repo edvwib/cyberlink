@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 $post = $pdo->prepare("SELECT * FROM posts WHERE post_id=:post_id AND user_id=:user_id");
 $post->bindParam(':post_id', $_GET['post'], PDO::PARAM_INT);
-$post->bindParam(':user_id', $_SESSION['user']['user_id'], PDO::PARAM_INT);
+$post->bindParam(':user_id', $_SESSION['user_id'], PDO::PARAM_INT);
 $post->execute();
 $post = $post->fetch(PDO::FETCH_ASSOC);
 if (!$post)

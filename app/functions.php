@@ -37,9 +37,18 @@ function getUserByID($userID, PDO $pdo):string
     $user = $pdo->prepare("SELECT username FROM users WHERE user_id=:user_id");
     $user->bindParam(':user_id', $userID, PDO::PARAM_INT);
     $user->execute();
-    $user = $user->fetchAll(PDO::FETCH_ASSOC);
-    return $user[0]['username'];
+    $user = $user->fetch(PDO::FETCH_ASSOC);
+    return $user['username'];
 }
+function getEmailByID($userID, PDO $pdo):string
+{
+    $email = $pdo->prepare("SELECT email FROM users WHERE user_id=:user_id");
+    $email->bindParam(':user_id', $userID, PDO::PARAM_INT);
+    $email->execute();
+    $email = $email->fetch(PDO::FETCH_ASSOC);
+    return $email['email'];
+}
+
 function getCommentCountByID($postID, PDO $pdo)
 {
     $commentCount = $pdo->prepare("SELECT COUNT() FROM comments WHERE post_id=:post_id");

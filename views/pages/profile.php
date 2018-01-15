@@ -2,11 +2,9 @@
 declare(strict_types=1);
 
 $profile = $pdo->prepare("SELECT email, username, user_id, bio FROM users WHERE user_id=:user_id");
-$profile->bindParam(':user_id', $_SESSION['user']['user_id']);
+$profile->bindParam(':user_id', $_SESSION['user_id']);
 $profile->execute();
 $profile = $profile->fetch(PDO::FETCH_ASSOC);
-
-
 ?>
 
 <div class="row profile-avatar my-3">

@@ -15,7 +15,7 @@ if (isset($_POST['bio']))
     {
         $changeBio = $pdo->prepare("UPDATE users SET bio=:newBio WHERE user_id=:user_id");
         $changeBio->bindParam(':newBio', $newBio, PDO::PARAM_STR);
-        $changeBio->bindParam(':user_id', $_SESSION['user']['user_id'], PDO::PARAM_INT);
+        $changeBio->bindParam(':user_id', $_SESSION['user_id'], PDO::PARAM_INT);
         $changeBio->execute();
         if (!$changeBio)
         {
