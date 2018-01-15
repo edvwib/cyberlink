@@ -23,6 +23,7 @@ switch ($query['page']) {
                     require_once __DIR__.'/app/posts/deletePost.php';
                     break;
                 default:
+                    redirect('/');
                     break;
             }
         }else {
@@ -45,6 +46,7 @@ switch ($query['page']) {
         redirect('/app/auth/logout.php');
         break;
     default:
+        require_once __DIR__.'404.php';
         break;
 }
 

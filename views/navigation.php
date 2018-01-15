@@ -1,7 +1,10 @@
 <?php
 declare(strict_types=1);
 
-$currentUser = getUserByID($_SESSION['user_id'], $pdo);
+if (isset($_SESSION['user_id']))
+{
+    $currentUser = getUserByID($_SESSION['user_id'], $pdo);
+}
 ?>
 
 <nav class="navbar navbar-expand-sm navbar-dark bg-dark mb-2">
