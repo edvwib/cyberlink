@@ -12,7 +12,7 @@ if (!empty($_POST['email']) && !empty($_POST['username']) && !empty($_POST['pass
     if(!filter_var($email, FILTER_VALIDATE_EMAIL))
     {//If email is not correct format
         $_SESSION['forms']['emailInvalid'] = true;
-        redirect('/?page=login');
+        redirect('/?page=login&fail');
     }
 
     $checkMail = $pdo->prepare("SELECT email FROM users WHERE email=:email");
@@ -46,6 +46,8 @@ if (!empty($_POST['email']) && !empty($_POST['username']) && !empty($_POST['pass
         if (!$createAccount) {
             die(var_dump($pdo->errorInfo()));
         }
+        $_SESSION['forms']['accountCreated'] = true;
+        redirect('/?page=login');
     }
 }
-redirect('/?page=login');
+redirect('/?page=login&fail');

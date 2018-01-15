@@ -13,12 +13,17 @@ declare(strict_types=1);
 <br>
 <div class="row">
     <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-4 offset-lg-4">
+
       <form class="row login-form" action="/../../app/auth/login.php" method="post">
           <?php if (isset($_SESSION['forms']['failedAuth']) && $_SESSION['forms']['failedAuth']): ?>
               <div class="col-10 offset-1 form-group">
                   <p class="col-12 bg-warning formError">Wrong username or password.</p>
               </div>
               <?php $_SESSION['forms']['failedAuth'] = false;?>
+          <?php endif; ?>
+          <?php if (isset($_SESSION['forms']['accountCreated']) && $_SESSION['forms']['accountCreated']): ?>
+              <p class="col-10 offset-1 bg-success text-white formError">Your account was created, please sign in below.</p>
+              <?php $_SESSION['forms']['accountCreated'] = false; ?>
           <?php endif; ?>
           <div class="col-10 offset-1 form-group">
               <input class="form-control" type="text" name="username" placeholder="Username..." required>

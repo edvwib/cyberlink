@@ -1,23 +1,20 @@
 'use strict';
 
 if (document.URL.indexOf("page=login") >= 0) {
-  let loginBtn = document.querySelector('.login-btn');
-  let registerBtn = document.querySelector('.register-btn');
-  let loginForm = document.querySelector('.login-form');
-  let registerForm = document.querySelector('.register-form');
+  var loginBtn = document.querySelector('.login-btn');
+  var registerBtn = document.querySelector('.register-btn');
+  var loginForm = document.querySelector('.login-form');
+  var registerForm = document.querySelector('.register-form');
 
+  if (document.URL.indexOf("page=login&fail") >= 0) {
+    showRegisterForm();
+  }
 
   loginBtn.addEventListener('click', () => {
-    registerForm.classList.add('hidden');
-    loginForm.classList.remove('hidden');
-    registerBtn.classList.remove('active');
-    loginBtn.classList.add('active');
+    showLoginForm();
   });
   registerBtn.addEventListener('click', () => {
-    loginForm.classList.add('hidden');
-    registerForm.classList.remove('hidden');
-    loginBtn.classList.remove('active');
-    registerBtn.classList.add('active');
+    showRegisterForm();
   });
 }
 
@@ -25,6 +22,7 @@ if (document.URL.indexOf("page=profile") >= 0) {
   let bioTextarea = document.querySelector('.profile-bio textarea');
   let bioChars = document.querySelector('#bioCharsLeft');
   bioChars.textContent = 400 - bioTextarea.value.length;
+
   bioTextarea.addEventListener('keyup', (ev) => {
     bioChars.textContent = 400 - bioTextarea.value.length;
   });
