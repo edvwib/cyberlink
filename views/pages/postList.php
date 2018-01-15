@@ -19,7 +19,7 @@ foreach ($posts as $post) {
                 <span class="col-12"><?php echo date($dateFormat, (int)$post['time']); ?></span>
             </div>
             <div class="row">
-                <p class="col-12 mb-0"><?php echo ($post['description']!=null && strlen($post['description']) < 105)?(substr($post['description'], 0, 105). '...'):($post['description']) ?></p>
+                <p class="col-12 mb-0"><?php echo ($post['description']!=null && strlen($post['description']) > 100)?(substr($post['description'], 0, 100). '...'):($post['description']) ?></p>
             </div>
             <div class="row">
                 <a href="?page=user&user=<?php echo $user ?>" class="col-8">/u/<?php echo $user ?></a>

@@ -51,7 +51,7 @@ else
                     <span class="col-7 col-sm-5"><?php echo date($dateFormat, (int)$userPost['time']); ?></span>
                 </div>
                 <div class="row">
-                    <p class="col-12 mb-0"><?php echo ($userPost['description']!=null && strlen($userPost['description']) < 105)?(substr($userPost['description'], 0, 105). '...'):($userPost['description']) ?></p>
+                    <p class="col-12 mb-0"><?php echo ($userPost['description']!=null && strlen($userPost['description']) > 100)?(substr($userPost['description'], 0, 100). '...'):($userPost['description']) ?></p>
                 </div>
                 <div class="row">
                     <a href="?page=user&user=<?php echo $username ?>" class="col-12">/u/<?php echo $username ?></a>
