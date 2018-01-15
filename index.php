@@ -46,7 +46,7 @@ switch ($query['page']) {
         redirect('/app/auth/logout.php');
         break;
     default:
-        require_once __DIR__.'404.php';
+        require_once __DIR__.'/views/pages/404.php';
         break;
 }
 
