@@ -16,7 +16,7 @@ if (!function_exists('redirect'))
     }
 }
 
-function getPostScoreByID($postID, PDO $pdo):int
+function getPostScoreByID(int $postID, PDO $pdo):int
 {
     $up = $pdo->prepare("SELECT vote_type FROM user_votes WHERE post_id=:post_id AND vote_type=1");
     $up->bindParam(':post_id', $postID, PDO::PARAM_INT);
@@ -32,7 +32,12 @@ function getPostScoreByID($postID, PDO $pdo):int
 
     return $up-$down;
 }
-function getUserByID($userID, PDO $pdo):string
+function getVoteAction(int $userID, int $postID, PDO $pdo):int
+{
+
+}
+
+function getUserByID(int $userID, PDO $pdo):string
 {
     $user = $pdo->prepare("SELECT username FROM users WHERE user_id=:user_id");
     $user->bindParam(':user_id', $userID, PDO::PARAM_INT);
@@ -40,7 +45,7 @@ function getUserByID($userID, PDO $pdo):string
     $user = $user->fetch(PDO::FETCH_ASSOC);
     return $user['username'];
 }
-function getEmailByID($userID, PDO $pdo):string
+function getEmailByID(int $userID, PDO $pdo):string
 {
     $email = $pdo->prepare("SELECT email FROM users WHERE user_id=:user_id");
     $email->bindParam(':user_id', $userID, PDO::PARAM_INT);
@@ -49,25 +54,25 @@ function getEmailByID($userID, PDO $pdo):string
     return $email['email'];
 }
 
-function getCommentCountByID($postID, PDO $pdo)
+function getCommentCountByID(int $postID, PDO $pdo):int
 {
     $commentCount = $pdo->prepare("SELECT COUNT() FROM comments WHERE post_id=:post_id");
     $commentCount->bindParam(':post_id', $postID, PDO::PARAM_INT);
     $commentCount->execute();
     $commentCount = $commentCount->fetch(PDO::FETCH_ASSOC);
 
-    return $commentCount['COUNT()'];
+    return (int) $commentCount['COUNT()'];
 }
 
 
-function isPostOwner($postID, $userID, PDO $pdo)
+function isPostOwner(int $postID, int $userID, PDO $pdo):bool
 {
     $post = $pdo->query("SELECT user_id FROM posts WHERE post_id=$postID");
     $post = $post->fetch(PDO::FETCH_ASSOC);
 
     return $post['user_id'] == $userID;
 }
-function isCommentOwner($commentID, $userID)
+function isCommentOwner(int $commentID, int $userID):bool
 {
 
 }

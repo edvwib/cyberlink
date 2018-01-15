@@ -9,6 +9,8 @@ if (substr($_SERVER['QUERY_STRING'],0,4) !== "page") { //If URL !contain page va
 
 require_once __DIR__.'/views/header.php';
 
+var_dump($_SESSION);
+
 switch ($query['page']) {
     case 'start':
     require_once __DIR__.'/views/pages/postList.php';

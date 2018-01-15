@@ -28,11 +28,13 @@ if (document.URL.indexOf("page=profile") >= 0) { //On profile page
   });
 }
 
-if (document.URL.indexOf("page=post") >= 0) { //On user page
+if (document.URL.indexOf("page=post") >= 0) { //On post page
   let deleteLink = document.querySelector('#deletePost');
-  deleteLink.addEventListener('click', (e) => {
-    if (!confirm("Do you really want to delete this post?")) {
-      e.preventDefault();
-    }
-  });
+  if (deleteLink !== null) {
+    deleteLink.addEventListener('click', (e) => {
+      if (!confirm("Do you really want to delete this post?")) {
+        e.preventDefault();
+      }
+    });
+  }
 }

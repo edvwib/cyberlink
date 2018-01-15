@@ -19,8 +19,8 @@ if (!empty($_POST['username']) && !empty($_POST['password']))
     }else if (password_verify($password, $checkUser[0]['password']))
     {//If password correct
         $_SESSION['authenticated'] = true;
-        $_SESSION['user_id'] = $checkUser[0]['user_id'];
-        $_SESSION['failedAuth'] = false;
+        $_SESSION['user_id'] = (int) $checkUser[0]['user_id'];
+        $_SESSION['forms']['failedAuth'] = false;
         redirect('/');
     }else
     {//If password incorrect

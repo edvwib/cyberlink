@@ -20,9 +20,9 @@ if (isset($_GET['post'])) {
     $comments->execute();
     $comments = $comments->fetchAll(PDO::FETCH_ASSOC);
 
-    $score = getPostScoreByID($post['post_id'], $pdo);
-    $user = getUserByID($post['user_id'], $pdo);
-    $commentCount = getCommentCountByID(intval($post['post_id']), $pdo);
+    $score = getPostScoreByID((int) $post['post_id'], $pdo);
+    $user = getUserByID((int) $post['user_id'], $pdo);
+    $commentCount = getCommentCountByID((int) $post['post_id'], $pdo);
 }
 
 
@@ -54,7 +54,7 @@ if (isset($_GET['post'])) {
         </div>
         <div class="row">
             <a class="col-8" href="?page=user&user=<?php echo $user ?>">/u/<?php echo $user ?></a>
-            <?php if (isset($_SESSION['user_id']) && isPostOwner($post['post_id'], $_SESSION['user_id'], $pdo)): ?>
+            <?php if (isset($_SESSION['user_id']) && isPostOwner((int) $post['post_id'], $_SESSION['user_id'], $pdo)): ?>
                 <a class="col-1 offset-1" href="?page=post&post=<?php echo $post['post_id'] ?>&action=edit">edit</a>
                 <a id="deletePost" class="col-2" href="?page=post&post=<?php echo $post['post_id'] ?>&action=delete">delete</a>
             <?php endif; ?>
@@ -85,9 +85,10 @@ if (isset($_GET['post'])) {
   <h4 class="col-12 col-sm-8 offset-sm-2">Comments(<?php echo $commentCount ?>)</h4>
   <div class="col-12 col-sm-8 offset-sm-2">
     <?php foreach ($comments as $comment): ?>
+        <?php $user = getUserByID((int) $comment['user_id'], $pdo); ?>
         <div class="row">
           <div class="col-12">
-            <a class="" href="?page=user&user=<?php echo getUserByID($comment['user_id'], $pdo); ?>" class="commentAuthor">/u/<?php echo getUserByID($comment['user_id'], $pdo); ?></a>
+            <a class="" href="?page=user&user=<?php echo $user; ?>" class="commentAuthor">/u/<?php echo $user; ?></a>
             <span class=""><?php echo date($dateFormat, (int)$comment['time']); ?></span>
           </div>
         </div>
