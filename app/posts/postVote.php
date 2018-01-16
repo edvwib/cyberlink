@@ -56,4 +56,13 @@ if(isset($vote))
         $updateVote->execute();
     }
 }
-redirect("/?page=post&post=$_POST[post_id]");
+if (isset($_SESSION['forms']['voteFailed']) && $_SESSION['forms']['voteFailed'])
+{
+    redirect('/#voteFail');
+}
+else if (isset($_POST['src']) && $_POST['src'] === 'frontpage') {
+    redirect("/#$_POST[post_id]");
+}
+else if(isset($_POST['src']) && $_POST['src'] === 'post') {
+    redirect("/?page=post&post=$_POST[post_id]");
+}

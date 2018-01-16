@@ -18,4 +18,4 @@ require __DIR__.'/../app/autoload.php';
 </head>
 <body>
     <?php require_once __DIR__.'/navigation.php'; ?>
-    <div class="container-fluid">
+    <div class="container">

@@ -9,7 +9,7 @@ $profile->execute();
 $profile = $profile->fetch(PDO::FETCH_ASSOC);
 ?>
 
-<div class="row profile-avatar my-3">
+<div class="profile-avatar my-3">
     <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 panel">
         <form class="row" action="/../../app/profile/changeAvatar.php" method="post" enctype="multipart/form-data">
             <h4 class="col-10 offset-1">Avatar</h4>
@@ -39,7 +39,7 @@ $profile = $profile->fetch(PDO::FETCH_ASSOC);
     </div>
 </div>
 
-<div class="row profile-bio my-3">
+<div class="profile-bio my-3">
     <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 panel">
         <form class="row" action="/../../app/profile/changeBio.php" method="post">
             <h4 class="col-10 offset-1">Biography</h4>
@@ -58,7 +58,7 @@ $profile = $profile->fetch(PDO::FETCH_ASSOC);
     </div>
 </div>
 
-<div class="row profile-email my-3">
+<div class="profile-email my-3">
     <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 panel">
         <form class="row" action="/../../app/profile/changeEmail.php" method="post">
             <h4 class="col-10 offset-1">Email</h4>
@@ -85,7 +85,7 @@ $profile = $profile->fetch(PDO::FETCH_ASSOC);
     </div>
 </div>
 
-<div class="row profile-password my-3">
+<div class="profile-password my-3">
     <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 panel">
         <form class="row" action="/../../app/profile/changePassword.php" method="post">
             <h4 class="col-10 offset-1">Password</h4>

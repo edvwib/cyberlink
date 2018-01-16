@@ -5,7 +5,7 @@ require_once __DIR__.'/../header.php';
 
 ?>
 
-<div class="row">
+<div class="">
   <?php if ($_SESSION['authenticated']): ?>
     <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 panel">
         <form class="row newPost" action="/../../app/posts/newPost.php" method="post">

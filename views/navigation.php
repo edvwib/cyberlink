@@ -26,8 +26,8 @@ if (isset($_SESSION['authenticated']) && $_SESSION['authenticated'])
                     You (<?php echo $currentUser ?>)
                     </a>
                     <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item <?php echo ($query['page']==='user')?('navbar-white'):('navbar-gray') ?>" href="?page=user&user=<?php echo $currentUser ?>">You</a>
-                        <a class="dropdown-item <?php echo ($query['page']==='profile')?('navbar-white'):('navbar-gray') ?>" href="?page=profile">Edit profile</a>
+                        <a class="dropdown-item <?php echo ($query['page']==='user')?('selected'):('') ?>" href="?page=user&user=<?php echo $currentUser ?>">You</a>
+                        <a class="dropdown-item <?php echo ($query['page']==='profile')?('selected'):('') ?>" href="?page=profile">Edit profile</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item navbar-gray" href="?page=logout">Log out</a>
                     </div>

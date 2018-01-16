@@ -22,15 +22,17 @@ if (isset($_GET['user'])) {
         $userPosts->bindParam(':user_id', $userID, PDO::PARAM_INT);
         $userPosts->execute();
         $userPosts = $userPosts->fetchAll(PDO::FETCH_ASSOC);
+
+        $user = getUserByID((int)$userID, $pdo);
     }
 }
 
 if (isset($_SESSION['forms']['userNotFound']) && $_SESSION['forms']['userNotFound'])
 {
     ?>
-    <div class="row">
-        <div class="col-12">
-            <p class="bg-warning">There's no user with the username '<?php echo $username ?>'.</p>
+    <div class="">
+        <div class="">
+            <p class="">There's no user with the username '<?php echo $username ?>'.</p>
         </div>
     </div>
     <?php
@@ -38,31 +40,37 @@ if (isset($_SESSION['forms']['userNotFound']) && $_SESSION['forms']['userNotFoun
 }
 else
 {
+    ?>
+    <?php if (file_exists(__DIR__.'/../../assets/profiles/'.$userID.'.png')): ?>
+        <img src="/../../assets/profiles/<?php echo $userID ?>.png" class="rounded mx-auto d-block" alt="avatar">
+    <?php else: ?>
+        <img src="/../../assets/profiles/0.png" class="rounded mx-auto d-block" alt="avatar">
+    <?php endif; ?>
+    <h2 class="text-center"><?php echo '/u/'.$username ?></h2>
+    <?php
     foreach ($userPosts as $userPost)
     {
         $score = getPostScoreByID((int) $userPost['post_id'], $pdo);
         $commentCount = getCommentCountByID(intval($userPost['post_id']), $pdo);
         ?>
-        <div class="row">
-            <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3">
-                <div class="row">
-                    <span class="col-1"><?php echo ($score===1)?($score.'pt'):($score.'pts') ?></span>
-                    <a class="col-10 offset-1" href="<?php echo $userPost['link'] ?>"><?php echo $userPost['title']; ?></a>
-                </div>
-                <div class="row">
-                    <span class="col-7 col-sm-5"><?php echo date($dateFormat, (int)$userPost['time']); ?></span>
-                </div>
-                <div class="row">
-                    <p class="col-12 mb-0"><?php echo ($userPost['description']!=null && strlen($userPost['description']) > 100)?(substr($userPost['description'], 0, 100). '...'):($userPost['description']) ?></p>
-                </div>
-                <div class="row">
-                    <a href="?page=user&user=<?php echo $username ?>" class="col-12">/u/<?php echo $username ?></a>
-                </div>
-                <div class="row">
-                    <a href="?page=post&post=<?php echo $userPost['post_id'] ?>"class="col-12">comments(<?php echo $commentCount ?>)</a>
-                </div>
+        <div class="post" id="<?php echo $userPost['post_id'] ?>">
+            <div class="scoreContainer">
+                <form class="scoreForm" action="/../../app/posts/postVote.php" method="post">
+                    <input type="hidden" name="post_id" value="<?php echo $userPost['post_id']; ?>">
+                    <input type="hidden" name="src" value="frontpage">
+                    <button class="u_vote btn <?php echo ($vote===1)?('active'):('') ?>" type="submit" name="upvote">▲</button>
+                    <span class="postScore"><?php echo ($score===1)?($score.'pt'):($score.'pts') ?></span>
+                    <button class="d_vote btn <?php echo ($vote===-1)?('active'):('') ?>" type="submit" name="downvote">▼</button>
+                </form>
             </div>
-            <hr>
+            <div class="postDetailContainer">
+                <h4 class="postTitle">
+                    <a class="postLink" href="<?php echo $userPost['link'] ?>"><?php echo $userPost['title']; ?></a>
+                </h4>
+                <span class="postTime"><?php echo date($dateFormat, (int)$userPost['time']); ?> by </span><a class="postUser" href="?page=user&user=<?php echo $user ?>">/u/<?php echo $user ?></a><br>
+                <span class="postDescription"><?php echo ($userPost['description']!=null && strlen($userPost['description']) > 50)?(substr($userPost['description'], 0, 50). '...'):($userPost['description']) ?></span><br>
+                <a class="postComments" href="?page=post&post=<?php echo $post['post_id'] ?>">comments(<?php echo $commentCount ?>)</a>
+            </div>
         </div>
         <?php
     }
