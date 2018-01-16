@@ -6,8 +6,8 @@ Cyberlink is a very basic reddit clone, functions include:
 * Voting on posted links
 * Showing posts by user
 
-<img src="https://lh3.googleusercontent.com/5Q7PvJDAdXUVmLBvON0fKE_-vsKL1vhyEsJiYbEFvd5Te9_oa5Uk-Vm5H7UnM24OG2xWucx_7eF_acSc4sZI=w958-h929" style="width:50%;" alt="">
-<img src="https://lh4.googleusercontent.com/vsHZffBuWSlh9P7Q_mglQw0VZ8iekEXrqvKNit16b2CbSvIfKISo6hdU1n0143TSMJ9bauwWApu4ftiBQAFT=w958-h929-rw" style="width:50%;" alt="">
+<img src="https://lh3.googleusercontent.com/5Q7PvJDAdXUVmLBvON0fKE_-vsKL1vhyEsJiYbEFvd5Te9_oa5Uk-Vm5H7UnM24OG2xWucx_7eF_acSc4sZI=w958-h929" width="50%">
+<img src="https://lh4.googleusercontent.com/vsHZffBuWSlh9P7Q_mglQw0VZ8iekEXrqvKNit16b2CbSvIfKISo6hdU1n0143TSMJ9bauwWApu4ftiBQAFT=w958-h929-rw" width="50%">
 
 
 ## Installation
