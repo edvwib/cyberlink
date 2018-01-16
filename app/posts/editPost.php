@@ -9,20 +9,14 @@ if (!empty($_POST['link']) && !empty($_POST['title']))
     $title = filter_var($_POST['title'], FILTER_SANITIZE_STRING);
     $description = filter_var($_POST['description'], FILTER_SANITIZE_STRING);
 
-    /* Commented out as it's not working properly
-    if(!filter_var($link, FILTER_VALIDATE_URL, FILTER_FLAG_SCHEME_REQUIRED | FILTER_FLAG_HOST_REQUIRED))
-    {//If invalid link
-        var_dump($link);echo '<br>';
-        $link = 'http://'.$link; //Attempt to fix
-        if (!filter_var($link, FILTER_VALIDATE_URL, FILTER_FLAG_SCHEME_REQUIRED | FILTER_FLAG_HOST_REQUIRED))
-        {//If still invalid link
-            $_SESSION['forms']['invalidLink'] = true;
-
-            die(var_dump($link));
-            redirect('/page=post&post='. $_POST['post_id'] .'&action=edit');
-        }
+    if (substr($link, 0, 7) === 'http://' || substr($link, 0, 8) === 'https://')
+    {
+        echo 'has http://<br>';
     }
-    */
+    else
+    {
+        $link = 'http://'.$link;
+    }
 
     $editPost = $pdo->prepare("UPDATE posts
                             SET link=:link,

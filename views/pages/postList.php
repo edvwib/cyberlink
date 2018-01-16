@@ -13,7 +13,7 @@ foreach ($posts as $post) {
         <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3">
             <div class="row">
                 <span class="col-1"><?php echo ($score===1)?($score.'pt'):($score.'pts') ?></span>
-                <a class="col-10 offset-1" href="http://<?php echo $post['link'] ?>"><?php echo $post['title']; ?></a>
+                <a class="col-10 offset-1" href="<?php echo $post['link'] ?>"><?php echo $post['title']; ?></a>
             </div>
             <div class="row">
                 <span class="col-12"><?php echo date($dateFormat, (int)$post['time']); ?></span>

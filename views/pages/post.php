@@ -46,7 +46,7 @@ if (isset($_GET['post'])) {
                     <button class="btn d_vote <?php echo ($vote===-1)?('active'):('') ?>" type="submit" name="downvote">▼</button>
                 </form>
             </div>
-            <a class="col-10 offset-1 verticalAlign" href="http://<?php echo $post['link'] ?>"><?php echo $post['title']; ?></a>
+            <a class="col-10 offset-1 verticalAlign" href="<?php echo $post['link'] ?>"><?php echo $post['title']; ?></a>
         </div>
         <div class="row">
             <span class="col-7 col-sm-5"><?php echo date($dateFormat, (int)$post['time']); ?></span>
