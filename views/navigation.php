@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-if (isset($_SESSION['user_id']))
+if (!empty($_SESSION['user_id']))
 {
-    $currentUser = getUserByID((int) $_SESSION['user_id'], $pdo);
+    $currentUser = getUserByID($_SESSION['user_id'], $pdo);
 }
 ?>
 
