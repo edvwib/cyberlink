@@ -7,7 +7,6 @@ if (substr($_SERVER['QUERY_STRING'],0,4) !== "page") { //If URL !contain page va
     parse_str($_SERVER['QUERY_STRING'], $query); //Auto parse query with parse_str
 }
 
-require_once __DIR__.'/views/header.php';
 
 switch ($query['page']) {
     case 'start':
@@ -43,7 +42,7 @@ switch ($query['page']) {
         require_once __DIR__.'/views/pages/login.php';
         break;
     case 'logout':
-        redirect('/app/auth/logout.php');
+        require_once __DIR__.'/app/auth/logout.php';
         break;
     default:
         require_once __DIR__.'/views/pages/404.php';

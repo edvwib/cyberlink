@@ -1,6 +1,8 @@
 <?php
 declare(strict_types=1);
 
+require_once __DIR__.'/../header.php';
+
 $posts = $pdo->query("SELECT * FROM posts");
 $posts = $posts->fetchAll(PDO::FETCH_ASSOC);
 

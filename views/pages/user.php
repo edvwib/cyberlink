@@ -1,6 +1,8 @@
 <?php
 declare(strict_types=1);
 
+require_once __DIR__.'/../header.php';
+
 if (isset($_GET['user'])) {
     $username = filter_var($_GET['user'], FILTER_SANITIZE_STRING);
 

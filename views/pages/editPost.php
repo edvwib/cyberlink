@@ -1,6 +1,8 @@
 <?php
 declare(strict_types=1);
 
+require_once __DIR__.'/../header.php';
+
 $post = $pdo->prepare("SELECT * FROM posts WHERE post_id=:post_id AND user_id=:user_id");
 $post->bindParam(':post_id', $_GET['post'], PDO::PARAM_INT);
 $post->bindParam(':user_id', $_SESSION['user_id'], PDO::PARAM_INT);
