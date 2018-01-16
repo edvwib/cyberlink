@@ -99,6 +99,10 @@ if (isset($_GET['post'])) {
         </div>
         <div class="row">
           <a href="#" class="col-2 commentReply">reply</a>
+          <?php if (isset($_SESSION['user_id']) && isCommentOwner((int) $comment['comment_id'], $_SESSION['user_id'], $pdo)): ?>
+              <a id="editComment" class="col-1" href="">edit</a>
+              <a id="deleteComment" class="col-2" href="">delete</a>
+          <?php endif; ?>
         </div>
         <hr>
     <?php endforeach; ?>

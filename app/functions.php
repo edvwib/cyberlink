@@ -71,6 +71,7 @@ function getUserByID($userID, PDO $pdo):string
     $user->bindParam(':user_id', $userID, PDO::PARAM_INT);
     $user->execute();
     $user = $user->fetch(PDO::FETCH_ASSOC);
+
     return $user['username'];
 }
 
@@ -87,6 +88,7 @@ function getEmailByID($userID, PDO $pdo):string
     $email->bindParam(':user_id', $userID, PDO::PARAM_INT);
     $email->execute();
     $email = $email->fetch(PDO::FETCH_ASSOC);
+
     return $email['email'];
 }
 
@@ -132,7 +134,7 @@ function isPostOwner(int $postID, $userID, PDO $pdo):bool
 function isCommentOwner(int $commentID, $userID, PDO $pdo):bool
 {
     $userID = (int) $userID;
-    $comment = $pdo->query("SELECT user_id FROM comments WHERE user_id=$userID");
+    $comment = $pdo->query("SELECT user_id FROM comments WHERE comment_id=$commentID");
     $comment = $comment->fetch(PDO::FETCH_ASSOC);
 
     return (int) $comment['user_id'] === $userID;
