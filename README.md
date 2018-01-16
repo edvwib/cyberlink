@@ -17,3 +17,6 @@ Cyberlink is a very basic reddit clone, functions include:
 <img src="https://i.imgur.com/nSaMdzC.png" width="33%">
 <img src="https://i.imgur.com/YWlGDrl.png" width="33%">
 </p>
+
+## Testers
+Sebastian, Albert
