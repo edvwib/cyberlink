@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-if (!empty($_SESSION['user_id']))
+if (isset($_SESSION['authenticated']) && $_SESSION['authenticated'])
 {
     $currentUser = getUserByID($_SESSION['user_id'], $pdo);
 }
