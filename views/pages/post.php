@@ -24,14 +24,17 @@ if (isset($_GET['post'])) {
     $user = getUserByID((int) $post['user_id'], $pdo);
     $commentCount = getCommentCountByID((int) $post['post_id'], $pdo);
 
-    $vote = getVoteAction($_SESSION['user_id'], (int) $post['post_id'], $pdo);
+    if (isset($_SESSION['authenticated']) && $_SESSION['authenticated'])
+    {
+        $vote = getVoteAction($_SESSION['user_id'], (int) $post['post_id'], $pdo);
+    }
 }
 
 
 ?>
 
 <?php if (isset($_SESSION['forms']['voteFailed']) && $_SESSION['forms']['voteFailed']): ?>
-    <p class="col-4 offset-4 bg-warning text-white">You need to be logged in in order to vote.</p>
+    <p class="col-12 col-md-4 offset-md-4 bg-warning text-white">You need to be logged in in order to vote.</p>
     <?php $_SESSION['forms']['voteFailed'] = false; ?>
 <?php endif; ?>
 
