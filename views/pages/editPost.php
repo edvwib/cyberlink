@@ -9,8 +9,8 @@ $post->bindParam(':user_id', $_SESSION['user_id'], PDO::PARAM_INT);
 $post->execute();
 $post = $post->fetch(PDO::FETCH_ASSOC);
 if (!$post)
-{
-    die(var_dump($pdo->errorInfo()));
+{ //unauthorized user
+    redirect("/?page=newpost");
 }
 ?>
 
@@ -28,6 +28,12 @@ if (!$post)
           <div class="col-10 offset-1 form-group">
               <textarea class="form-control" type="text" name="description" rows="3"><?php echo $post['description'] ?></textarea>
           </div>
+          <?php if (isset($_SESSION['forms']['invalidPost']) && $_SESSION['forms']['invalidPost']): ?>
+              <div class="col-10 offset-1 form-group">
+                  <p class="bg-danger text-white formError">Please enter at least a link and a title.</p>
+              </div>
+              <?php $_SESSION['forms']['invalidPost'] = false; ?>
+          <?php endif; ?>
           <div class="col-10 offset-1 form-group">
               <button class="col-12 btn" type="submit" name="submit">Update</button>
           </div>

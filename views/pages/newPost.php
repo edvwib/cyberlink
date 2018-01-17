@@ -11,13 +11,15 @@ require_once __DIR__.'/../header.php';
         <form class="row newPost" action="/../../app/posts/newPost.php" method="post">
             <h4 class="col-10 offset-1">Submit a new post:</h4>
             <div class="col-10 offset-1 form-group">
-                <input class="form-control" type="text" name="link" placeholder="Link..." required>
+                <input class="form-control" type="text" name="link" placeholder="Link..." required
+                    value="<?php echo (isset($_SESSION['formInput']['link']))?($_SESSION['formInput']['link']):('') ?>">
             </div>
             <div class="col-10 offset-1 form-group">
-                <input class="form-control" type="text" name="title" placeholder="Title..." required>
+                <input class="form-control" type="text" name="title" placeholder="Title..." required
+                    value="<?php echo (isset($_SESSION['formInput']['title']))?($_SESSION['formInput']['title']):('') ?>">
             </div>
             <div class="col-10 offset-1 form-group">
-                <textarea class="form-control" type="text" name="description" placeholder="Description..." rows="3"></textarea>
+                <textarea class="form-control" type="text" name="description" placeholder="Description..." rows="3"><?php echo (isset($_SESSION['formInput']['desc']))?($_SESSION['formInput']['desc']):('') ?></textarea>
             </div>
             <?php if (isset($_SESSION['forms']['invalidPost']) && $_SESSION['forms']['invalidPost']): ?>
                 <div class="col-10 offset-1 form-group">

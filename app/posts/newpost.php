@@ -33,10 +33,16 @@ if (!empty($_POST['link']) && !empty($_POST['title']))
     $linkToPost->execute();
     $linkToPost = $linkToPost->fetch();
 
+    unset($_SESSION['formInput']); //Remove so it doesn't get used elsewhere
     redirect('/?page=post&post='.$linkToPost['post_id']);
 }
 else
 {
     $_SESSION['forms']['invalidPost'] = true;
+    $_SESSION['formInput'] = [
+        'link' => $_POST['link'],
+        'title' => $_POST['title'],
+        'desc' => $_POST['description'],
+    ];
     redirect('/?page=newpost');
 }

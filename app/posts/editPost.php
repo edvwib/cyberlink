@@ -29,5 +29,6 @@ if (!empty($_POST['link']) && !empty($_POST['title']))
     {
         die(var_dump($pdo->errorInfo()));
     }
+    unset($_SESSION['formInput']); //Remove so it doesn't get used elsewhere
 }
 redirect("/?page=post&post=".$_POST['post_id']);
