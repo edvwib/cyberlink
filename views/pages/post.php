@@ -57,8 +57,8 @@ if (isset($_GET['post'])) {
         <span class="postTime"><?php echo date($dateFormat, (int)$post['time']); ?> by </span><a class="postUser" href="?page=user&user=<?php echo $user ?>">/u/<?php echo $user ?></a><br>
         <span class="postDescription"><?php echo ($post['description']!=null && strlen($post['description']) > 50)?(substr($post['description'], 0, 50). '...'):($post['description']) ?></span><br>
         <?php if (isset($_SESSION['user_id']) && isPostOwner((int) $post['post_id'], $_SESSION['user_id'], $pdo)): ?>
-            <a class="" href="?page=post&post=<?php echo $post['post_id'] ?>&action=edit">edit</a>
-            <a id="deletePost" class="" href="?page=post&post=<?php echo $post['post_id'] ?>&action=delete">delete</a>
+            <a  href="?page=post&post=<?php echo $post['post_id'] ?>&action=edit">edit</a>
+            <a id="deletePost"  href="?page=post&post=<?php echo $post['post_id'] ?>&action=delete">delete</a>
         <?php endif; ?>
     </div>
 </div>
@@ -96,8 +96,8 @@ if (isset($_GET['post'])) {
             <div class="commentActions">
                 <a class="commentReply" href="#">reply</a>
                 <?php if (isset($_SESSION['user_id']) && isCommentOwner((int) $comment['comment_id'], $_SESSION['user_id'], $pdo)): ?>
-                    <!-- <a id="editComment" class="" href="">edit</a> -->
-                    <!-- <a id="deleteComment" class="" href="">delete</a> -->
+                    <!-- <a id="editComment"  href="">edit</a> -->
+                    <!-- <a id="deleteComment"  href="">delete</a> -->
                 <?php endif; ?>
             </div>
         </div>

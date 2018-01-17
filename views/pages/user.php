@@ -30,9 +30,9 @@ if (isset($_GET['user'])) {
 if (isset($_SESSION['forms']['userNotFound']) && $_SESSION['forms']['userNotFound'])
 {
     ?>
-    <div class="">
-        <div class="">
-            <p class="">There's no user with the username '<?php echo $username ?>'.</p>
+    <div >
+        <div >
+            <p >There's no user with the username '<?php echo $username ?>'.</p>
         </div>
     </div>
     <?php

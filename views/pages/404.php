@@ -5,16 +5,12 @@ require_once __DIR__.'/../header.php';
 
 ?>
 
-<div class="">
-    <div class="">
-        <div class="">
-            <h1 class="">404 Not Found</h1>
-        </div>
-        <div class="">
-            <p class="">The file you requested does not exist.</p>
-        </div>
-        <div class="">
-            <a class="" href="/">Go to the startpage</a>
-        </div>
-    </div>
+
+<h1 class="notFoundHeader">404 Not Found</h1>
+
+<div >
+    <p class="notFoundText">The file you requested does not exist.</p>
+</div>
+<div >
+    <a class="notFoundText" href="/">Go to the startpage</a>
 </div>
