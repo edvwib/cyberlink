@@ -5,11 +5,11 @@ require_once __DIR__.'/../autoload.php';
 
 if (!empty($_POST['link']) && !empty($_POST['title']))
 {
-    $link = filter_var($_POST['link'], FILTER_SANITIZE_URL);
+    $link = strtolower(filter_var($_POST['link'], FILTER_SANITIZE_URL));
     $title = filter_var($_POST['title'], FILTER_SANITIZE_STRING);
     $description = filter_var($_POST['description'], FILTER_SANITIZE_STRING);
 
-    if (!substr($link, 0, 7) === 'http://' || !substr($link, 0, 8) === 'https://')
+    if (strncmp($link, 'http://', 7) !== 0 && strncmp($link, 'https://', 8) !== 0)
     {
         $link = 'http://'.$link;
     }
