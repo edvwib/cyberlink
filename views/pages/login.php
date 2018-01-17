@@ -29,10 +29,13 @@ require_once __DIR__.'/../header.php';
               <?php $_SESSION['forms']['accountCreated'] = false; ?>
           <?php endif; ?>
           <div class="col-10 offset-1 form-group">
-              <input class="form-control" type="text" name="username" placeholder="Username..." required>
+              <label for="username">Username:</label>
+              <input type="text" class="form-control" name="username" placeholder="Username" required
+                  value="<?php echo (isset($_SESSION['formInput']['username']))?($_SESSION['formInput']['username']):('') ?>">
           </div>
           <div class="col-10 offset-1 form-group">
-              <input class="form-control" type="password" name="password" placeholder="Password..." required>
+              <label for="password">Password:</label>
+              <input type="password" class="form-control" name="password" placeholder="********" required>
           </div>
           <div class="col-10 offset-1 form-group">
               <button class="col-12 btn" type="submit" name="submit">Log in</button>
@@ -58,14 +61,29 @@ require_once __DIR__.'/../header.php';
               </div>
               <?php $_SESSION['forms']['usernameInUse'] = false;?>
           <?php endif; ?>
+          <?php if (isset($_SESSION['forms']['passwordInvalid']) && $_SESSION['forms']['passwordInvalid']): ?>
+              <div class="col-10 offset-1 form-group">
+                  <p class="col-12 bg-warning formError">The passwords you've entered do not match.</p>
+              </div>
+              <?php $_SESSION['forms']['passwordInvalid'] = false;?>
+          <?php endif; ?>
           <div class="col-10 offset-1 form-group">
-              <input class="form-control" type="email" name="email" placeholder="Email..." required>
+              <label for="email">Email:</label>
+              <input type="text" class="form-control" name="email" placeholder="example@example.com" required
+                  value="<?php echo (isset($_SESSION['formInput']['email']))?($_SESSION['formInput']['email']):('') ?>">
           </div>
           <div class="col-10 offset-1 form-group">
-              <input class="form-control" type="text" name="username" placeholder="Username..." autocomplete="off" required>
+              <label for="username">Username:</label>
+              <input type="text" class="form-control" name="username" autocomplete="off" placeholder="Username" required
+                  value="<?php echo (isset($_SESSION['formInput']['username']))?($_SESSION['formInput']['username']):('') ?>">
           </div>
           <div class="col-10 offset-1 form-group">
-              <input class="form-control" type="password" name="password" placeholder="Password..." required>
+              <label for="password1">Password:</label>
+              <input type="password" class="form-control" name="password1" placeholder="********" required>
+          </div>
+          <div class="col-10 offset-1 form-group">
+              <label for="password2">Repeat password:</label>
+              <input type="password" class="form-control" name="password2" placeholder="********" required>
           </div>
           <div class="col-10 offset-1 form-group">
               <button class="col-12 btn" type="submit" name="submit">Create account</button>

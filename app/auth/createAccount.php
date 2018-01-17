@@ -3,11 +3,17 @@ declare(strict_types=1);
 
 require_once __DIR__.'/../autoload.php';
 
-if (!empty($_POST['email']) && !empty($_POST['username']) && !empty($_POST['password']))
+if (!empty($_POST['email']) && !empty($_POST['username']) && !empty($_POST['password1']) && !empty($_POST['password2']))
 {
+    if ($_POST['password1'] !== $_POST['password2'])
+    {
+        $_SESSION['forms']['passwordInvalid'] = true;
+        redirect('/?page=login&fail');
+    }
+
     $email = strtolower(filter_var($_POST['email'], FILTER_SANITIZE_EMAIL));
     $username = strtolower(filter_var($_POST['username'], FILTER_SANITIZE_STRING));
-    $passwordHash = password_hash($_POST['password'], PASSWORD_DEFAULT);
+    $passwordHash = password_hash($_POST['password1'], PASSWORD_DEFAULT);
 
     if(!filter_var($email, FILTER_VALIDATE_EMAIL))
     {//If email is not correct format
@@ -46,8 +52,17 @@ if (!empty($_POST['email']) && !empty($_POST['username']) && !empty($_POST['pass
         if (!$createAccount) {
             die(var_dump($pdo->errorInfo()));
         }
+
+        unset($_SESSION['formInput']); //Remove so it doesn't get used elsewhere
         $_SESSION['forms']['accountCreated'] = true;
         redirect('/?page=login');
+    }
+    else
+    {
+        $_SESSION['formInput'] = [
+            'email' => $email,
+            'username' => $username,
+        ];
     }
 }
 redirect('/?page=login&fail');

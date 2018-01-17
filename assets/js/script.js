@@ -38,3 +38,27 @@ if (document.URL.indexOf("page=post") >= 0) { //On post page
     });
   }
 }
+
+if (document.URL.indexOf("page=login") >= 0) { //On login page
+  if (document.URL.indexOf("page=login&failed") >= 0) {
+    showRegisterForm();
+  }
+  let passwordInputs = document.querySelectorAll('.register-form input[type="password"]');
+  let submitBtn = document.querySelector('.register-form button[type="submit"]');
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Passwords do not match';
+
+  console.log(passwordInputs);
+  if (passwordInputs !== null) {
+    passwordInputs[1].addEventListener('keyup', (e) => {
+      if (passwordInputs[0].value === passwordInputs[1].value) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Create account';
+      }
+      else {
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Passwords do not match';
+      }
+    });
+  }
+}

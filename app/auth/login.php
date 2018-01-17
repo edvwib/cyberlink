@@ -16,15 +16,18 @@ if (!empty($_POST['username']) && !empty($_POST['password']))
     if (empty($checkUser))
     {//If user doesn't exist
         $_SESSION['forms']['failedAuth'] = true;
+        $_SESSION['formInput'] = [
+            'username' => $username,
+        ];
+
     }else if (password_verify($password, $checkUser[0]['password']))
     {//If password correct
         $_SESSION['authenticated'] = true;
         $_SESSION['user_id'] = (int) $checkUser[0]['user_id'];
         $_SESSION['forms']['failedAuth'] = false;
+
+        unset($_SESSION['formInput']); //Remove so it doesn't get used elsewhere
         redirect('/');
-    }else
-    {//If password incorrect
-        $_SESSION['forms']['failedAuth'] = true;
     }
 }
 redirect('/?page=login');
