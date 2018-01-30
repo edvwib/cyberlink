@@ -9,8 +9,7 @@ if (!empty($_POST['link']) && !empty($_POST['title']))
     $title = filter_var($_POST['title'], FILTER_SANITIZE_STRING);
     $description = filter_var($_POST['description'], FILTER_SANITIZE_STRING);
 
-    if (strncmp($link, 'http://', 7) !== 0 && strncmp($link, 'https://', 8) !== 0)
-    {
+    if (strncmp($link, 'http://', 7) !== 0 && strncmp($link, 'https://', 8) !== 0){
         $link = 'http://'.$link;
     }
 

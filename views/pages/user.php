@@ -51,6 +51,14 @@ else
     foreach ($userPosts as $userPost)
     {
         $score = getPostScoreByID((int) $userPost['post_id'], $pdo);
+        if (isset($_SESSION['authenticated']) && $_SESSION['authenticated'])
+        {
+            $vote = getVoteAction($_SESSION['user_id'], (int) $userPost['post_id'], $pdo);
+        }
+        else
+        {
+            $vote = 0;
+        }
         $commentCount = getCommentCountByID(intval($userPost['post_id']), $pdo);
         ?>
         <div class="post" id="<?php echo $userPost['post_id'] ?>">
@@ -69,7 +77,7 @@ else
                 </h4>
                 <span class="postTime"><?php echo date($dateFormat, (int)$userPost['time']); ?> by </span><a class="postUser" href="?page=user&user=<?php echo $user ?>">/u/<?php echo $user ?></a><br>
                 <span class="postDescription"><?php echo ($userPost['description']!=null && strlen($userPost['description']) > 50)?(substr($userPost['description'], 0, 50). '...'):($userPost['description']) ?></span><br>
-                <a class="postComments" href="?page=post&post=<?php echo $post['post_id'] ?>">comments(<?php echo $commentCount ?>)</a>
+                <a class="postComments" href="?page=post&post=<?php echo $userPost['post_id'] ?>">comments(<?php echo $commentCount ?>)</a>
             </div>
         </div>
         <?php

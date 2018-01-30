@@ -1,12 +1,21 @@
 <?php
 declare(strict_types=1);
 
-if (substr($_SERVER['QUERY_STRING'],0,4) !== "page") { //If URL !contain page var
+if (substr($_SERVER['REQUEST_URI'],2,4) !== "page") { //If URL !contain page var
     $query = ['page' => 'start',];
 }else {
-    parse_str($_SERVER['QUERY_STRING'], $query); //Auto parse query with parse_str
+    $start = strpos($_SERVER['REQUEST_URI'], '&');
+    if (is_int($start)) { //If requested page has no subpage
+        $query['page'] = (substr($_SERVER['REQUEST_URI'],7, $start-7));
+    }
+    else { //If page has subpage, get the value of it
+        $query['page'] = (substr($_SERVER['REQUEST_URI'],7));
+        $end = strpos($query['page'], '=');
+        if (is_int($end)){
+            $query['action'] = substr($query['page'], $start, $end-$start);
+        }
+    }
 }
-
 
 switch ($query['page']) {
     case 'start':
