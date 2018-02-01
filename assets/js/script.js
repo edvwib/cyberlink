@@ -62,3 +62,11 @@ if (document.URL.indexOf("page=login") >= 0) { //On login page
     });
   }
 }
+
+
+if (document.URL.indexOf("/?") == -1 ||
+    document.URL.indexOf("/?page=post") >= 0 ||
+    document.URL.indexOf("/?page=user") >= 0) {
+  var timeTitles = document.querySelectorAll('.postTime, .commentTime');
+  convertTimeToLocal(timeTitles);
+}

@@ -152,7 +152,7 @@ function getTimeAgo(int $timeThen): string
     }elseif ($timeDiff < 86400) { //Less than 24 hours
         return round($timeDiff/3600) . ' hours ago';
     }elseif ($timeDiff < 172800) { //Less than 2 days
-        return round($timeDiff/86400) . ' day ago';
+        return '1 day ago';
     }elseif ($timeDiff < 31536000) { //Less than a year
         return round($timeDiff/86400) . ' days ago';
     }elseif ($timeDiff < 63072000) { //Less than two years

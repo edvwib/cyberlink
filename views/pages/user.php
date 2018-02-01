@@ -75,7 +75,7 @@ else
                 <h4 class="postTitle">
                     <a class="postLink" href="<?php echo $userPost['link'] ?>"><?php echo $userPost['title']; ?></a>
                 </h4>
-                <span class="postTime"><?php echo getTimeAgo((int)$userPost['time']); ?> by </span><a class="postUser" href="?page=user&user=<?php echo $user ?>">/u/<?php echo $user ?></a><br>
+                <span class="postTime" title="<?php echo date($dateFormat, (int)$userPost['time']) ?>"><?php echo getTimeAgo((int)$userPost['time']); ?> by </span><a class="postUser" href="?page=user&user=<?php echo $user ?>">/u/<?php echo $user ?></a><br>
                 <span class="postDescription"><?php echo ($userPost['description']!=null && strlen($userPost['description']) > 50)?(substr($userPost['description'], 0, 50). '...'):($userPost['description']) ?></span><br>
                 <a class="postComments" href="?page=post&post=<?php echo $userPost['post_id'] ?>">comments(<?php echo $commentCount ?>)</a>
             </div>

@@ -13,3 +13,11 @@ function showRegisterForm(){
   loginBtn.classList.remove('active');
   registerBtn.classList.add('active');
 }
+
+
+function convertTimeToLocal(timeTitles){
+  timeTitles.forEach(timeTitle => {
+    let time = new Date(timeTitle.title);
+    timeTitle.title = time.toLocaleString();
+  });
+}

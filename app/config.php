@@ -5,5 +5,5 @@ declare(strict_types=1);
 return [
     'title' => 'Cyberlink',
     'database_path' => sprintf('sqlite:%s/database/database.db', __DIR__),
-    'dateFormat' => 'Y-m-d @ H:i:s',
+    'dateFormat' => 'Y-m-d\\TH:i:s',
 ];
