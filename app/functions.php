@@ -143,15 +143,22 @@ function isCommentOwner(int $commentID, $userID, PDO $pdo):bool
 function getTimeAgo(int $timeThen): string
 {
     $timeDiff = time() - $timeThen;
-    if ($timeDiff < 60) { //Less than a minute
-        return round($timeDiff) . ' seconds ago';
+    if ($timeDiff < 120) { //Less than one hour
+        return 'just now';
     }else if ($timeDiff < 3600) { //Less than one hour
         return round($timeDiff/60) . ' minutes ago';
+    }elseif ($timeDiff < 7200) { //Less than 2 hours
+        return '1 hour ago';
     }elseif ($timeDiff < 86400) { //Less than 24 hours
         return round($timeDiff/3600) . ' hours ago';
+    }elseif ($timeDiff < 172800) { //Less than 2 days
+        return round($timeDiff/86400) . ' day ago';
     }elseif ($timeDiff < 31536000) { //Less than a year
         return round($timeDiff/86400) . ' days ago';
-    }
+    }elseif ($timeDiff < 63072000) { //Less than two years
+        return round($timeDiff/31536000) . ' year ago';
+    }else {
+        return round($timeDiff/31536000) . ' years ago';
 
-    return "";
+    }
 }

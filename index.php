@@ -58,6 +58,4 @@ switch ($query['page']) {
         break;
 }
 
-die(var_dump(getTimeAgo(1451639194)));
-
 require_once __DIR__.'/views/footer.php';

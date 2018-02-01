@@ -54,7 +54,7 @@ if (isset($_GET['post'])) {
         <h4 class="postTitle">
             <a class="postLink" href="<?php echo $post['link'] ?>"><?php echo $post['title']; ?></a>
         </h4>
-        <span class="postTime"><?php echo date($dateFormat, (int)$post['time']); ?> by </span><a class="postUser" href="?page=user&user=<?php echo $user ?>">/u/<?php echo $user ?></a><br>
+        <span class="postTime"><?php echo getTimeAgo((int)$post['time']); ?> by </span><a class="postUser" href="?page=user&user=<?php echo $user ?>">/u/<?php echo $user ?></a><br>
         <span class="postDescription"><?php echo ($post['description']!=null && strlen($post['description']) > 50)?(substr($post['description'], 0, 50). '...'):($post['description']) ?></span><br>
         <?php if (isset($_SESSION['user_id']) && isPostOwner((int) $post['post_id'], $_SESSION['user_id'], $pdo)): ?>
             <a  href="?page=post&post=<?php echo $post['post_id'] ?>&action=edit">edit</a>
@@ -88,7 +88,7 @@ if (isset($_GET['post'])) {
         <div class="comment">
             <div class="commentInfo">
                 <a class="commentUser" href="?page=user&user=<?php echo $user; ?>" class="commentUser">/u/<?php echo $user ?></a>
-                <span class="commentTime"><?php echo date($dateFormat, (int)$comment['time']); ?></span>
+                <span class="commentTime"><?php echo getTimeAgo((int)$post['time']); ?></span>
             </div>
             <p class="commentText">
               <?php echo $comment['comment']; ?>

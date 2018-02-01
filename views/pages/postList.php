@@ -41,7 +41,7 @@ foreach ($posts as $post) {
             <h4 class="postTitle">
                 <a class="postLink" href="<?php echo $post['link'] ?>"><?php echo $post['title']; ?></a>
             </h4>
-            <span class="postTime"><?php echo date($dateFormat, (int)$post['time']); ?> by </span><a class="postUser" href="?page=user&user=<?php echo $user ?>">/u/<?php echo $user ?></a><br>
+            <span class="postTime"><?php echo getTimeAgo((int)$post['time']); ?> by </span><a class="postUser" href="?page=user&user=<?php echo $user ?>">/u/<?php echo $user ?></a><br>
             <span class="postDescription"><?php echo ($post['description']!=null && strlen($post['description']) > 50)?(substr($post['description'], 0, 50). '...'):($post['description']) ?></span><br>
             <a class="postComments" href="?page=post&post=<?php echo $post['post_id'] ?>">comments(<?php echo $commentCount ?>)</a>
         </div>
