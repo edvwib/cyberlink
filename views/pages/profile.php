@@ -90,7 +90,8 @@ $profile = $profile->fetch(PDO::FETCH_ASSOC);
         <form class="row" action="/../../app/profile/changePassword.php" method="post">
             <h4 class="col-10 offset-1">Password</h4>
             <input class="col-10 offset-1 form-control" type="password" name="old-password" placeholder="old password" autocomplete="off" required>
-            <input class="col-10 offset-1 form-control" type="password" name="new-password" placeholder="new password" autocomplete="off" required>
+            <input class="col-10 offset-1 form-control" type="password" name="new-password1" placeholder="new password" required>
+            <input class="col-10 offset-1 form-control" type="password" name="new-password2" placeholder="repeat new password" required>            
             <?php if (isset($_SESSION['forms']['passwordUpdated']) && $_SESSION['forms']['passwordUpdated']): ?>
                 <p class="col-10 offset-1 bg-success text-white formError">Successfully updated your password.</p>
                 <?php $_SESSION['forms']['passwordUpdated'] = false; ?>
@@ -98,6 +99,10 @@ $profile = $profile->fetch(PDO::FETCH_ASSOC);
             <?php if (isset($_SESSION['forms']['updatePassFailed']) && $_SESSION['forms']['updatePassFailed']): ?>
                 <p class="col-10 offset-1 bg-danger text-white formError">Incorrect password.</p>
                 <?php $_SESSION['forms']['updatePassFailed'] = false; ?>
+            <?php endif; ?>
+            <?php if (isset($_SESSION['forms']['updatePassNotSame']) && $_SESSION['forms']['updatePassNotSame']): ?>
+                <p class="col-10 offset-1 bg-danger text-white formError">The new passwords did not match.</p>
+                <?php $_SESSION['forms']['updatePassNotSame'] = false; ?>
             <?php endif; ?>
             <button class="col-10 offset-1 btn" type="submit" name="submit">Update password</button>
         </form>
