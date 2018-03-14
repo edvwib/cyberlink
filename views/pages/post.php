@@ -26,8 +26,7 @@ if (isset($_GET['post'])) {
     $user = getUserByID((int) $post['user_id'], $pdo);
     $commentCount = getCommentCountByID((int) $post['post_id'], $pdo);
 
-    if (isset($_SESSION['authenticated']) && $_SESSION['authenticated'])
-    {
+    if (isset($_SESSION['authenticated']) && $_SESSION['authenticated']) {
         $vote = getVoteAction($_SESSION['user_id'], (int) $post['post_id'], $pdo);
     }
 }

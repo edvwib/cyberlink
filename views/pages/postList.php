@@ -17,15 +17,11 @@ foreach ($posts as $post) {
     $user = getUserByID((int)$post['user_id'], $pdo);
     $commentCount = getCommentCountByID(intval($post['post_id']), $pdo);
 
-    if (isset($_SESSION['authenticated']) && $_SESSION['authenticated'])
-    {
+    if (isset($_SESSION['authenticated']) && $_SESSION['authenticated']) {
         $vote = getVoteAction($_SESSION['user_id'], (int) $post['post_id'], $pdo);
-    }
-    else
-    {
+    } else {
         $vote = 0;
-    }
-    ?>
+    } ?>
 
     <div class="post" id="<?php echo $post['post_id'] ?>">
         <div class="scoreContainer">

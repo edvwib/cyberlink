@@ -3,8 +3,7 @@ declare(strict_types=1);
 
 require_once __DIR__.'/../autoload.php';
 
-if (isset($_GET['post']) && $_GET['action'] === 'delete')
-{
+if (isset($_GET['post']) && $_GET['action'] === 'delete') {
     $postID = intval($_GET['post']);
     $deletedLink = "?page=post&post=$postID";
 
@@ -13,26 +12,22 @@ if (isset($_GET['post']) && $_GET['action'] === 'delete')
     $checkComments->execute();
     $checkComments = $checkComments->fetchAll(PDO::FETCH_ASSOC);
 
-    if (empty($checkComments))
-    { //Deletes post entirely
+    if (empty($checkComments)) { //Deletes post entirely
         $deletePost = $pdo->prepare("DELETE FROM posts WHERE post_id=:post_id AND user_id=:user_id");
         $deletePost->bindParam(':post_id', $postID, PDO::PARAM_INT);
         $deletePost->bindParam(':user_id', $_SESSION['user_id'], PDO::PARAM_INT);
         $deletePost->execute();
-        if (!$deletePost)
-        {
+        if (!$deletePost) {
             die(var_dump($pdo->errorInfo()));
         }
         $deleteVotes = $pdo->prepare("DELETE FROM user_votes WHERE post_id=:post_id");
         $deleteVotes->bindParam(':post_id', $postID, PDO::PARAM_INT);
         $deleteVotes->execute();
-        if (!$deleteVotes)
-        {
+        if (!$deleteVotes) {
             die(var_dump($pdo->errorInfo()));
         }
         redirect('/');
-    }else
-    { //Deletes post, keeps comments and votes
+    } else { //Deletes post, keeps comments and votes
         $deletePostdata = $pdo->prepare("UPDATE posts SET link=:deletedLink,
                                                       title='[deleted]',
                                                       description='[deleted]',
@@ -43,8 +38,7 @@ if (isset($_GET['post']) && $_GET['action'] === 'delete')
         $deletePostdata->bindParam(':post_id', $postID, PDO::PARAM_INT);
         $deletePostdata->bindParam(':user_id', $_SESSION['user_id'], PDO::PARAM_INT);
         $deletePostdata->execute();
-        if (!$deletePostdata)
-        {
+        if (!$deletePostdata) {
             die(var_dump($pdo->errorInfo()));
         }
         redirect("/$deletedLink");

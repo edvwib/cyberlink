@@ -1,17 +1,16 @@
 <?php
 declare(strict_types=1);
 
-if (substr($_SERVER['REQUEST_URI'],2,4) !== "page") { //If URL !contain page var
+if (substr($_SERVER['REQUEST_URI'], 2, 4) !== "page") { //If URL !contain page var
     $query = ['page' => 'start',];
-}else {
+} else {
     $start = strpos($_SERVER['REQUEST_URI'], '&');
     if (is_int($start)) { //If requested page has no subpage
-        $query['page'] = (substr($_SERVER['REQUEST_URI'],7, $start-7));
-    }
-    else { //If page has subpage, get the value of it
-        $query['page'] = (substr($_SERVER['REQUEST_URI'],7));
+        $query['page'] = (substr($_SERVER['REQUEST_URI'], 7, $start-7));
+    } else { //If page has subpage, get the value of it
+        $query['page'] = (substr($_SERVER['REQUEST_URI'], 7));
         $end = strpos($query['page'], '=');
-        if (is_int($end)){
+        if (is_int($end)) {
             $query['action'] = substr($query['page'], $start, $end-$start);
         }
     }
@@ -34,7 +33,7 @@ switch ($query['page']) {
                     redirect('/');
                     break;
             }
-        }else {
+        } else {
             require_once __DIR__.'/views/pages/post.php';
         }
         break;

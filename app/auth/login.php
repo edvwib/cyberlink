@@ -3,8 +3,7 @@ declare(strict_types=1);
 
 require_once __DIR__.'/../autoload.php';
 
-if (!empty($_POST['username']) && !empty($_POST['password']))
-{
+if (!empty($_POST['username']) && !empty($_POST['password'])) {
     $username = strtolower(filter_var($_POST['username'], FILTER_SANITIZE_STRING));
     $password = $_POST['password'];
 
@@ -13,15 +12,12 @@ if (!empty($_POST['username']) && !empty($_POST['password']))
     $checkUser->execute();
     $checkUser = $checkUser->fetchAll(PDO::FETCH_ASSOC);
 
-    if (empty($checkUser))
-    {//If user doesn't exist
+    if (empty($checkUser)) {//If user doesn't exist
         $_SESSION['forms']['failedAuth'] = true;
         $_SESSION['formInput'] = [
             'username' => $username,
         ];
-
-    }else if (password_verify($password, $checkUser[0]['password']))
-    {//If password correct
+    } elseif (password_verify($password, $checkUser[0]['password'])) {//If password correct
         $_SESSION['authenticated'] = true;
         $_SESSION['user_id'] = (int) $checkUser[0]['user_id'];
         $_SESSION['forms']['failedAuth'] = false;

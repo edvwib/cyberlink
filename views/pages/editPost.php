@@ -8,8 +8,7 @@ $post->bindParam(':post_id', $_GET['post'], PDO::PARAM_INT);
 $post->bindParam(':user_id', $_SESSION['user_id'], PDO::PARAM_INT);
 $post->execute();
 $post = $post->fetch(PDO::FETCH_ASSOC);
-if (!$post)
-{ //unauthorized user
+if (!$post) { //unauthorized user
     redirect("/?page=newpost");
 }
 ?>

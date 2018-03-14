@@ -3,10 +3,8 @@ declare(strict_types=1);
 
 require_once __DIR__.'/../autoload.php';
 
-if (!empty($_POST['email']) && !empty($_POST['username']) && !empty($_POST['password1']) && !empty($_POST['password2']))
-{
-    if ($_POST['password1'] !== $_POST['password2'])
-    {
+if (!empty($_POST['email']) && !empty($_POST['username']) && !empty($_POST['password1']) && !empty($_POST['password2'])) {
+    if ($_POST['password1'] !== $_POST['password2']) {
         $_SESSION['forms']['passwordInvalid'] = true;
         redirect('/?page=login&fail');
     }
@@ -15,8 +13,7 @@ if (!empty($_POST['email']) && !empty($_POST['username']) && !empty($_POST['pass
     $username = strtolower(filter_var($_POST['username'], FILTER_SANITIZE_STRING));
     $passwordHash = password_hash($_POST['password1'], PASSWORD_DEFAULT);
 
-    if(!filter_var($email, FILTER_VALIDATE_EMAIL))
-    {//If email is not correct format
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {//If email is not correct format
         $_SESSION['forms']['emailInvalid'] = true;
         redirect('/?page=login&fail');
     }
@@ -25,8 +22,7 @@ if (!empty($_POST['email']) && !empty($_POST['username']) && !empty($_POST['pass
     $checkMail->bindParam(':email', $email, PDO::PARAM_STR);
     $checkMail->execute();
     $checkMail = $checkMail->fetchAll(PDO::FETCH_ASSOC);
-    if (!empty($checkMail))
-    {
+    if (!empty($checkMail)) {
         $_SESSION['forms']['emailInUse'] = true;
     }
 
@@ -34,13 +30,11 @@ if (!empty($_POST['email']) && !empty($_POST['username']) && !empty($_POST['pass
     $checkUsername->bindParam(':username', $username, PDO::PARAM_STR);
     $checkUsername->execute();
     $checkUsername = $checkUsername->fetchAll(PDO::FETCH_ASSOC);
-    if (!empty($checkUsername) || $username === '[deleted]')
-    {
+    if (!empty($checkUsername) || $username === '[deleted]') {
         $_SESSION['forms']['usernameInUse'] = true;
     }
 
-    if (empty($checkMail) && empty($checkUsername))
-    {//If both email and username are not in use
+    if (empty($checkMail) && empty($checkUsername)) {//If both email and username are not in use
         $createAccount = $pdo->prepare("INSERT INTO users
             (email, username, password) VALUES
             (:mail, :username, :password)");
@@ -56,9 +50,7 @@ if (!empty($_POST['email']) && !empty($_POST['username']) && !empty($_POST['pass
         unset($_SESSION['formInput']); //Remove so it doesn't get used elsewhere
         $_SESSION['forms']['accountCreated'] = true;
         redirect('/?page=login');
-    }
-    else
-    {
+    } else {
         $_SESSION['formInput'] = [
             'email' => $email,
             'username' => $username,

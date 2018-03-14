@@ -1,8 +1,7 @@
 <?php
 declare(strict_types=1);
 
-if (!function_exists('redirect'))
-{
+if (!function_exists('redirect')) {
     /**
      * Redirect the user to given path.
      *
@@ -10,7 +9,8 @@ if (!function_exists('redirect'))
      *
      * @return void
      */
-    function redirect($path){
+    function redirect($path)
+    {
         header("Location: ${path}");
         exit;
     }
@@ -145,20 +145,19 @@ function getTimeAgo(int $timeThen): string
     $timeDiff = time() - $timeThen;
     if ($timeDiff < 120) { //Less than one hour
         return 'just now';
-    }else if ($timeDiff < 3600) { //Less than one hour
+    } elseif ($timeDiff < 3600) { //Less than one hour
         return round($timeDiff/60) . ' minutes ago';
-    }elseif ($timeDiff < 7200) { //Less than 2 hours
+    } elseif ($timeDiff < 7200) { //Less than 2 hours
         return '1 hour ago';
-    }elseif ($timeDiff < 86400) { //Less than 24 hours
+    } elseif ($timeDiff < 86400) { //Less than 24 hours
         return round($timeDiff/3600) . ' hours ago';
-    }elseif ($timeDiff < 172800) { //Less than 2 days
+    } elseif ($timeDiff < 172800) { //Less than 2 days
         return '1 day ago';
-    }elseif ($timeDiff < 31536000) { //Less than a year
+    } elseif ($timeDiff < 31536000) { //Less than a year
         return round($timeDiff/86400) . ' days ago';
-    }elseif ($timeDiff < 63072000) { //Less than two years
+    } elseif ($timeDiff < 63072000) { //Less than two years
         return round($timeDiff/31536000) . ' year ago';
-    }else {
+    } else {
         return round($timeDiff/31536000) . ' years ago';
-
     }
 }

@@ -10,12 +10,9 @@ if (isset($_GET['user'])) {
     $userID->bindParam(':username', $username, PDO::PARAM_STR);
     $userID->execute();
     $userID = $userID->fetchAll(PDO::FETCH_ASSOC);
-    if (empty($userID))
-    {
+    if (empty($userID)) {
         $_SESSION['forms']['userNotFound'] = true;
-    }
-    else
-    {
+    } else {
         $userID = $userID[0]['user_id'];
 
         $userPosts = $pdo->prepare("SELECT * FROM posts WHERE user_id=:user_id");
@@ -27,8 +24,7 @@ if (isset($_GET['user'])) {
     }
 }
 
-if (isset($_SESSION['forms']['userNotFound']) && $_SESSION['forms']['userNotFound'])
-{
+if (isset($_SESSION['forms']['userNotFound']) && $_SESSION['forms']['userNotFound']) {
     ?>
     <div >
         <div >
@@ -37,9 +33,7 @@ if (isset($_SESSION['forms']['userNotFound']) && $_SESSION['forms']['userNotFoun
     </div>
     <?php
     $_SESSION['forms']['userNotFound'] = false;
-}
-else
-{
+} else {
     ?>
     <?php if (file_exists(__DIR__.'/../../assets/profiles/'.$userID.'.png')): ?>
         <img src="/../../assets/profiles/<?php echo $userID ?>.png" class="rounded mx-auto d-block" alt="avatar">
@@ -48,19 +42,14 @@ else
     <?php endif; ?>
     <h2 class="text-center"><?php echo '/u/'.$username ?></h2>
     <?php
-    foreach ($userPosts as $userPost)
-    {
+    foreach ($userPosts as $userPost) {
         $score = getPostScoreByID((int) $userPost['post_id'], $pdo);
-        if (isset($_SESSION['authenticated']) && $_SESSION['authenticated'])
-        {
+        if (isset($_SESSION['authenticated']) && $_SESSION['authenticated']) {
             $vote = getVoteAction($_SESSION['user_id'], (int) $userPost['post_id'], $pdo);
-        }
-        else
-        {
+        } else {
             $vote = 0;
         }
-        $commentCount = getCommentCountByID(intval($userPost['post_id']), $pdo);
-        ?>
+        $commentCount = getCommentCountByID(intval($userPost['post_id']), $pdo); ?>
         <div class="post" id="<?php echo $userPost['post_id'] ?>">
             <div class="scoreContainer">
                 <form class="scoreForm" action="/../../app/posts/postVote.php" method="post">
