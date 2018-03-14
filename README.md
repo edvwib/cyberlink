@@ -6,7 +6,6 @@ Cyberlink is a very basic reddit clone, functions include:
 * Voting on posted links
 * Showing posts by user
 
-<br>
 [![StyleCI](https://styleci.io/repos/113291164/shield?branch=master)](https://styleci.io/repos/113291164)
 
 ## Installation
